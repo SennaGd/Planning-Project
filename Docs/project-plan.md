@@ -1,6 +1,6 @@
 # Project Plan Lessenplanbord
 Gemaakt door: Frank, Senna en Tiemen
-Datum: 18-02-2026
+Datum: 18-08-2026
 
 ## Inhoud Project
 In dit project gaan wij een plannings dashboard maken waarin studenten kunnen kijken wat de planning is, de studenten kunnen zich abonneren op groupen om het in hun eigen lokale planning te zetten.

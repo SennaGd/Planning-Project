@@ -20,6 +20,7 @@ het doel is om een handig systeem te maken waarbij studenten kunnen zien wat voo
 
 ## MoSCoW
 | MUST HAVE | SHOULD HAVE | COULD HAVE | WON'T HAVE |
+| --------- | ----------- | ---------- | ---------- | 
 | dashboard | Pushmeldingen | Mobiele Weergave | |
 | beheer omgeving | QR-code Kalender Abonnement | Export naar Excel | |
 | Gebruikers Rollen | Foto van Docent | Koppeling met Microsoft 365 | |

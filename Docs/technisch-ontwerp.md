@@ -35,7 +35,7 @@ Kolom **activities**
 ![image](./doc-images/database-template.png)
 
 ### Link voor ICS template:
-![link](https://www.text-2-ics.com/blog/ics-file-format-structure-guide)
+https://www.text-2-ics.com/blog/ics-file-format-structure-guide
 
 
 ## Hoe worden ingevulde gegevens verwerkt?

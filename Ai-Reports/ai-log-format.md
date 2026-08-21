@@ -1,29 +1,28 @@
-# AI-logboek
-
+# AI Logbook
 ## 2026-09-15
 
-### Taak
+### Task
+What do you want to achieve?
 
-wat wil je bereiken
 ### Prompt
+Which prompt did you use?
 
-Welke prompt heb je gebruikt?
-### Outputsamenvatting
+### Output Summary
+Briefly describe what the AI generated.
 
-Beschrijf kort wat AI heeft gegenereerd.
-### Kritische beoordeling
+### Critical Evaluation
+Answer at least the following questions:
 
-Beantwoord minimaal de volgende vragen:
+- Was the solution correct?
+- Do I understand the generated code?
+- Which parts were unclear?
+- What errors or shortcomings did I discover?
+- How did I check/verify that?
 
-- Was de oplossing correct?
-- Begrijp ik de gegenereerde code?
-- Welke onderdelen waren onduidelijk?
-- Welke fouten of tekortkomingen ontdekte ik?
-- Hoe heb ik dat gecontroleerd?
-### Eigen aanpassingen
+### Own Adjustments
+What changes did you make yourself?
 
-Welke wijzigingen heb je zelf gedaan?
-### Resultaat
+### Result
 
-Wat heeft de AI-interactie uiteindelijk opgeleverd?
-(korte samenvatting)
+What did the AI interaction ultimately deliver?
+(brief summary)

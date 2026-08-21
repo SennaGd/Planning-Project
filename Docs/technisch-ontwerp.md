@@ -5,12 +5,32 @@ Datum: 19-08-2026
 
 ## Gebruikte technieken 
 Programmeertalen: PHP / HTML / CSS / JavaScript
+
 Frameworks: Laravel / Vue
+
 Database: SQLite
 
 
-## Waar wordt de data opgeslagen?
-De data wordt opgeslagen in een SQLite database.
+## Datamodel
+De data wordt opgeslagen in een SQLite database, hieronder zie je de tabel namen.
+De tabel namen zijn ook geinspireed op de ICS template (zie: 'Link voor ICS template') 
+
+Kolom: **users**
+- id (primary / int)
+- username (varchar)
+- email (mail *or* varchar)
+- password (varchar) // Hashed
+- role (varchar) 
+
+Kolom **activities**
+- prod_id (primary / int)
+- uid (mail *or* varchar) -> users.email 
+- dt_stamp (datetime) // Created Time
+- dt_start (datetime) // Start Time
+- dt_end (datetime) // End Time
+- summary (tinytext) // Short Summary 
+- status (tinytext) // Active | Inactive
+- class (varchar)
 
 ![image](./doc-images/database-template.png)
 
@@ -42,3 +62,6 @@ Dit project zou worden gemaakt met de framework Laravel met de starterkit "Vue".
 
 ## Randvoorwaarden voor koppeling aan de bestaande systemen
 Wij gaan github gebruiken als koppelmethode/versiebeheer voor dit project, hier zullen meerdere branches met meerdere features gemaakt worden zodat dit makkelijk opgehaald kan worden. En een goed beeld hebben van de vorige commits/versies
+
+## User Flow Diagram 
+![image](./doc-images/user-flow-diagram.png

@@ -64,4 +64,4 @@ Dit project zou worden gemaakt met de framework Laravel met de starterkit "Vue".
 Wij gaan github gebruiken als koppelmethode/versiebeheer voor dit project, hier zullen meerdere branches met meerdere features gemaakt worden zodat dit makkelijk opgehaald kan worden. En een goed beeld hebben van de vorige commits/versies
 
 ## User Flow Diagram 
-![image](./doc-images/user-flow-diagram.png
+![image](./doc-images/user-flow-diagram.png)

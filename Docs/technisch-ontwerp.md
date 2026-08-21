@@ -2,11 +2,12 @@
 Gemaakt door: Frank, Senna en Tiemen
 Datum: 19-08-2026
 
-## Welke technieken worden er gebruikt?
-- Object Georienteerd (OOP)
-- Laravel
-- Vue
-- SQLite Database
+
+## Gebruikte technieken 
+Programmeertalen: PHP / HTML / CSS / JavaScript
+Frameworks: Laravel / Vue
+Database: SQLite
+
 
 ## Waar wordt de data opgeslagen?
 De data wordt opgeslagen in een SQLite database.

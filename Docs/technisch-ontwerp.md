@@ -30,7 +30,11 @@ Kolom **activities**
 - dt_end (datetime) // End Time
 - summary (tinytext) // Short Summary 
 - status (tinytext) // Active | Inactive
-- class (varchar)
+- class (varchar) -> classes.classname
+
+Kolom **classes**
+- class_id (primary / key)
+- classname (varchar)
 
 ![image](./doc-images/database-template.png)
 

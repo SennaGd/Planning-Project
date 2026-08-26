@@ -1,4 +1,4 @@
-# Project Plan Lessenplanbord
+# Projectplan Lessenplanbord
 Gemaakt door: Frank, Senna en Tiemen
 Datum: 18-08-2026
 

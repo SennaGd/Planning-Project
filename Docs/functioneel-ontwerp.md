@@ -60,7 +60,7 @@ Docenten kunnen gemakkelijk inloggen en een les of activiteit toevoegen of bewer
 | **Versie** | 1.0 |
 | **Actor** | Docent, Superbeheerder |
 | **Preconditie** | Gebruiker beschikt over een aangemaakt account en bevindt zich op de inlogomgeving. |
-| **Scenario** | 1. Gebruiker vult e-mailadres/gebruikersnaam en wachtwoord in. Gebruiker klikt op de inlogknop. De controller valideert de gegevens (wachtwoord wordt geverifieerd via Hash + Salt). Bij akkoord wordt de gebruiker doorverwezen naar de beheeromgeving. |
+| **Scenario** | 1. Gebruiker vult e-mailadres en wachtwoord in. Gebruiker klikt op de inlogknop. De controller valideert de gegevens (wachtwoord wordt geverifieerd via Hash + Salt). Bij akkoord wordt de gebruiker doorverwezen naar de beheeromgeving. |
 | **Uitzonderingen** | Onjuiste inloggegevens: De controller weigert toegang en toont een foutmelding. |
 | **Niet-functionele eisen** | Snelheid van de response ligt onder 1 seconde. Wachtwoorden zijn securely gehasht + gesalt opgeslagen in SQLite. |
 | **Postconditie** | Gebruiker is geauthenticeerd en heeft toegang tot zijn/haar specifieke beheerfuncties. |
@@ -70,7 +70,7 @@ Docenten kunnen gemakkelijk inloggen en een les of activiteit toevoegen of bewer
 | **Versie** | 1.0 |
 | **Actor** | Docent |
 | **Preconditie** | Docent is succesvol ingelogd in de beheeromgeving. |
-| **Scenario** | 1. Docent opent het formulier voor een nieuwe activiteit. Vult de vereiste velden in (Bestemming/Les, VluchtNummer/Klas, Airline/Docent, Gate/Lokaal, Tijd). Verzendt het formulier. Controller valideert de invoer en slaat de gegevens op in de database (`activities` tabel). Laravel Reverb pusht een realtime update naar het dashboard op het leerplein en mobiele apparaten. |
+| **Scenario** | 1. Docent opent het formulier voor een nieuwe activiteit. Vult de vereiste velden in (Bestemming(Les), VluchtNummer(Klas), Airline(Docent), Gate(Lokaal), Tijd). Verzendt het formulier. Controller valideert de invoer en slaat de gegevens op in de database (`activities` tabel). Laravel Reverb pusht een realtime update naar het dashboard op het leerplein en mobiele apparaten. |
 | **Uitzonderingen** | Ongeldige tijd of ontbrekende verplichte velden: Controller geeft een validatiefout en de data wordt niet opgeslagen. |
 | **Niet-functionele eisen** | Realtime synchronisatie via Laravel Reverb. Formuliervalidatie afgehandeld door Laravel Controller. |
 | **Postconditie** | De activiteit is toegevoegd aan de database en direct zichtbaar op alle dashboards. |

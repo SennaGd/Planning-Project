@@ -37,18 +37,22 @@ De docenten hun account wordt aangemaakt door een superbeheerder dit persoon zal
 ### Randvoorwaarde
 - Toegang tot server-pc
 
-	om de website uiteindelijk op de server te hosten.
+	*om de website uiteindelijk op de server te hosten.*
 - AI/LLM Provider 
 
-	om te helpen met het ontwikkelen van software. 
-	en voor nieuwe ideen.
+	*om te helpen met het ontwikkelen van software.* 
+	*en voor nieuwe ideen.*
 - Github repository (version control)
 
-    om goed ons project op te slaan 
-    als er iets kapot gaat wij een werkend backup hebben.
+    *om goed ons project op te slaan* 
+    *als er iets kapot gaat wij een werkend backup hebben.*
 - Docent(en)
 
-	om vragen te stellen.
+	*om vragen te stellen.*
+- Weekelijkse meeting met product owner
+    
+    *om progressie van de applicatie te laten zien*
+    *mogelijke vragen stellen* 
 
 ### Risico Analyse
 - Andere scholieren kunnen de roosters en activiteiten zien.

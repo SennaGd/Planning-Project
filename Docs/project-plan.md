@@ -67,4 +67,4 @@ De docenten hun account wordt aangemaakt door een superbeheerder dit persoon zal
 - QR-Code ongeldig
 
     Student of Docent kan activeit/klas niet delen of zelf scannen 
-
+- Server overload door te veel unieke kalender requests

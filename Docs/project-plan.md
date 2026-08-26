@@ -36,23 +36,31 @@ De docenten hun account wordt aangemaakt door een superbeheerder dit persoon zal
 
 ### Randvoorwaarde
 - Toegang tot server-pc
+
 	om de website uiteindelijk op de server te hosten.
 - AI/LLM Provider 
+
 	om te helpen met het ontwikkelen van software. 
 	en voor nieuwe ideen.
 - Github repository (version control)
+
     om goed ons project op te slaan 
     als er iets kapot gaat wij een werkend backup hebben.
 - Docent(en)
+
 	om vragen te stellen.
 
 ### Risico Analyse
 - Andere scholieren kunnen de roosters en activiteiten zien.
+
     terwijl zij niet op de school zitten.
 - packages die er uit liggen (unsupported) 
+
     applicatie kan niet worden gebouwd waardoor de applicatie dus ook niet werkt
 - Hacker komt in de docenten omgeving
+
     Datalek mogelijk en ongeldige planning
 - QR-Code ongeldig
+
     Student of Docent kan activeit/klas niet delen of zelf scannen 
 

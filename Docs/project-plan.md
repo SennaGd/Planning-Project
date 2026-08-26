@@ -9,11 +9,12 @@ In Eduarte staan alleen maar lesblokken, voor de Software Developers staan er le
 
 ## Projectomschrijving
 ### Doelstelling
-Wij hebben opdracht gekregen om voor al deze problemen een globale oplossing te vinden, de opdachtgever (product owner) wilt een overzichtelijk dashboard waar studenten op een duidelijke manier kunnen zien waar en wanneer er welke les gegeven wordt.
+Wij hebben opdracht gekregen om voor al deze problemen een globale oplossing te vinden, de opdachtgever (product owner) wilt een overzichtelijk dashboard waar studenten op een duidelijke manier kunnen zien waar en wanneer er welke les gegeven wordt. Ook komt het dashboard op het scherm te staan in op lesplein.
 
-Ook zouden studenten zich kunnen abonneren op een of meerdere klassen. Zodat zij dan in hun kalender de lessen gemakkelijk kunnen zien
+Ook zouden studenten zich kunnen abonneren op een of meerdere klassen. Zodat zij dan in hun kalender de lessen gemakkelijk kunnen zien.
+
 ### Resultaat
-Als oplossing hebben wij een overzichtelijk dashboard bedacht. Wij gaan bezig met het maken van een vluchtinformatiebord in de stijl van zo'n bord in schiphol, dit zal zich worden weergegeven op het lesplein in de C afdeling. Ook kunnen de studenten de planning zien via hun telefoon of laptop.
+Als oplossing hebben wij een overzichtelijk dashboard bedacht. Wij gaan bezig met het maken van een vluchtinformatiebord in de stijl schiphol, dit zal zich worden weergegeven op het lesplein in de C afdeling. Ook kunnen de studenten de planning zien via hun telefoon of laptop.
 
 Op dit informatiebord zal een student de volgende informatie vinden: Bestemming(Les), VluchtNummer(Klas), Airline(Docent), Gate(Lokaal) en Tijd(Tijdstip). 
 Studenten kunnen zich ook abonneren op een of meerdere klassen. De klassen kan je selecteren met een knopje en dan vervolgens kan je abonneren op de klassen die de student heeft aangevinkt. Dit kan worden gedaan met een knopje en een QR-Code. Met de QR-Code zal de student of docent dit ook kunnen delen met een klas.
@@ -21,16 +22,16 @@ De studenten zullen deze planning kunnen bezoeken via hun internet-browser en he
 
 Voor de docenten is er ook een omgeving om verschillende activiteiten aan te maken voor een aangegeven klas. Deze omgeving kunnen de docenten bezoeken na het inloggen in zijn/haar account. De docent kan ook activiteiten aanmaken in de naam van een andere docenten. Ook kunnen docenten deze activiteiten aanpassen en verwijderen, de docenten kunnen ook andere docenten hun les aanpassen en verwijderen. 
 
-De docenten hun account wordt aangemaakt door een superbeheerder dit persoon zal alleen verantwoordelijk zijn voor het aanmaken van de docenten accounts dus niet voor het aanmaken of aanpassen van verschillende activiteiten.
+De docenten hun account wordt aangemaakt door een superbeheerder dit persoon zal alleen verantwoordelijk zijn voor het aanmaken voor de docent zijn account, dus niet voor het aanmaken of aanpassen van verschillende activiteiten.
 
 
 ### MoSCoW
 | MUST HAVE | SHOULD HAVE | COULD HAVE | WON'T HAVE |
 | --------- | ----------- | ---------- | ---------- | 
 | dashboard             | Realtime Updates (laravel reverb) | Mobiele Weergave  | Export naar Excel  |
-| beheer omgeving       | Agendaweergave naast Schiphol-weergave| Thema Switch | Koppeling met Microsoft 365  |
-| Gebruikers Rollen     | | QR-code Kalender Abonnement                       | Foto van Docent |
-| Kalender Abonnement   | | Dark Mode Switch | |
+| beheer omgeving       | Login Omgeving | Thema Switch | Koppeling met Microsoft 365  |
+| Gebruikers Rollen     | Activiteiten Beheer Omgeving | QR-code Kalender Abonnement                       | Foto van Docent |
+| Kalender Abonnement   | Superbeheerder Omgeving | Dark Mode Switch | Agendaweergave naast Schiphol-weergave |
 | Database              | | Kleurcodering per opleiding | |
 
 ### Randvoorwaarde

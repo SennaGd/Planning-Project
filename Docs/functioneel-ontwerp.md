@@ -28,9 +28,15 @@ Docenten kunnen gemakkelijk inloggen en een les of activiteit toevoegen of bewer
 
 - Docenten
     Inlog omgeving
+    Account aanpassen
     Lessen/activiteiten toevoegen 
     Lessen/activiteiten aanpassen
     Lessen/activiteiten verwijderen
+- Superbeheerder
+    Inlog omgeving
+    Docenten account toevoegen
+    Docenten account aanpassen
+    Docenten account verwijderen
 
 
 ## Functionele Requirements
@@ -44,7 +50,7 @@ Docenten kunnen gemakkelijk inloggen en een les of activiteit toevoegen of bewer
 | **Versie** | 1.0 |
 | **Actor** | Student, Docent |
 | **Preconditie** | De webapplicatie is bereikbaar via de browser of het fysieke scherm op het leerplein (C-afdeling) staat aan. |
-| **Scenario** | 1. Gebruiker opent het dashboard via telefoon/laptop of bekijkt het fysieke scherm. De frontend haalt de gegevens op uit de SQLite database (`activities` tabel). Het lesrooster wordt getoond in Schiphol-stijl (Bestemming/Les, VluchtNummer/Klas, Airline/Docent, Gate/Lokaal, Tijd/Tijdstip). |
+| **Scenario** | 1. Gebruiker opent het dashboard via telefoon/laptop of bekijkt het fysieke scherm. De controllers halen de gegevens op uit de SQLite database (`activities` tabel). Het lesrooster wordt getoond in Schiphol-stijl (Bestemming/Les, VluchtNummer/Klas, Airline/Docent, Gate/Lokaal, Tijd/Tijdstip). |
 | **Uitzonderingen** | Geen databaseverbinding: Het scherm toont een melding dat er geen activiteiten geladen kunnen worden. |
 | **Niet-functionele eisen** | Database response binnen 2 seconden. Mobiele weergave is direct toegankelijk zonder account/inloggen. |
 | **Postconditie** | De gebruiker heeft een up-to-date en overzichtelijk beeld van de actuele lessen en activiteiten. |

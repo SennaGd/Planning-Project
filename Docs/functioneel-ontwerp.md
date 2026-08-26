@@ -21,16 +21,16 @@ Docenten kunnen gemakkelijk inloggen en een les of activiteit toevoegen of bewer
 ## Requirements
 ### User Requirements
 - Studenten
-Kunnen abonneren op een klas/planning. 
-Kunnen alle lessen en activiteiten zien.
-Filteren op klas/les.
-Qr-code scannen om automatisch te abonneren.
+    Kunnen abonneren op een klas/planning. 
+    Kunnen alle lessen en activiteiten zien.
+    Filteren op klas/les.
+    Qr-code scannen om automatisch te abonneren.
 
 - Docenten
-Inlog omgeving
-Lessen/activiteiten toevoegen 
-Lessen/activiteiten aanpassen
-Lessen/activiteiten verwijderen
+    Inlog omgeving
+    Lessen/activiteiten toevoegen 
+    Lessen/activiteiten aanpassen
+    Lessen/activiteiten verwijderen
 
 
 ## Functionele Requirements

@@ -46,11 +46,12 @@ De docenten hun account wordt aangemaakt door een superbeheerder dit persoon zal
 	om vragen te stellen.
 
 ### Risico Analyse
-- Het limiet van de AI provider
-	Wachten tot er nieuwe tokens zijn.
-	Nieuwe provider zoeken.
-- Eerste deadline niet gehaald
-	revisie van MoSCoW 	
-- Systeem doet niet toe aan verwachtingen (product owner)
-    Reviseren van het systeem en mogelijk oplossing zoeken met de product owner.
+- Andere scholieren kunnen de roosters en activiteiten zien.
+    terwijl zij niet op de school zitten.
+- packages die er uit liggen (unsupported) 
+    applicatie kan niet worden gebouwd waardoor de applicatie dus ook niet werkt
+- Hacker komt in de docenten omgeving
+    Datalek mogelijk en ongeldige planning
+- QR-Code ongeldig
+    Student of Docent kan activeit/klas niet delen of zelf scannen 
 

@@ -37,7 +37,7 @@ Table: **Roles**
 - role_id (primary / key)
 - role_name (varchar)
 
-<!-- ![image](./doc-images/database-template.png) -->
+![image](./doc-images/diagram.png)
 
 #### Link voor ICS template:
 https://www.text-2-ics.com/blog/ics-file-format-structure-guide

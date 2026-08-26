@@ -1,4 +1,4 @@
-# Project Plan Lessenplanbord
+# Projectplan Lessenplanbord
 Gemaakt door: Frank, Senna en Tiemen
 Datum: 18-08-2026
 
@@ -67,4 +67,4 @@ De docenten hun account wordt aangemaakt door een superbeheerder dit persoon zal
 - QR-Code ongeldig
 
     Student of Docent kan activeit/klas niet delen of zelf scannen 
-
+- Server overload door te veel unieke kalender requests

@@ -9,7 +9,7 @@ Datum: 19-08-2026
 - Packages voor kalender feed (https://github.com/markuspoerschke/iCal) en Laravel Reverb
 
 # Datamodel
-De data wordt opgeslagen in een SQLite database, hieronder zie je de tabel namen.
+De data wordt opgeslagen in een SQLite database, hieronder zie je de tabel namen. Wij hebben gekozen voor een SQLite database omdat, dit een klein project is en intern wordt gebruikt binnen de IT afdeling van Firda Sneek.
 De tabel namen zijn ook geinspireed op de ICS template (zie: 'Link voor ICS template') 
 
 Table: **users**
@@ -43,7 +43,7 @@ Table: **Roles**
 https://www.text-2-ics.com/blog/ics-file-format-structure-guide
 
 ## Hoe worden ingevulde gegevens verwerkt?
-Ingevulde gegevens worden verwerkt met een bijhorende controller, de controller controleert of alles correct is geschreven denk aan de controle op tijd, hoofdlettergevoeligheid. Vervolgens wordt data gelijk opgeslagen naar de database om te worden bekeken, wijzingen en te verwijderen. Ook dit wordt gedaan door een controller.
+Ingevulde gegevens worden verwerkt met een bijhorende controller, de controller controleert of alles correct is geschreven denk aan de controle op tijd, hoofdlettergevoeligheid. Vervolgens wordt data gelijk opgeslagen naar de database om te worden bekeken, wijzingen en te verwijderen. Ook dit wordt gedaan door een controller. Dit zorgt ervoor dat er geen incorrecte gegevens in de database kunnen komen.
 
 # Algemene zaken
 
@@ -54,16 +54,16 @@ De normale studenten kunnen alleen activiteiten die zijn ingepland bekijken. Doc
 De database requests zullen altijd onder de twee secondes zitten, zelfs als het er boven zit zal het niet heel veel uitmaken voor de user experience. Voor docenten zal het waarschijnlijk iets sneller gaan ivm; hoge prioriteit (dus ongeveer een seconde). Ook wordt er gebruik gemaakt van Laravel Reverb voor realtime updates tussen de backend en frontend zodat, wijzigingen en toevoegingen direct worden getoond zowel als voor de student en docent.
 
 ## De Onderhoudtbaarheid
-Sinds het object georienteerd wordt gemaakt zal alles makkelijk te onderhouden zijn. Alle code moet het liefst apart werken zodat je gemakkelijk code functies en classes kan veranderen.
+Sinds het object georienteerd wordt gemaakt zal alles makkelijk te onderhouden zijn. Alle code moet het liefst apart werken zodat je gemakkelijk code functies en classes kan veranderen. Laravel helpt hier ook bij met controllers, models, migrations en meer.
 
 ## Beveiliging van de website
-Er moet rekening gehouden met de aangemaakte wachtwoorden, hierdoor zal er gebruik worden gemaakt van een Hash + Salt waardoor het wachtwoord heel moeilijk is om te achterhalen zelfs als iemand toegang heeft tot deze database. Controllers helpt ook veel bij met het valideren van forms.
+Er moet rekening gehouden met de aangemaakte wachtwoorden, hierdoor zal er gebruik worden gemaakt van een Hash + Salt waardoor het wachtwoord heel moeilijk is om te achterhalen zelfs als iemand toegang heeft tot deze database. Dit is al ingebouwd in de Laravel Starter Kit.
 
 ## De ontwikkelmethode / Programmeertalen
-Dit project zou worden gemaakt met de framework Laravel met de starterkit "Vue". Sinds laravel in php is zullen we hier dus php als backend gebruiken. Wij gebruiken "PHP: 8.5", "HTML" , "CSS" , "TailwindCSS" en misschien een beetje "JavaScript" om het iets meer reactive te. Voor Laravel gebruiken wij ook de nieuwste versie. Tijdens dit project maken we ook gebruik van packages.
+Dit project zal worden gemaakt met de framework Laravel met de starter kit "Vue". We hebben gekozen voor deze framework omdat, het makkelijk te onderhouden is, beveiliging al is ingebouwd en automatisch al snel is. Sinds laravel in php is zullen we hier dus php als backend gebruiken. Wij gebruiken "PHP: 8.5", "HTML" , "CSS" , "TailwindCSS" en misschien een beetje "JavaScript" om het iets meer reactive te. Voor Laravel gebruiken wij ook de nieuwste versie. Tijdens dit project maken we ook gebruik van packages om het makkelijker te maken.
 
 ## Randvoorwaarden voor koppeling aan de bestaande systemen
-Wij gaan github gebruiken als koppelmethode/versiebeheer voor dit project, hier zullen meerdere branches met meerdere features gemaakt worden zodat dit makkelijk opgehaald kan worden. En een goed beeld hebben van de vorige commits/versies. Tijdens dit project maken we ook gebruik van packages voor het genereren van ics bestanden.
+Wij gaan github gebruiken als koppelmethode/versiebeheer voor dit project, hier zullen meerdere branches met meerdere features gemaakt worden zodat dit makkelijk opgehaald kan worden. En een goed beeld hebben van de vorige commits/versies.
 
 <!-- ## User Flow Diagram 
 ![image](./doc-images/user-flow-diagram.png) -->

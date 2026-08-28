@@ -217,19 +217,25 @@ It explained how the model > view > controller system works, as well for migrati
 Answer at least the following questions:
 
 - Was the solution correct?
+After implementing a Model, Controller and a Route it did work as explained.
+
 - Do I understand the generated code?
+There was no code generated.
+
 - Which parts were unclear?
+None it was written out pretty clearly.
+
 - What errors or shortcomings did I discover?
+None.
+
 - How did I check/verify that?
+I really didn't have to since it did not write code it just provided me a scheme on how laravel handles information.
 
 ### Own Adjustments
-What changes did you make yourself?
+I didn't have to adjust anything, I did create a Model called: Activity and a Controller name: ActivityController which handle parsing over the data of the activities table in the sqlite database.
 
 ### Result
-
-What did the AI interaction ultimately deliver?
-(brief summary)
-
+I have gained the knowledge on how laravel parses information from database -> controllers -> views
 
 ## 2026-08-28
 

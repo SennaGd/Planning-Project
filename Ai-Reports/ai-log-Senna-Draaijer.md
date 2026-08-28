@@ -1,5 +1,5 @@
 # AI Logbook
-## 2026-09-15
+## 2026-08-21
 
 ### Task
 What do you want to achieve?
@@ -57,7 +57,7 @@ What did the AI interaction ultimately deliver?
 An example of a Model-View-Controller.
 
 
-## 2026-09-15
+## 2026-08-27
 
 ### Task
 Create scenarios and use cases based on the functional design and use case diagram of the Planning Dashboard Project.
@@ -95,7 +95,7 @@ What did the AI interaction ultimately deliver?
 Text based scenarios for the given use case, not in the right format.
 
 
-## 2026-09-15
+## 2026-08-27
 ### Task
 Reformat the scenario overviews into individual Markdown tables per use case.
 
@@ -131,7 +131,7 @@ What did the AI interaction ultimately deliver?
 Formatted scenarios that showed correctly inside the ai environment but not in a plain text file 
 
 
-## 2026-09-15
+## 2026-08-27
 ### Task
 Deliver the output explicitly as a '.md' code block.
 
@@ -166,7 +166,8 @@ What did the AI interaction ultimately deliver?
 
 A good parsed code block with combined scenarios which ended up falling short from my requirements.
 
-## 2026-09-15
+
+## 2026-08-27
 ### Task
 Make sure the scenarios are not combined together.
 
@@ -199,3 +200,61 @@ What did the AI interaction ultimately deliver?
 (brief summary)
 
 A complete scenario that is fully supported in '.md'
+
+
+## 2026-08-28
+
+### Task
+Understand how data is parsed throughout Laravel.
+
+### Prompt
+how can i parse information from sqlite database to route to page in laravel?
+
+### Output Summary
+It explained how the model > view > controller system works, as well for migrations.
+
+### Critical Evaluation
+Answer at least the following questions:
+
+- Was the solution correct?
+- Do I understand the generated code?
+- Which parts were unclear?
+- What errors or shortcomings did I discover?
+- How did I check/verify that?
+
+### Own Adjustments
+What changes did you make yourself?
+
+### Result
+
+What did the AI interaction ultimately deliver?
+(brief summary)
+
+
+## 2026-08-28
+
+### Task
+What do you want to achieve?
+
+### Prompt
+Which prompt did you use?
+
+### Output Summary
+Briefly describe what the AI generated.
+
+### Critical Evaluation
+Answer at least the following questions:
+
+- Was the solution correct?
+- Do I understand the generated code?
+- Which parts were unclear?
+- What errors or shortcomings did I discover?
+- How did I check/verify that?
+
+### Own Adjustments
+What changes did you make yourself?
+
+### Result
+
+What did the AI interaction ultimately deliver?
+(brief summary)

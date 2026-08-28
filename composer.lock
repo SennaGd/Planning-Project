@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a1e7c282c33bf3b206c89b7d59bc1c0c",
+    "content-hash": "d459ae23c9559b25c060d8f5ce8c5a78",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -4331,6 +4331,57 @@
                 }
             ],
             "time": "2026-08-06T16:21:11+00:00"
+        },
+        {
+            "name": "sssurii/laravel-ics",
+            "version": "v0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sssurii/laravel-ics.git",
+                "reference": "0d81cb8f300604a16b2aa3fd96fe2ae611c87649"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sssurii/laravel-ics/zipball/0d81cb8f300604a16b2aa3fd96fe2ae611c87649",
+                "reference": "0d81cb8f300604a16b2aa3fd96fe2ae611c87649",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "INSAN\\ICS\\ICSServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "INSAN\\ICS\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Surinder Singh",
+                    "email": "sssurii.dev@gmail.com"
+                }
+            ],
+            "description": "Package to generate ics files, email invitation.",
+            "keywords": [
+                "Invitation",
+                "event",
+                "iCalendar",
+                "ics",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/sssurii/laravel-ics/issues",
+                "source": "https://github.com/sssurii/laravel-ics/tree/v0.3"
+            },
+            "time": "2023-12-17T16:57:00+00:00"
         },
         {
             "name": "symfony/clock",

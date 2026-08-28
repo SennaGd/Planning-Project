@@ -1,0 +1,11 @@
+Fontconfig error: "/home/senna/.config/fontconfig/fonts.conf", line 1: no element found
+[2026-08-28 11:06:38.894] [info] Using configuration file /home/senna/.config/waybar/config.jsonc
+[2026-08-28 11:06:38.899] [info] Discovered appearance 'dark'
+[2026-08-28 11:06:38.920] [info] Using CSS file /home/senna/.config/waybar/style.css
+[2026-08-28 11:06:38.927] [warning] module sway/mode: Disabling module "sway/mode", Socket path is empty
+[2026-08-28 11:06:38.928] [info] Hyprland IPC starting
+[2026-08-28 11:06:38.929] [info] Loading persistent workspaces from Waybar config
+[2026-08-28 11:06:38.929] [info] Loading persistent workspaces from Hyprland workspace rules
+[2026-08-28 11:06:38.932] [warning] module sway/window: Disabling module "sway/window", Socket path is empty
+Full
+[2026-08-28 11:06:38.967] [info] Bar configured (width: 1920, height: 29) for output: eDP-1

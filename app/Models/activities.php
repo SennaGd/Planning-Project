@@ -13,12 +13,18 @@ class activities extends Model
         'description',
         'status',
         'text',
-        'attendee'
-    ]; // fillable is what should be entered through the form
-    protected $guarded = [
+        'attendee',
         'prod_id',
         'uid',
         'dt_stamp',
-        'version'
-    ]; // guarded is what should be entered through the backend.
+        'version',
+    ];
+
+    // fillable is what should be entered through the form
+//    protected $guarded = [
+//
+//    ];
+
+    // guarded is what should be entered through the backend.
+
 }

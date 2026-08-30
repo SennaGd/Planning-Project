@@ -14,6 +14,7 @@
                                 dark: '#0F172A',
                                 slate: '#1E293B',
                                 gold: '#FFCD00',
+                                'dark_gray': '#1E293B',
                             },
                         },
                     },
@@ -23,7 +24,19 @@
     </head>
     <body class="min-h-full bg-white text-black transition-colors duration-200 dark:bg-schiphol-dark dark:text-white">
         <header class="flex items-center gap-4 bg-[#FFCD00] px-6 py-3 m-0 transition-colors duration-200 dark:bg-black" id="header">
-            <img src="{{ asset('images/departure.png') }}" alt="Logo" class="h-16 w-16 object-contain">
+            {{-- <img src="{{ asset('images/departure.png') }}" alt="Logo" class="h-16 w-16 object-contain"> --}}
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="h-16 w-16 object-contain text-black dark:text-[#FFCD00]" fill="currentColor">
+                <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" stroke="none">
+                <path d="M1350 4706 c-107 -30 -214 -59 -236 -65 l-42 -11 515 -893 c284 -490
+                517 -899 520 -907 3 -12 -101 -43 -519 -154 -288 -77 -569 -151 -624 -166
+                l-101 -28 -249 195 -248 195 -178 -47 c-98 -27 -178 -53 -178 -58 0 -6 145
+                -261 321 -567 l322 -557 121 32 c3476 931 4095 1099 4149 1128 137 72 216 231
+                190 383 -33 191 -185 320 -373 318 -64 -1 -174 -27 -753 -183 -372 -101 -681
+                -181 -686 -179 -5 2 -397 365 -872 808 -474 443 -867 806 -873 807 -6 1 -99
+                -22 -206 -51z"/>
+                <path d="M170 610 l0 -250 2395 0 2395 0 0 250 0 250 -2395 0 -2395 0 0 -250z"/>
+                </g>
+            </svg>
             <h1 class="text-2xl font-semibold text-black dark:text-[#FFCD00]" id="title">Planning</h1>
             @php
                 if (Route::currentRouteName() === 'home') {
@@ -47,12 +60,12 @@
                 </svg>
             </button>
         </header>
-        <div class="flex w-full items-center bg-gray-300 px-6 py-3">
-            <h2 id="currentTime" class="text-2xl text-black">{{ now()->format('H:i') }}</h2>
+        <div class="flex w-full items-center bg-gray-300 px-6 py-3 dark:bg-schiphol-dark_gray transition-colors duration-200">
+            <h2 id="currentTime" class="text-2xl text-black dark:text-white">{{ now()->format('H:i') }}</h2>
             <div class="flex-1"></div>
-            <h2 id="currentDate" class="text-2xl text-black">{{ now()->format('d-m-Y') }}</h2>
+            <h2 id="currentDate" class="text-2xl text-black dark:text-white">{{ now()->format('d-m-Y') }}</h2>
         </div>
-        <main class="bg-white transition-colors duration-200 dark:bg-schiphol-dark">
+        <main class="bg-white transition-colors duration-200 dark:bg-schiphol-slate">
             {{ $slot }}
         </main>
         <footer></footer>

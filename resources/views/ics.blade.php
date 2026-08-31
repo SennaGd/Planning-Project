@@ -1,3 +1,3 @@
 <div>
-    hello
+    hello {{ $activity}}
 </div>

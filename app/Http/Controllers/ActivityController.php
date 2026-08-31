@@ -36,9 +36,9 @@ class ActivityController extends Controller
      */
     public function show($id)
     {
-        $activity = Activity::FindOrFail($id);
+        $activity = Activity::where("prod_id", $id)->firstOrFail();
 
-        return view('ics', compact('activity'));
+        return view('ics', compact("activity"));
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Activity;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ActivityController extends Controller
 {
@@ -40,7 +41,32 @@ class ActivityController extends Controller
 
         return view('ics', compact("activity"));
     }
+    public function generate_ics_feed(): Response
+    {
+        $ics_content = implode("\r\n", [
+            'BEGIN:VCALENDAR',
+            'VERSION:2.0',
+            'PRODID:-//Your Company//Your App//EN',
+            'CALSCALE:GREGORIAN',
+            'METHOD:PUBLISH',
+            'BEGIN:VEVENT',
+            'UID:' . uniqid() . '@yourdomain.com',
+            'DTSTAMP:' . now()->utc()->format('Ymd\THis\Z'),
+            'DTSTART:20260910T140000Z',
+            'DTEND:20260910T150000Z',
+            'SUMMARY:Team Strategy Meeting',
+            'DESCRIPTION:Discussion regarding upcoming objectives.',
+            'LOCATION:Conference Room A',
+            'END:VEVENT',
+            'END:VCALENDAR',
+        ]);
 
+
+        return response($ics_content, 200, [
+            'Content-Type' => 'text/calendar; charset=utf-8',
+            'Content-Disposition' => 'inline; filename="event.ics"',
+        ]);
+    }
     /**
      * Show the form for editing the specified resource.
      */

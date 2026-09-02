@@ -27,7 +27,7 @@ Table: **activities**
 - dt_end (datetime) // End Time
 - summary (varchar) // Short Summary 
 - status (varchar) // Active | Inactive
-- departure_hall (varchar) // location
+- location (varchar) 
 - class (varchar) -> classes.classname
 - version (float) 
 

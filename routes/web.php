@@ -8,7 +8,6 @@ Route::view('/', 'index')->name('home');
 Route::view('/lesplein', 'lesplein')->name('lesplein');
 
 Route::get('/ics/{activity}', [ActivityController::class, 'show']);
-Route::post()
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');

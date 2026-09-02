@@ -25,9 +25,11 @@ Table: **activities**
 - dt_stamp (datetime) // Created Time
 - dt_start (datetime) // Start Time
 - dt_end (datetime) // End Time
-- summary (tinytext) // Short Summary 
-- status (tinytext) // Active | Inactive
+- summary (varchar) // Short Summary 
+- status (varchar) // Active | Inactive
+- location (varchar) 
 - class (varchar) -> classes.classname
+- version (float) 
 
 Table: **classes**
 - class_id (primary / key)

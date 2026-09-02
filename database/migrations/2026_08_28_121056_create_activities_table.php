@@ -19,9 +19,10 @@ return new class extends Migration
             $table->dateTime('dt_end');
             $table->tinyText('summary');
             $table->string('description');
+            $table->string('location');
             $table->string('status');
             $table->string('text');
-            $table->string('version');
+            $table->float('version');
             $table->string('attendee');
             $table->timestamps('updated_at');
         });

@@ -4,10 +4,18 @@ Datum: 18-08-2026
 
 ## Inleiding 
 Sinds het start van het nieuwe schooljaar zijn er veranderingen gemaakt in het rooster, en de manier van lesgeven. Deze veranderingen hebben er voor gezorgd dat studenten een slecht of geen overzicht hebben van de lessen die hen gegeven worden. Daarnaast moet elke student inloggen in Eduarte wat helaas niet mogelijk is voor sommige scholieren. En ook is het onpraktisch om elk lesuur steeds opnieuw in te loggen in Eduarte. 
-In Eduarte staan alleen maar lesblokken, voor de Software Developers staan er lesblokken genaamd "Project". De studenten kunnen in dit blok meerdere activiteiten hebben zoals: Workshops, Uitleg, Vergaderingen en Presentaties. Dus voor de studenten in Software Development is het niet duidelijk wat zij daadwerkelijk gaan doen in een blokuur. 
+In Eduarte staan alleen maar lesblokken, voor de Software Developers staan er lesblokken genaamd "Project". De studenten kunnen in dit blok meerdere activiteiten hebben zoals: Workshops, Uitleg, Vergaderingen en Presentaties. Dus voor de studenten in Software Development is het niet duidelijk wat zij daadwerkelijk gaan doen in een blokuur. De opdracht gever is een docent genaamd Sven Imholz.
 
 
 ## Projectomschrijving
+Wat voor problemen zijn er momenteel, waarom moeten deze opgelost worden?
+
+In de inleiding werd verteld dat de blokuren in Eduarte niet perse zeggen waar of wat voor les de student heeft. Dit is niet zo handig, sinds de student niet een duidelijk overzicht krijgt van wat de daadwerkelijke planning voor dit blokuur is, ook werd omschreven dat de studenten niet altijd in Eduarte kunnen inloggen, soms heeft Eduarte een storing of werken de accounts van de studenten compleet niet (dit gebeurt vaak bij studenten die van opleiding zijn veranderd, zijn/haar account werkt wel maar kan geen duidelijk overzicht krijgen van het rooster). Hierdoor zullen studenten niet komen opdagen of verward zijn over of zij wel lessen hebben. Hierdoor moeten zij dan weer naar een docent om te vragen of zij een les hebben. Dit kan resulteren in tijdsverlies voor docenten en studenten, het is niet heel praktisch om het zo te doen.
+Zoals net werd gezegd dat de studenten soms niet kunnen inloggen of dat Eduarte eruit ligt. De studenten kunnen momenteel ook niet de planning in de kalender app krijgen. In de kalender app kunnen zij ook notificaties krijgen wat voor lessen zij hebben.
+
+De docenten kunnen ook geen extra informatie toevoegen in Eduarte, dit wordt gedaan door de rooster makers. Zij regelen de roosters voor alle klassen. Ook kunnen de docenten geen groepen aanmaken voor klassen, dit staat ook net al de roosters in Eduarte vast.
+
+
 ### Doelstelling
 Wij hebben opdracht gekregen om voor al deze problemen een globale oplossing te vinden, de opdachtgever (product owner) wilt een overzichtelijk dashboard waar studenten op een duidelijke manier kunnen zien waar en wanneer er welke les gegeven wordt. Ook komt het dashboard op het scherm te staan in op lesplein.
 

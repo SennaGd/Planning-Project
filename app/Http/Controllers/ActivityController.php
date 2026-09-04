@@ -34,17 +34,18 @@ class ActivityController extends Controller
         $validated = $request->validate([
             'uid'         => 'required|string|max:255',
             'dt_stamp'    => 'required|date',
-            'dt_strat'    => 'required|date',
-            'dt_end'      => 'required|date|after_or_equal:dt_strat',
-            'summary'     => 'required|string|max:65535',
+            'dt_start'    => 'required|date',
+            'dt_end'      => 'required|date|after_or_equal:dt_start',
+            'summary'     => 'required|string',
             'description' => 'required|string|max:255',
             'location'    => 'required|string|max:255',
             'status'      => 'required|string|max:255',
             'text'        => 'required|string|max:255',
-            'version'     => 'required|string|max:255',
+            'version'     => 'required|numeric',
             'attendee'    => 'required|string|max:255',
         ]);
-        Activity::create($request->all());
+
+        Activity::create($validated);
 
 
     }

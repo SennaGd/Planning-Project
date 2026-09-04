@@ -9,9 +9,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('activitiesToClasses', function (Blueprint $table) {
-            $table->unsignedBigInteger('activity_id');
-            $table->unsignedBigInteger('class_id');
-
             $table->foreignId('activity_id')->constrained('activities')->cascadeOnDelete();
             $table->foreignId('class_id')->constrained('schoolClasses')->cascadeOnDelete();
 

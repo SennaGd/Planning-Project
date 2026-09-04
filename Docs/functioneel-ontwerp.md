@@ -102,7 +102,7 @@ Een superbeheerder kan gemakkelijk docenten toevoegen.
 | **Versie** | 1.0 |
 | **Actor** | Student |
 | **Preconditie** | Student heeft de webapplicatie geopend in een browser. |
-| **Scenario** | Student vinkt een of meerdere klassen aan. Student klikt op de knop om een agenda-link te genereren. Systeem maakt gebruik van de `iCal` package om een ICS-feed op te stellen. Systeem toont de unieke iCal-url die gekopieerd kan worden. |
+| **Scenario** | Student vinkt een of meerdere klassen aan. Student klikt op de knop om een agenda-link te genereren. Systeem maakt gebruik van de Request Class (van Laravel) om een ICS-bestand op te stellen. Systeem geef ICS-bestand terug aan gebruiker. |
 | **Uitzonderingen** | Geen klas geselecteerd: Systeem meld dat er minimaal één klas moet worden aangevinkt. |
 | **Niet-functionele eisen** | Geen account vereist. Beveiligd tegen server overload bij veel gelijktijdige requests. |
 | **Postconditie** | De student beschikt over een direct te koppelen kalender-link. |

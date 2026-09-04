@@ -5,7 +5,7 @@ use App\Http\Controllers\ActivityController;
 
 
 Route::get('/', [ActivityController::class, 'index'])->name('home');
-Route::view('/lesplein', 'lesplein')->name('lesplein');
+Route::get('/lesplein', [ActivityController::class, 'index'])->name('lesplein');
 
 Route::get('/ics/{activity}', [ActivityController::class, 'show']);
 

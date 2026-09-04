@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\View\View;
 use App\Models\Activity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class ActivityController extends Controller
 {
@@ -15,7 +16,13 @@ class ActivityController extends Controller
     {
         $activities = Activity::query()->get();
 
-        return view('index', compact('activities'));
+        if (Route::currentRouteName() === 'home') {
+            return view('index', compact('activities'));
+        } elseif (Route::currentRouteName() === 'lesplein') {
+            return view('lesplein', compact('activities'));
+        }
+
+        abort(404);
     }
     /**
      * Show the form for creating a new resource.

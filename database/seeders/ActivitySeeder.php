@@ -16,7 +16,7 @@ class ActivitySeeder extends Seeder
         Activity::create([
             'uid' => 'uid1',
             'dt_stamp' => now(),
-            'dt_strat' => now(),
+            'dt_start' => now(),
             'dt_end' => now()->addHour(),
             'summary' => 'Activity 1',
             'description' => 'Description for Activity 1',
@@ -30,7 +30,7 @@ class ActivitySeeder extends Seeder
         Activity::create([
             'uid' => 'uid2',
             'dt_stamp' => now()->addHours(1),
-            'dt_strat' => now()->addHours(2),
+            'dt_start' => now()->addHours(2),
             'dt_end' => now()->addHours(3),
             'summary' => 'Activity 2',
             'description' => 'Description for Activity 2',

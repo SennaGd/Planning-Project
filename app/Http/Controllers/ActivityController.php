@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\View\View;
 use App\Models\Activity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Response;
 
 class ActivityController extends Controller
@@ -12,11 +13,25 @@ class ActivityController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $activities = Activity::query()->get();
+        $selectedDate = $request->input('date', now()->toDateString());
 
-        return view('index', compact('activities'));
+        $request->validate([
+            'date' => ['nullable', 'date'],
+        ]);
+
+        $activities = Activity::query()
+            ->whereDate('dt_strat', $selectedDate)
+            ->get();
+
+        if (Route::currentRouteName() === 'home') {
+            return view('index', compact('activities', 'selectedDate'));
+        } elseif (Route::currentRouteName() === 'lesplein') {
+            return view('lesplein', compact('activities'));
+        }
+
+        abort(404);
     }
     /**
      * Show the form for creating a new resource.

@@ -62,7 +62,7 @@
                 </button>                
             </div>
         </header>
-        <div class="flex w-full items-center bg-gray-300 px-6 py-3 dark:bg-schiphol-dark_gray transition-colors duration-200">
+        <div class="flex w-full items-center px-6 py-3 dark:bg-schiphol-dark_gray transition-colors duration-200">
             <h2 id="currentTime" class="text-2xl text-black dark:text-white">{{ now()->format('H:i') }}</h2>
             <div class="flex-1"></div>
             <h2 id="currentDate" class="text-2xl text-black dark:text-white">{{ now()->format('d-m-Y') }}</h2>

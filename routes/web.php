@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActivityController;
 
 
-Route::view('/', 'index')->name('home');
-Route::view('/lesplein', 'lesplein')->name('lesplein');
+Route::get('/', [ActivityController::class, 'index'])->name('home');
+Route::get('/lesplein', [ActivityController::class, 'index'])->name('lesplein');
 
 
 Route::middleware(['auth', 'verified'])->group(function () {

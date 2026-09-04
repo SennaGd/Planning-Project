@@ -12,12 +12,20 @@ class ActivityController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $activities = Activity::query()->get();
+        $selectedDate = $request->input('date', now()->toDateString());
+
+        $request->validate([
+            'date' => ['nullable', 'date'],
+        ]);
+
+        $activities = Activity::query()
+            ->whereDate('dt_strat', $selectedDate)
+            ->get();
 
         if (Route::currentRouteName() === 'home') {
-            return view('index', compact('activities'));
+            return view('index', compact('activities', 'selectedDate'));
         } elseif (Route::currentRouteName() === 'lesplein') {
             return view('lesplein', compact('activities'));
         }

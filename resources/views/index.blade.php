@@ -1,6 +1,7 @@
 <x-SchipholLayout>
     <div class="flex w-full items-center px-6 py-3 dark:bg-schiphol-dark_gray transition-colors duration-200" id="filterbar">
         <form method="GET" action="/" class="flex items-center gap-3">
+            <input type="date" id="date" name="date" value="{{ $selectedDate }}" class="inline-auto w-[10rem] shrink-0">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 shrink-0">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
             </svg>
@@ -23,7 +24,6 @@
             </thead>
             <tbody>
                 @foreach($activities as $activity)
-                    @if(\Carbon\Carbon::parse($activity->dt_strat)->isToday())
                         <tr class="dark:border-schiphol-dark_gray transition-colors duration-200 text-1xl">
                             <td class="px-4 py-2">{{ \Carbon\Carbon::parse($activity->dt_strat)->format('H:i') }} - {{ \Carbon\Carbon::parse($activity->dt_end)->format('H:i') }}</td>
                             <td class="px-4 py-2">{{ \Carbon\Carbon::parse($activity->dt_strat)->format('d-m-Y') }}</td>
@@ -32,9 +32,17 @@
                             <td class="px-4 py-2">{{ $activity->class }}</td>
                             <td class="px-4 py-2">{{ $activity->attendee}}</td>
                         </tr>
-                    @endif
                 @endforeach
             </tbody>
         </table>
     </div>
+    <script>
+        document.getElementById('date').addEventListener('change', function() {
+            this.form.submit();
+        });
+
+        document.getElementById('search').addEventListener('input', function() {
+            this.form.submit();
+        });
+    </script>
 </x-SchipholLayout>

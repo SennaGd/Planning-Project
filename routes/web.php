@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActivityController;
 
 
-Route::view('/', 'index')->name('home');
+Route::get('/', [ActivityController::class, 'index'])->name('home');
 Route::view('/lesplein', 'lesplein')->name('lesplein');
 
 Route::get('/ics/{activity}', [ActivityController::class, 'show']);

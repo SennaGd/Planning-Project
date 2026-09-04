@@ -16,17 +16,27 @@ class ActivityController extends Controller
     public function index(Request $request): View
     {
         $selectedDate = $request->input('date', now()->toDateString());
+        $searchQuery = $request->input('search', '');
 
         $request->validate([
             'date' => ['nullable', 'date'],
         ]);
 
         $activities = Activity::query()
-            ->whereDate('dt_strat', $selectedDate)
+            ->whereDate('dt_start', $selectedDate)
+            ->when($searchQuery, function ($query) use ($searchQuery) {
+                $query->where(function ($subQuery) use ($searchQuery) {
+                    $subQuery->where('summary', 'like', "%{$searchQuery}%")
+                        ->orWhere('description', 'like', "%{$searchQuery}%")
+                        ->orWhere('location', 'like', "%{$searchQuery}%")
+                        ->orWhere('attendee', 'like', "%{$searchQuery}%");
+                });
+            })
+            ->orderBy('dt_start')
             ->get();
 
         if (Route::currentRouteName() === 'home') {
-            return view('index', compact('activities', 'selectedDate'));
+            return view('index', compact('activities', 'selectedDate', 'searchQuery'));
         } elseif (Route::currentRouteName() === 'lesplein') {
             return view('lesplein', compact('activities'));
         }
@@ -49,8 +59,8 @@ class ActivityController extends Controller
         $validated = $request->validate([
             'uid'         => 'required|string|max:255',
             'dt_stamp'    => 'required|date',
-            'dt_stat'    => 'required|date',
-            'dt_end'      => 'required|date|after_or_equal:dt_strat',
+            'dt_start'    => 'required|date',
+            'dt_end'      => 'required|date|after_or_equal:dt_start',
             'summary'     => 'required|string|max:65535',
             'description' => 'required|string|max:255',
             'location'    => 'required|string|max:255',

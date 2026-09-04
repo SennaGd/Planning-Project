@@ -34,7 +34,7 @@ class ActivityController extends Controller
         $validated = $request->validate([
             'uid'         => 'required|string|max:255',
             'dt_stamp'    => 'required|date',
-            'dt_strat'    => 'required|date',
+            'dt_stat'    => 'required|date',
             'dt_end'      => 'required|date|after_or_equal:dt_strat',
             'summary'     => 'required|string|max:65535',
             'description' => 'required|string|max:255',
@@ -73,7 +73,7 @@ class ActivityController extends Controller
         */
         $ics_content = implode("\r\n", [
             "BEGIN:VCALENDAR",
-            "VERSION:1.0",
+            "VERSION:2.0",
             "PRODID:-//Firda Planning//Planning Dashboard v2.0//NL",
             "CALSCALE:GREGORIAN",
             "METHOD:PUBLISH",
@@ -83,6 +83,17 @@ class ActivityController extends Controller
         foreach ($id_list_TEST as $id){
             $activity = Activity::where("prod_id", $id)->firstOrFail();
             if ($activity) {
+                $parsed_dt_start = $activity
+                    ->dt_start
+                    ->utc()
+                    ->format('Ymd\THis\Z');
+
+                $parsed_dt_end = $activity
+                    ->dt_end
+                    ->utc()
+                    ->format('Ymd\THis\Z');
+
+
                 $event = implode("\r\n", [
                     "BEGIN:VEVENT",
                     "UID:".uniqid()."@firda-planning.com",

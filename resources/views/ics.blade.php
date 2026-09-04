@@ -6,7 +6,8 @@
     str_replace(
         ['http://', 'https://'],
         'http://',
-        route('calendar.event')
+        route('calendar.event'),
+
     )
 }}">
     Subscribe

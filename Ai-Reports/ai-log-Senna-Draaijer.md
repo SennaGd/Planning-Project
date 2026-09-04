@@ -288,7 +288,120 @@ I typed the function myself implementing a response that the output had shown.
 
     Best Practice: Serve https:// by default, or conditionally swap to webcal:// only on mobile devices via JavaScript.
 
-## 2026-08-28
+## 2026-09-04
+### Task
+I want to know if I am following the right structure in the ICS file im generating.
+
+### Prompt
+Is there anything off in this ICS file, my calendar doesn't accept this structure. Why?
+*followed by ics file*
+
+### Output Summary
+It told met that the only correct timestamp was DTSTAMP which had the structure YYYYMMDDTHHMMSS, the DTSTART and DTEND had just datetime values. The version of the ISO was 1.0 which followed an older structure. The new one was version 2.0.
+
+### Critical Evaluation
+Answer at least the following questions:
+
+- Was the solution correct?
+Yes, I have changed the database parser and now my calendar recognizes it.
+
+- Do I understand the generated code?
+It didn't generate anything besides giving me information.
+- Which parts were unclear?
+Well it explained a pretty simple thing, it was just the version which means what parsed it uses old one is 1.0 new one 2.0 and just time format.
+- What errors or shortcomings did I discover?
+Well I did not have a correct structure, but once I fixed the timestamp that was appended into the database it was all fixed. 
+- How did I check/verify that?
+I opened the ICS file and tried to put it into my agenda/calendar app
+
+### Own Adjustments
+I didnt change anything the ai generated, I did use the information given. 
+
+### Result
+An explanation of how the ICS handles information.
+
+## 2026-09-04
+
+### Task
+What do you want to achieve?
+
+### Prompt
+Which prompt did you use?
+
+### Output Summary
+Briefly describe what the AI generated.
+
+### Critical Evaluation
+Answer at least the following questions:
+
+- Was the solution correct?
+- Do I understand the generated code?
+- Which parts were unclear?
+- What errors or shortcomings did I discover?
+- How did I check/verify that?
+
+### Own Adjustments
+What changes did you make yourself?
+
+### Result
+
+What did the AI interaction ultimately deliver?
+(brief summary)
+## 2026-09-04
+
+### Task
+What do you want to achieve?
+
+### Prompt
+Which prompt did you use?
+
+### Output Summary
+Briefly describe what the AI generated.
+
+### Critical Evaluation
+Answer at least the following questions:
+
+- Was the solution correct?
+- Do I understand the generated code?
+- Which parts were unclear?
+- What errors or shortcomings did I discover?
+- How did I check/verify that?
+
+### Own Adjustments
+What changes did you make yourself?
+
+### Result
+
+What did the AI interaction ultimately deliver?
+(brief summary)
+## 2026-09-04
+
+### Task
+What do you want to achieve?
+
+### Prompt
+Which prompt did you use?
+
+### Output Summary
+Briefly describe what the AI generated.
+
+### Critical Evaluation
+Answer at least the following questions:
+
+- Was the solution correct?
+- Do I understand the generated code?
+- Which parts were unclear?
+- What errors or shortcomings did I discover?
+- How did I check/verify that?
+
+### Own Adjustments
+What changes did you make yourself?
+
+### Result
+
+What did the AI interaction ultimately deliver?
+(brief summary)
+## 2026-09-04
 
 ### Task
 What do you want to achieve?

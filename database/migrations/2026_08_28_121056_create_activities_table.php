@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('activities', function (Blueprint $table) {
-            $table->id('prod_id');
+            $table->id();
             $table->string('uid');
             $table->dateTime('dt_stamp');
             $table->dateTime('dt_start');
@@ -20,6 +20,7 @@ return new class extends Migration
             $table->tinyText('summary');
             $table->string('description');
             $table->string('location');
+            $table->string('schoolClass');
             $table->string('status');
             $table->string('text');
             $table->float('version');

@@ -237,7 +237,171 @@ I didn't have to adjust anything, I did create a Model called: Activity and a Co
 ### Result
 I have gained the knowledge on how laravel parses information from database -> controllers -> views
 
-## 2026-08-28
+## 2026-09-02
+
+### Task
+How I can return an ICS request that your device will recognize. 
+On mobile: opening calendar app 
+
+### Prompt
+how can I return a view that is an ics feed, that your mobile device will recognize and open into the calendar app 
+### Output Summary
+A brief explanation on how events, responses work in laravel and a possible solution for my question.
+
+### Critical Evaluation
+Answer at least the following questions:
+
+- Was the solution correct?
+Yes, I have created a function in the ActivityController which then created an ics file that ended up working.
+- Do I understand the generated code?
+Yes, it's honestly pretty simple. it uses a response class which sends a response back to the client.
+- Which parts were unclear?
+A bit about using the routing but it was not that bad to figure out myself.
+- What errors or shortcomings did I discover?
+I only had an error when defining a "<a>" tag on a page.
+- How did I check/verify that?
+I tested with Tiemen to see if it worked, it did.
+
+### Own Adjustments
+What changes did you make yourself?
+I typed the function myself implementing a response that the output had shown.
+
+### Result
+1. Controller Setup
+    Format your event data into a valid RFC 5545 iCalendar string.
+    Return a raw response using response($icsContent, 200, $headers).
+    Set critical headers:
+        'Content-Type' => 'text/calendar; charset=utf-8'
+        'Content-Disposition' => 'inline; filename="event.ics"'
+
+2. Routing & Blade Links
+    Define the route with a name in routes/web.php:
+    Route::get('/calendar/event.ics', [ActivityController::class, 'generate_ics_feed'])->name('calendar.event');
+
+    Call the route in Blade using its name, not its path:
+    route('calendar.event')
+
+3. Cross-Platform Protocol Handling
+    https://: Safe for all devices. Mobile browsers read the text/calendar header and open the Calendar app, while desktop browsers cleanly download the file.
+
+    webcal://: Best for mobile calendar subscriptions, but causes "unknown protocol" errors on desktops without a registered calendar application.
+
+    Best Practice: Serve https:// by default, or conditionally swap to webcal:// only on mobile devices via JavaScript.
+
+## 2026-09-04
+### Task
+I want to know if I am following the right structure in the ICS file im generating.
+
+### Prompt
+Is there anything off in this ICS file, my calendar doesn't accept this structure. Why?
+*followed by ics file*
+
+### Output Summary
+It told met that the only correct timestamp was DTSTAMP which had the structure YYYYMMDDTHHMMSS, the DTSTART and DTEND had just datetime values. The version of the ISO was 1.0 which followed an older structure. The new one was version 2.0.
+
+### Critical Evaluation
+Answer at least the following questions:
+
+- Was the solution correct?
+Yes, I have changed the database parser and now my calendar recognizes it.
+
+- Do I understand the generated code?
+It didn't generate anything besides giving me information.
+- Which parts were unclear?
+Well it explained a pretty simple thing, it was just the version which means what parsed it uses old one is 1.0 new one 2.0 and just time format.
+- What errors or shortcomings did I discover?
+Well I did not have a correct structure, but once I fixed the timestamp that was appended into the database it was all fixed. 
+- How did I check/verify that?
+I opened the ICS file and tried to put it into my agenda/calendar app
+
+### Own Adjustments
+I didnt change anything the ai generated, I did use the information given. 
+
+### Result
+An explanation of how the ICS handles information.
+
+## 2026-09-04
+
+### Task
+What do you want to achieve?
+
+### Prompt
+Which prompt did you use?
+
+### Output Summary
+Briefly describe what the AI generated.
+
+### Critical Evaluation
+Answer at least the following questions:
+
+- Was the solution correct?
+- Do I understand the generated code?
+- Which parts were unclear?
+- What errors or shortcomings did I discover?
+- How did I check/verify that?
+
+### Own Adjustments
+What changes did you make yourself?
+
+### Result
+
+What did the AI interaction ultimately deliver?
+(brief summary)
+## 2026-09-04
+
+### Task
+What do you want to achieve?
+
+### Prompt
+Which prompt did you use?
+
+### Output Summary
+Briefly describe what the AI generated.
+
+### Critical Evaluation
+Answer at least the following questions:
+
+- Was the solution correct?
+- Do I understand the generated code?
+- Which parts were unclear?
+- What errors or shortcomings did I discover?
+- How did I check/verify that?
+
+### Own Adjustments
+What changes did you make yourself?
+
+### Result
+
+What did the AI interaction ultimately deliver?
+(brief summary)
+## 2026-09-04
+
+### Task
+What do you want to achieve?
+
+### Prompt
+Which prompt did you use?
+
+### Output Summary
+Briefly describe what the AI generated.
+
+### Critical Evaluation
+Answer at least the following questions:
+
+- Was the solution correct?
+- Do I understand the generated code?
+- Which parts were unclear?
+- What errors or shortcomings did I discover?
+- How did I check/verify that?
+
+### Own Adjustments
+What changes did you make yourself?
+
+### Result
+
+What did the AI interaction ultimately deliver?
+(brief summary)
+## 2026-09-04
 
 ### Task
 What do you want to achieve?

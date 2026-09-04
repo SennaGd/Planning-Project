@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('prod_id');
             $table->string('uid');
             $table->dateTime('dt_stamp');
-            $table->dateTime('dt_strat');
+            $table->dateTime('dt_start');
             $table->dateTime('dt_end');
             $table->tinyText('summary');
             $table->string('description');

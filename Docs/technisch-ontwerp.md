@@ -6,7 +6,7 @@ Datum: 19-08-2026
 - Programmeertalen: PHP / HTML / CSS / JavaScript
 - Frameworks: Laravel / Vue
 - Database: SQLite
-- Packages voor kalender feed (https://github.com/markuspoerschke/iCal) en Laravel Reverb
+- Packages: Carbon (datetime parser) 
 
 # Datamodel
 De data wordt opgeslagen in een SQLite database, hieronder zie je de tabel namen. Wij hebben gekozen voor een SQLite database omdat, dit een klein project is en intern wordt gebruikt binnen de IT afdeling van Firda Sneek.
@@ -22,9 +22,9 @@ Table: **users**
 Table: **activities**
 - prod_id (primary / int)
 - uid (mail *or* varchar) -> users.email 
-- dt_stamp (datetime) // Created Time
-- dt_start (datetime) // Start Time
-- dt_end (datetime) // End Time
+- dt_stamp (datetime) // Created Time | format (YYYYMMDDTHHMMSS)
+- dt_start (datetime) // Start Time | format (YYYYMMDDTHHMMSSZ)
+- dt_end (datetime) // End Time | format (YYYYMMDDTHHMMSSZ)
 - summary (varchar) // Short Summary 
 - status (varchar) // Active | Inactive
 - location (varchar) 

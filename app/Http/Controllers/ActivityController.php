@@ -91,19 +91,11 @@ class ActivityController extends Controller
 
         return $ics_time;
     }
-    public function generate_ics_feed(): Response
+    public function generate_ics_feed(Request $request): Response
     {
+        $activities_list = $request->query('activities', []);
 
-        /**
-         $ics [
-            VERSION:
-            DTSTART:
-            DTEND:
-            SUMMARY:
-            DESCRIPTION:
-            LOCATION
-         ]
-        */
+        # header ICS file
         $ics_content = implode("\r\n", [
             "BEGIN:VCALENDAR",
             "VERSION:2.0",
@@ -112,8 +104,7 @@ class ActivityController extends Controller
             "METHOD:PUBLISH",
         ]);
 
-        $id_list_TEST = [1, 2];
-        foreach ($id_list_TEST as $id){
+        foreach ($activities_list as $id){
             $activity = Activity::where("prod_id", $id)->firstOrFail();
             if ($activity) {
                 $parsed_dt_start = ActivityController::parse_ics_time(
@@ -123,7 +114,6 @@ class ActivityController extends Controller
                 $parsed_dt_end = ActivityController::parse_ics_time(
                     $activity->dt_end
                 );
-
 
 
                 $event = implode("\r\n", [

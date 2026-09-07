@@ -38,6 +38,14 @@
         </table>
     </div>
     <script>
+        const navigationEntry = performance.getEntriesByType('navigation')[0];
+        const currentUrl = new URL(window.location.href);
+
+        if (navigationEntry?.type === 'reload' && currentUrl.searchParams.has('date')) {
+            currentUrl.searchParams.delete('date');
+            window.location.replace(currentUrl.toString());
+        }
+
         document.getElementById('date').addEventListener('change', function() {
             this.form.submit();
         });

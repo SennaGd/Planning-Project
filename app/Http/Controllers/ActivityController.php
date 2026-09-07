@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\View\View;
 use App\Models\Activity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Response;
 
 class ActivityController extends Controller
@@ -12,11 +13,35 @@ class ActivityController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $activities = Activity::query()->get();
+        $selectedDate = $request->input('date', now()->toDateString());
+        $searchQuery = $request->input('search', '');
 
-        return view('index', compact('activities'));
+        $request->validate([
+            'date' => ['nullable', 'date'],
+        ]);
+
+        $activities = Activity::query()
+            ->whereDate('dt_start', $selectedDate)
+            ->when($searchQuery, function ($query) use ($searchQuery) {
+                $query->where(function ($subQuery) use ($searchQuery) {
+                    $subQuery->where('summary', 'like', "%{$searchQuery}%")
+                        ->orWhere('description', 'like', "%{$searchQuery}%")
+                        ->orWhere('location', 'like', "%{$searchQuery}%")
+                        ->orWhere('attendee', 'like', "%{$searchQuery}%");
+                });
+            })
+            ->orderBy('dt_start')
+            ->get();
+
+        if (Route::currentRouteName() === 'home') {
+            return view('index', compact('activities', 'selectedDate', 'searchQuery'));
+        } elseif (Route::currentRouteName() === 'lesplein') {
+            return view('lesplein', compact('activities'));
+        }
+
+        abort(404);
     }
     /**
      * Show the form for creating a new resource.
@@ -36,7 +61,7 @@ class ActivityController extends Controller
             'dt_stamp'    => 'required|date',
             'dt_start'    => 'required|date',
             'dt_end'      => 'required|date|after_or_equal:dt_start',
-            'summary'     => 'required|string',
+            'summary'     => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'location'    => 'required|string|max:255',
             'status'      => 'required|string|max:255',
@@ -59,37 +84,55 @@ class ActivityController extends Controller
 
         return view('ics', compact("activity"));
     }
-    public function generate_ics_feed(): Response
+    /**
+     * Parsed from format .now()  to ICS format
+     * YYYY-MM-DD HH-MM-SS -> YYYYMMDDTHHMMSSZ
+     * 2026-09-04 11:09:48 -> 20260904T110948Z
+    */
+    public function parse_ics_time(string $str_time)
     {
+        $year = substr($str_time, 0, 4);
+        $month = substr($str_time, 5, 2);
+        $day = substr($str_time, 8, 2);
+        $hour = substr($str_time, 11, 2);
+        $minute = substr($str_time, 14, 2);
+        $second = substr($str_time, 17, 2);
 
-        /**
-         $ics [
-            VERSION:
-            DTSTART:
-            DTEND:
-            SUMMARY:
-            DESCRIPTION:
-            LOCATION
-         ]
-        */
+        $ics_time = $year.$month.$day."T".$hour.$minute.$second."Z";
+
+        return $ics_time;
+    }
+    public function generate_ics_feed(Request $request): Response
+    {
+        $activities_list = $request->query('activities', []);
+
+        # header ICS file
         $ics_content = implode("\r\n", [
             "BEGIN:VCALENDAR",
-            "VERSION:1.0",
+            "VERSION:2.0",
             "PRODID:-//Firda Planning//Planning Dashboard v2.0//NL",
             "CALSCALE:GREGORIAN",
             "METHOD:PUBLISH",
         ]);
 
-        $id_list_TEST = [1, 2];
-        foreach ($id_list_TEST as $id){
+        foreach ($activities_list as $id){
             $activity = Activity::where("prod_id", $id)->firstOrFail();
             if ($activity) {
+                $parsed_dt_start = ActivityController::parse_ics_time(
+                    $activity->dt_start
+                );
+
+                $parsed_dt_end = ActivityController::parse_ics_time(
+                    $activity->dt_end
+                );
+
+
                 $event = implode("\r\n", [
                     "BEGIN:VEVENT",
                     "UID:".uniqid()."@firda-planning.com",
                     "DTSTAMP:".now()->utc()->format('Ymd\THis\Z'),
-                    "DTSTART:$activity->dt_start",
-                    "DTEND:$activity->dt_end",
+                    "DTSTART:$parsed_dt_start",
+                    "DTEND:$parsed_dt_end",
                     "SUMMARY:$activity->summary",
                     "LOCATION:$activity->location",
                     "END:VEVENT",

@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActivityController;
 
 
-Route::view('/', 'index')->name('home');
-Route::view('/lesplein', 'lesplein')->name('lesplein');
+Route::get('/', [ActivityController::class, 'index'])->name('home');
+Route::get('/lesplein', [ActivityController::class, 'index'])->name('lesplein');
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -16,7 +16,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 // ICS
 
 Route::get('/ics/{activity}', [ActivityController::class, 'show']);
-Route::get('/calendar/event.ics', [ActivityController::class, 'generate_ics_feed'])->name('calendar.event');
+Route::get('/calendar/generate.ics', [ActivityController::class, 'generate_ics_feed'])->name('calendar.ics');
 
 
 

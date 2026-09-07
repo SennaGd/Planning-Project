@@ -1,14 +1,9 @@
 <div>
     hello {{ $activity}}
-
-
     <a href="{{
-    str_replace(
-        ['http://', 'https://'],
-        'http://',
-        route('calendar.event'),
-
-    )
+        route('calendar.ics',
+            ['activities' => ['1','2']]
+        )
 }}">
     Subscribe
 </a>

@@ -2,30 +2,39 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Attributes\Table;
+use App\Models\SchoolClass;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-#[Table('activities')]
 class Activity extends Model
 {
     protected $fillable = [
-        'dt_strat',
+        'uid',
+        'dt_stamp',
+        'dt_start',
         'dt_end',
         'summary',
         'description',
+        'location',
         'status',
         'text',
-        'attendee',
-        'location',
-        'prod_id',
-        'uid',
-        'dt_stamp',
-        'version'
-    ]; // fillable is what should be entered through the form
-    protected $guarded = [
-        'dt_start',
-        'dt_end',
-        'summary'
-    ]; // guarded is what should be entered through the backend.
+        'version',
+        'attendee'
+    ];
+
+    protected $casts = [
+        'dt_stamp' => 'datetime',
+        'dt_start' => 'datetime',
+        'dt_end' => 'datetime',
+    ];
+
+    public function schoolClasses(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            SchoolClass::class,
+            'activitiesToClasses',
+            'activity_id',
+            'class_id'
+        );
+    }
 }

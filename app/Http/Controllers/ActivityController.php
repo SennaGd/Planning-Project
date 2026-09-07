@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\View\View;
 use App\Models\Activity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Response;
 
 class ActivityController extends Controller
@@ -12,11 +13,35 @@ class ActivityController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $activities = Activity::query()->get();
+        $selectedDate = $request->input('date', now()->toDateString());
+        $searchQuery = $request->input('search', '');
 
-        return view('index', compact('activities'));
+        $request->validate([
+            'date' => ['nullable', 'date'],
+        ]);
+
+        $activities = Activity::query()
+            ->whereDate('dt_start', $selectedDate)
+            ->when($searchQuery, function ($query) use ($searchQuery) {
+                $query->where(function ($subQuery) use ($searchQuery) {
+                    $subQuery->where('summary', 'like', "%{$searchQuery}%")
+                        ->orWhere('description', 'like', "%{$searchQuery}%")
+                        ->orWhere('location', 'like', "%{$searchQuery}%")
+                        ->orWhere('attendee', 'like', "%{$searchQuery}%");
+                });
+            })
+            ->orderBy('dt_start')
+            ->get();
+
+        if (Route::currentRouteName() === 'home') {
+            return view('index', compact('activities', 'selectedDate', 'searchQuery'));
+        } elseif (Route::currentRouteName() === 'lesplein') {
+            return view('lesplein', compact('activities'));
+        }
+
+        abort(404);
     }
     /**
      * Show the form for creating a new resource.
@@ -34,17 +59,24 @@ class ActivityController extends Controller
         $validated = $request->validate([
             'uid'         => 'required|string|max:255',
             'dt_stamp'    => 'required|date',
+<<<<<<< HEAD
             'dt_stat'    => 'required|date',
             'dt_end'      => 'required|date|after_or_equal:dt_strat',
             'summary'     => 'required|string|max:65535',
+=======
+            'dt_start'    => 'required|date',
+            'dt_end'      => 'required|date|after_or_equal:dt_start',
+            'summary'     => 'required|string|max:255',
+>>>>>>> main
             'description' => 'required|string|max:255',
             'location'    => 'required|string|max:255',
             'status'      => 'required|string|max:255',
             'text'        => 'required|string|max:255',
-            'version'     => 'required|string|max:255',
+            'version'     => 'required|numeric',
             'attendee'    => 'required|string|max:255',
         ]);
-        Activity::create($request->all());
+
+        Activity::create($validated);
 
 
     }

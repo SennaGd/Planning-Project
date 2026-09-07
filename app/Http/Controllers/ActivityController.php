@@ -61,15 +61,16 @@ class ActivityController extends Controller
             'dt_stamp'    => 'required|date',
             'dt_start'    => 'required|date',
             'dt_end'      => 'required|date|after_or_equal:dt_start',
-            'summary'     => 'required|string|max:65535',
+            'summary'     => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'location'    => 'required|string|max:255',
             'status'      => 'required|string|max:255',
             'text'        => 'required|string|max:255',
-            'version'     => 'required|string|max:255',
+            'version'     => 'required|numeric',
             'attendee'    => 'required|string|max:255',
         ]);
-        Activity::create($request->all());
+
+        Activity::create($validated);
 
 
     }

@@ -23,6 +23,7 @@ class ActivityController extends Controller
         ]);
 
         $activities = Activity::query()
+            ->with('schoolClasses')
             ->whereDate('dt_start', $selectedDate)
             ->when($searchQuery, function ($query) use ($searchQuery) {
                 $query->where(function ($subQuery) use ($searchQuery) {

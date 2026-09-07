@@ -29,7 +29,7 @@
                             <td class="px-4 py-2">{{ \Carbon\Carbon::parse($activity->dt_start)->format('d-m-Y') }}</td>
                             <td class="px-4 py-2">{{ $activity->summary }}</td>
                             <td class="px-4 py-2">{{ $activity->location }}</td>
-                            <td class="px-4 py-2">{{ $activity->class }}</td>
+                            <td class="px-4 py-2">{{ $activity->schoolClasses->pluck('classname')->join(', ') }}</td>
                             <td class="px-4 py-2">{{ $activity->attendee}}</td>
                             <td class="px-4 py-2">@if (\Carbon\Carbon::parse($activity->dt_end)->isPast()) <p class="text-red-500">Vertrokken</p> @elseif (\Carbon\Carbon::parse($activity->dt_start)->isPast()) <p class="text-green-500">Boarding</p> @else <p class="text-yellow-500">Gepland</p> @endif</td>
                         </tr>

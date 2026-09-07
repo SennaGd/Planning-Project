@@ -14,15 +14,15 @@
             </thead>
             <tbody>
                 @foreach($activities as $activity)
-                    @if(\Carbon\Carbon::parse($activity->dt_strat)->isToday())
+                    @if(\Carbon\Carbon::parse($activity->dt_start)->isToday())
                         <tr class="dark:border-schiphol-dark_gray transition-colors duration-200 text-1xl">
-                            <td class="px-4 py-2">{{ \Carbon\Carbon::parse($activity->dt_strat)->format('H:i') }} - {{ \Carbon\Carbon::parse($activity->dt_end)->format('H:i') }}</td>
-                            <td class="px-4 py-2">{{ \Carbon\Carbon::parse($activity->dt_strat)->format('d-m-Y') }}</td>
+                            <td class="px-4 py-2">{{ \Carbon\Carbon::parse($activity->dt_start)->format('H:i') }} - {{ \Carbon\Carbon::parse($activity->dt_end)->format('H:i') }}</td>
+                            <td class="px-4 py-2">{{ \Carbon\Carbon::parse($activity->dt_start)->format('d-m-Y') }}</td>
                             <td class="px-4 py-2">{{ $activity->summary }}</td>
                             <td class="px-4 py-2">{{ $activity->location }}</td>
                             <td class="px-4 py-2">{{ $activity->class }}</td>
                             <td class="px-4 py-2">{{ $activity->attendee}}</td>
-                            <td class="px-4 py-2">@if (\Carbon\Carbon::parse($activity->dt_end)->isPast()) <p class="text-red-500">Vertrokken</p> @elseif (\Carbon\Carbon::parse($activity->dt_strat)->isPast()) <p class="text-green-500">Boarding</p> @else <p class="text-yellow-500">Gepland</p> @endif</td>
+                            <td class="px-4 py-2">@if (\Carbon\Carbon::parse($activity->dt_end)->isPast()) <p class="text-red-500">Vertrokken</p> @elseif (\Carbon\Carbon::parse($activity->dt_start)->isPast()) <p class="text-green-500">Boarding</p> @else <p class="text-yellow-500">Gepland</p> @endif</td>
 
                         </tr>
                     @endif

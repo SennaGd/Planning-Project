@@ -32,9 +32,9 @@ class Activity extends Model
     {
         return $this->belongsToMany(
             SchoolClass::class,
-            'activity_school_class',// pivot table
-            'activity_id',// this model its primKey
-            'school_class_id'// related model its primKey
+            'activitiesToClasses',
+            'activity_id',
+            'class_id'
         );
     }
 }

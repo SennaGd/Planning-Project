@@ -14,8 +14,8 @@ class SchoolClass extends Model
     {
         return $this->belongsToMany(
             Activity::class,
-            'activity_school_class',
-            'school_class_id',
+            'activitiesToClasses',
+            'class_id',
             'activity_id'
         );
     }

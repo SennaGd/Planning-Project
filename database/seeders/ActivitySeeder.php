@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Activity;
+use App\Models\SchoolClass;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class ActivitySeeder extends Seeder
 {
@@ -14,6 +16,11 @@ class ActivitySeeder extends Seeder
     {
         $now = now();
 
+        $schoolClasses = collect(['SD1A', 'SD1B', 'SD2A', 'SD2B'])
+            ->mapWithKeys(fn (string $classname): array => [
+                $classname => SchoolClass::firstOrCreate(['classname' => $classname]),
+            ]);
+
         $activities = [
             [
                 'uid' => 'uid1',
@@ -23,6 +30,7 @@ class ActivitySeeder extends Seeder
                 'description' => 'Kennismaking met softwareontwikkeling, versiebeheer en samenwerken in teams.',
                 'location' => 'Lokaal A101',
                 'attendee' => 'development@example.com',
+                'classes' => ['SD1A', 'SD1B'],
             ],
             [
                 'uid' => 'uid2',
@@ -32,6 +40,7 @@ class ActivitySeeder extends Seeder
                 'description' => 'Praktische workshop over branches, pull requests en code reviews.',
                 'location' => 'Lokaal B204',
                 'attendee' => 'development@example.com',
+                'classes' => ['SD1A', 'SD1B'],
             ],
             [
                 'uid' => 'uid3',
@@ -41,6 +50,7 @@ class ActivitySeeder extends Seeder
                 'description' => 'Relationele databases ontwerpen en queries schrijven met SQL.',
                 'location' => 'Lokaal C302',
                 'attendee' => 'database@example.com',
+                'classes' => ['SD1A', 'SD2A'],
             ],
             [
                 'uid' => 'uid4',
@@ -50,6 +60,7 @@ class ActivitySeeder extends Seeder
                 'description' => 'REST APIs bouwen, testen en documenteren voor webapplicaties.',
                 'location' => 'Lokaal A102',
                 'attendee' => 'development@example.com',
+                'classes' => ['SD1B', 'SD2B'],
             ],
             [
                 'uid' => 'uid5',
@@ -59,6 +70,7 @@ class ActivitySeeder extends Seeder
                 'description' => 'Beheer van Linux servers, gebruikersrechten en processen.',
                 'location' => 'Serverruimte 1',
                 'attendee' => 'beheer@example.com',
+                'classes' => ['SD2A', 'SD2B'],
             ],
             [
                 'uid' => 'uid6',
@@ -68,6 +80,7 @@ class ActivitySeeder extends Seeder
                 'description' => 'Introductie in cloudplatformen, virtuele machines en schaalbaarheid.',
                 'location' => 'Lokaal B205',
                 'attendee' => 'cloud@example.com',
+                'classes' => ['SD2A', 'SD2B'],
             ],
             [
                 'uid' => 'uid7',
@@ -77,6 +90,7 @@ class ActivitySeeder extends Seeder
                 'description' => 'Herkennen van veiligheidsrisicos, phishing en veilige wachtwoorden.',
                 'location' => 'Lokaal C301',
                 'attendee' => 'security@example.com',
+                'classes' => ['SD1A', 'SD2A'],
             ],
             [
                 'uid' => 'uid8',
@@ -86,6 +100,7 @@ class ActivitySeeder extends Seeder
                 'description' => 'Software automatisch bouwen, testen en uitrollen met CI/CD pipelines.',
                 'location' => 'Lokaal A103',
                 'attendee' => 'devops@example.com',
+                'classes' => ['SD2A', 'SD2B'],
             ],
             [
                 'uid' => 'uid9',
@@ -95,6 +110,7 @@ class ActivitySeeder extends Seeder
                 'description' => 'Basisprincipes van TCP/IP, netwerkmonitoring en troubleshooting.',
                 'location' => 'Netwerklab',
                 'attendee' => 'netwerk@example.com',
+                'classes' => ['SD1B', 'SD2B'],
             ],
             [
                 'uid' => 'uid10',
@@ -104,17 +120,24 @@ class ActivitySeeder extends Seeder
                 'description' => 'Presentatie van afgeronde projecten voor software en systeembeheer.',
                 'location' => 'Auditorium',
                 'attendee' => 'it-projecten@example.com',
+                'classes' => ['SD1A', 'SD1B', 'SD2A', 'SD2B'],
             ],
         ];
 
         foreach ($activities as $activity) {
-            Activity::create([
-                ...$activity,
+            $createdActivity = Activity::create([
+                ...collect($activity)->except('classes')->all(),
                 'dt_stamp' => $now,
                 'status' => 'active',
                 'text' => 'IT en Software Development',
                 'version' => '1.0',
             ]);
+
+            Schema::withoutForeignKeyConstraints(function () use ($activity, $createdActivity, $schoolClasses): void {
+                $createdActivity->schoolClasses()->attach(
+                    collect($activity['classes'])->map(fn (string $classname): int => $schoolClasses[$classname]->id)
+                );
+            });
         }
     }
 }

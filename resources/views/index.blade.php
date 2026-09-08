@@ -1,4 +1,5 @@
 <x-SchipholLayout>
+    @vite('resources/css/app.css')
     <div class="flex w-full items-center px-6 py-3 dark:bg-schiphol-dark_gray transition-colors duration-200" id="filterbar">
         <form method="GET" action="/" class="flex items-center gap-3">
             <input type="date" id="date" name="date" value="{{ $selectedDate }}" class="inline-auto w-[10rem] shrink-0">
@@ -8,7 +9,21 @@
             <input class="w-full bg-transparent outline-none" type="text" name="search" id="search" placeholder="Zoeken" value="{{ $searchQuery }}">
         </form>
         <div class="flex-1"></div>
-        <a href="">Kalenderabonomenten</a>
+        <!--  popup  | button  -->
+        <button class='popup-button'>Kalenderabonomenten</button>
+
+        <!--  popup  | content  -->
+        <div class='popup-wrapper'>
+            <div class='popup dark:text-schiphol-light_gray'>
+                <div class='popup-close'>x</div>
+                <div class='popup-content'>
+                    <h2>Hello</h2>
+                    <p>World!</p>
+
+                </div>
+            </div>
+        </div>
+        @vite('resources/js/popup.js')
     </div>
         <table class="table-auto text-left w-full">
             <thead class="dark:bg-schiphol-dark_gray bg-gray-300 transition-colors duration-200">

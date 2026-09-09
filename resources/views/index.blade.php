@@ -27,24 +27,24 @@
     </div>
         <table class="table-auto text-left w-full">
             <thead class="dark:bg-schiphol-dark_gray bg-gray-300 transition-colors duration-200">
-            <tr class="dark:text-schiphol-light_gray transition-colors duration-200 text-2xl dark:border-schiphol-dark_gray">
-                <th scope="col" class="px-4 py-2">Tijd</th>
-                <th scope="col" class="px-4 py-2">Datum</th>
-                <th scope="col" class="px-4 py-2">Bestemming</th>
-                <th scope="col" class="px-4 py-2">Gate</th>
-                <th scope="col" class="px-4 py-2">Vluchtnummer</th>
-                <th scope="col" class="px-4 py-2">Vliegmaatschapij</th>
-                <th scope="col" class="px-4 py-2">Opmerkingen</th>
-            </tr>
+                <tr class="dark:text-schiphol-light_gray transition-colors duration-200 text-2xl dark:border-schiphol-dark_gray dark:text-[#FFCD00]">
+                    <th scope="col" class="px-4 py-2">Tijd</th>
+                    <th scope="col" class="px-4 py-2">Datum</th>
+                    <th scope="col" class="px-4 py-2">Bestemming</th>
+                    <th scope="col" class="px-4 py-2">Gate</th>
+                    <th scope="col" class="px-4 py-2">Vluchtnummer</th>
+                    <th scope="col" class="px-4 py-2">Vliegmaatschapij</th>
+                    <th scope="col" class="px-4 py-2">Opmerkingen</th>
+                </tr>
             </thead>
             <tbody>
                 @foreach($activities as $activity)
-                        <tr class="dark:border-schiphol-dark_gray transition-colors duration-200 text-1xl">
+                        <tr class="text-1xl">
                             <td class="px-4 py-2">{{ \Carbon\Carbon::parse($activity->dt_start)->format('H:i') }} - {{ \Carbon\Carbon::parse($activity->dt_end)->format('H:i') }}</td>
                             <td class="px-4 py-2">{{ \Carbon\Carbon::parse($activity->dt_start)->format('d-m-Y') }}</td>
                             <td class="px-4 py-2">{{ $activity->summary }}</td>
                             <td class="px-4 py-2">{{ $activity->location }}</td>
-                            <td class="px-4 py-2">{{ $activity->class }}</td>
+                            <td class="px-4 py-2">{{ $activity->schoolClasses->pluck('classname')->join(', ') }}</td>
                             <td class="px-4 py-2">{{ $activity->attendee}}</td>
                             <td class="px-4 py-2">@if (\Carbon\Carbon::parse($activity->dt_end)->isPast()) <p class="text-red-500">Vertrokken</p> @elseif (\Carbon\Carbon::parse($activity->dt_start)->isPast()) <p class="text-green-500">Boarding</p> @else <p class="text-yellow-500">Gepland</p> @endif</td>
                         </tr>
@@ -53,6 +53,14 @@
         </table>
     </div>
     <script>
+        const navigationEntry = performance.getEntriesByType('navigation')[0];
+        const currentUrl = new URL(window.location.href);
+
+        if (navigationEntry?.type === 'reload' && currentUrl.searchParams.has('date')) {
+            currentUrl.searchParams.delete('date');
+            window.location.replace(currentUrl.toString());
+        }
+
         document.getElementById('date').addEventListener('change', function() {
             this.form.submit();
         });

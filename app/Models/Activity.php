@@ -3,11 +3,17 @@
 namespace App\Models;
 
 use App\Models\SchoolClass;
+use App\Events\ActivityCreated;
+use Database\Factories\ActivityFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Activity extends Model
 {
+    /** @use HasFactory<ActivityFactory> */
+    use HasFactory;
+
     protected $fillable = [
         'uid',
         'dt_stamp',
@@ -19,7 +25,7 @@ class Activity extends Model
         'status',
         'text',
         'version',
-        'attendee'
+        'attendee',
     ];
 
     protected $casts = [
@@ -36,5 +42,20 @@ class Activity extends Model
             'activity_id',
             'class_id'
         );
+    }
+
+    public function attachSchoolClasses(iterable $classIds): void
+    {
+        $this->schoolClasses()->attach($classIds);
+        $this->unsetRelation('schoolClasses');
+
+        ActivityCreated::dispatch($this->load('schoolClasses'));
+    }
+
+    protected static function booted(): void
+    {
+        static::created(function (Activity $activity): void {
+            ActivityCreated::dispatch($activity);
+        });
     }
 }

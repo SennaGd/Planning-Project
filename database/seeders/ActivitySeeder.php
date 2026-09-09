@@ -134,7 +134,7 @@ class ActivitySeeder extends Seeder
             ]);
 
             Schema::withoutForeignKeyConstraints(function () use ($activity, $createdActivity, $schoolClasses): void {
-                $createdActivity->schoolClasses()->attach(
+                $createdActivity->attachSchoolClasses(
                     collect($activity['classes'])->map(fn (string $classname): int => $schoolClasses[$classname]->id)
                 );
             });

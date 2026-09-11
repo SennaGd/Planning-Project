@@ -39,7 +39,7 @@ class ActivityController extends Controller
         if (Route::currentRouteName() === 'home') {
             return view('index', compact('activities', 'selectedDate', 'searchQuery'));
         } elseif (Route::currentRouteName() === 'lesplein') {
-            return view('lesplein', compact('activities'));
+            return view('lesplein', compact('activities', 'selectedDate'));
         }
 
         abort(404);

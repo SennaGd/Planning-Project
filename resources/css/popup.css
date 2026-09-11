@@ -1,5 +1,5 @@
 .popup-wrapper {
-
+    overflow:hidden;
     background:#020202bb;
     position: fixed;
     top:0;
@@ -10,6 +10,7 @@
     display:none;
 }
 .popup {
+    z-index: 1000;
     width: 100%;
     background:white;
     max-width: 300px;

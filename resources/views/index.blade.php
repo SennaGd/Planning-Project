@@ -12,18 +12,7 @@
         <!--  popup  | button  -->
         <button class='popup-button'>Kalenderabonomenten</button>
 
-        <!--  popup  | content  -->
-        <div class='popup-wrapper'>
-            <div class='popup dark:text-schiphol-light_gray'>
-                <div class='popup-close'>x</div>
-                <div class='popup-content'>
-                    <h2>Hello</h2>
-                    <p>World!</p>
 
-                </div>
-            </div>
-        </div>
-        @vite('resources/js/popup.js')
     </div>
         <table class="table-auto text-left w-full">
             <thead class="dark:bg-schiphol-dark_gray bg-gray-300 transition-colors duration-200">
@@ -52,6 +41,38 @@
             </tbody>
         </table>
     </div>
+
+    <!--  popup  | content  -->
+    <div class='popup-wrapper'>
+            <div class='popup dark:text-schiphol-light_gray'>
+                <div class='popup-close'>x</div>
+                <div class='popup-content'>
+                    <h2>Abonneer op een of meerdere kalenders</h2>
+                    <form action="{{ route('calendar.ics') }}" method="POST">
+                        @csrf
+                        <details class="dropdown-wrapper">
+                            <summary class="dropdown-button">Selecteer klassen</summary>
+
+                            <div class="dropdown-menu">
+                                @foreach ($school_classes as $class)
+                                    <label class="dropdown-item">
+                                        <input
+                                            type="checkbox"
+                                            name="school_classes[]"
+                                            value="{{ $class->id }}"
+                                        >
+                                        <span>{{ $class->classname }}</span>
+                                    </label>
+                                @endforeach
+                            </div>
+                        </details>
+
+                        <input type='submit' value='Submit'>
+                    </form>
+                </div>
+            </div>
+        </div>
+        @vite('resources/js/popup.js')
     <script>
         const navigationEntry = performance.getEntriesByType('navigation')[0];
         const currentUrl = new URL(window.location.href);

@@ -40,10 +40,28 @@
         return paragraph;
     }
 
+    function refreshActivityStatus(row) {
+        const startIso = row.dataset.dtStart;
+        const endIso = row.dataset.dtEnd;
+        const status = row.querySelector('[data-cell="status"]');
+
+        if (! startIso || ! endIso || ! status) {
+            return;
+        }
+
+        status.replaceChildren(statusCell(startIso, endIso));
+    }
+
+    function refreshAllActivityStatuses() {
+        activitiesBody.querySelectorAll('[data-activity-id]').forEach(refreshActivityStatus);
+    }
+
     function appendActivityRow(activity) {
         const row = document.createElement('tr');
         row.className = 'text-1xl';
         row.dataset.activityId = activity.id;
+        row.dataset.dtStart = activity.dt_start;
+        row.dataset.dtEnd = activity.dt_end;
 
         const cells = [
             `${formatTime(activity.dt_start)} - ${formatTime(activity.dt_end)}`,
@@ -68,6 +86,7 @@
 
         const status = document.createElement('td');
         status.className = 'px-4 py-2';
+        status.dataset.cell = 'status';
         status.appendChild(statusCell(activity.dt_start, activity.dt_end));
         row.appendChild(status);
 
@@ -107,4 +126,7 @@
         .listen('.ActivityDeleted', (activity) => {
             removeActivityRow(activity);
         });
+
+    refreshAllActivityStatuses();
+    setInterval(refreshAllActivityStatuses, 1000);
 </script>

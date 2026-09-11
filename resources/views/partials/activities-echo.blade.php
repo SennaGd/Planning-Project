@@ -115,6 +115,40 @@
         existing?.remove();
     }
 
+    function updateActivityRow(activity) {
+        const existing = activitiesBody.querySelector(`[data-activity-id="${activity.id}"]`);
+
+        if (! existing) {
+            return;
+        }
+
+        existing.dataset.dtStart = activity.dt_start;
+        existing.dataset.dtEnd = activity.dt_end;
+
+        const cells = [
+            `${formatTime(activity.dt_start)} - ${formatTime(activity.dt_end)}`,
+            formatDate(activity.dt_start),
+            activity.summary ?? '',
+            activity.location ?? '',
+            activity.classnames ?? '',
+            activity.attendee ?? '',
+        ];
+
+        cells.forEach((value, index) => {
+            const cell = existing.children[index];
+
+            if (cell) {
+                cell.textContent = value;
+
+                if (index === 4) {
+                    cell.dataset.cell = 'classnames';
+                }
+            }
+        });
+
+        refreshActivityStatus(existing);
+    }
+
     window.Echo.channel('activities')
         .listen('ActivityCreated', (activity) => {
             if (activity.date !== selectedDate) {
@@ -122,6 +156,13 @@
             }
 
             upsertActivityRow(activity);
+        })
+        .listen('ActivityUpdated', (activity) => {
+            if (activity.date !== selectedDate) {
+                return;
+            }
+
+            updateActivityRow(activity);
         })
         .listen('.ActivityDeleted', (activity) => {
             removeActivityRow(activity);

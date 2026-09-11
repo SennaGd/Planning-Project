@@ -1,5 +1,4 @@
 <x-SchipholLayout>
-    @vite('resources/css/app.css')
     <div class="flex w-full items-center px-6 py-3 dark:bg-schiphol-dark_gray transition-colors duration-200" id="filterbar">
         <form method="GET" action="/" class="flex items-center gap-3">
             <input type="date" id="date" name="date" value="{{ $selectedDate }}" class="inline-auto w-[10rem] shrink-0">
@@ -10,8 +9,8 @@
         </form>
         <div class="flex-1"></div>
         <!--  popup  | button  -->
-        <button class='popup-button'>Kalenderabonomenten</button>
 
+        <button command='show-modal' commandfor="my-dialog-2">kalenderabonnementen</button>
 
     </div>
         <table class="table-auto text-left w-full">
@@ -42,37 +41,39 @@
         </table>
     </div>
 
+    <dialog id='my-dialog-2' closedby='any' class='popup-content background:black/20 backdrop-blur-sm m-auto p-5 shadow rounded dark:bg-schiphol-dark_gray dark:text-[#f0f0f0] dark:text-schiphol-light_gray'>
+        <h2>Abonneer op een of meerdere kalenders</h2>
+        <form action="{{ route('calendar.ics') }}" method="POST" class=''>
+            @csrf
+                <p class='italic'>- Selecteer klassen</p>
+                <div class='p-2 pl-5 align-content' >
+                    <ul>
+                        @foreach ($school_classes as $class)
+                            <li>
+                            <label class="dropdown-item">
+                                <input
+                                    type="checkbox"
+                                    name="school_classes[]"
+                                    value="{{ $class->id }}"
+                                >
+                                <span>{{ $class->classname }}</span>
+                            </label>
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+
+            <input class='underline' type='submit' value='Submit' >
+        </form>
+    </dialog>
+
     <!--  popup  | content  -->
     <div class='popup-wrapper'>
             <div class='popup dark:text-schiphol-light_gray'>
                 <div class='popup-close'>x</div>
                 <div class='popup-content'>
-                    <h2>Abonneer op een of meerdere kalenders</h2>
-                    <form action="{{ route('calendar.ics') }}" method="POST">
-                        @csrf
-                        <details class="dropdown-wrapper">
-                            <summary class="dropdown-button">Selecteer klassen</summary>
-
-                            <div class="dropdown-menu">
-                                @foreach ($school_classes as $class)
-                                    <label class="dropdown-item">
-                                        <input
-                                            type="checkbox"
-                                            name="school_classes[]"
-                                            value="{{ $class->id }}"
-                                        >
-                                        <span>{{ $class->classname }}</span>
-                                    </label>
-                                @endforeach
-                            </div>
-                        </details>
-
-                        <input type='submit' value='Submit'>
-                    </form>
-                </div>
-            </div>
+                   </div>
         </div>
-        @vite('resources/js/popup.js')
     <script>
         const navigationEntry = performance.getEntriesByType('navigation')[0];
         const currentUrl = new URL(window.location.href);

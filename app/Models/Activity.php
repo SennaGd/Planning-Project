@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\SchoolClass;
 use App\Events\ActivityCreated;
+use App\Events\ActivityDeleted;
 use Database\Factories\ActivityFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -56,6 +56,10 @@ class Activity extends Model
     {
         static::created(function (Activity $activity): void {
             ActivityCreated::dispatch($activity);
+        });
+
+        static::deleting(function (Activity $activity): void {
+            ActivityDeleted::dispatch($activity);
         });
     }
 }

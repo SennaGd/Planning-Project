@@ -90,6 +90,12 @@
         appendActivityRow(activity);
     }
 
+    function removeActivityRow(activity) {
+        const existing = activitiesBody.querySelector(`[data-activity-id="${activity.id}"]`);
+
+        existing?.remove();
+    }
+
     window.Echo.channel('activities')
         .listen('ActivityCreated', (activity) => {
             if (activity.date !== selectedDate) {
@@ -97,5 +103,8 @@
             }
 
             upsertActivityRow(activity);
+        })
+        .listen('.ActivityDeleted', (activity) => {
+            removeActivityRow(activity);
         });
 </script>

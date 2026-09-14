@@ -34,17 +34,17 @@
                             <div class="space-y-6">
                                 <form action="{{ route('store') }}" method="POST">
                                     <label for="summary">Bestemming/omscrhijving:</label>
-                                    <input type="text" name="summary" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                                    <input type="text" name="summary" value="Introductie Software Development" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
                                     <label for="">gate/klaslokaal</label>
-                                    <input type="text" name="location" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                                    <input type="text" name="location" value="audiotorium" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
                                     <label for="">vluchtnummer/klas</label>
-                                    <input type="text" name="class" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                                    <input type="text" name="class" value="1111" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
                                     <label for="">vliegmaatschapij/aanwezige</label>
-                                    <input type="text" name="attendee" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                                    <input type="text" name="attendee" value="it-projecten@gmail.com" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
                                     <label for="">begin tijd</label>
-                                    <input type="datetime-local" name="dt_start" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                                    <input type="datetime-local" value="2008-07-11T12:00" name="dt_start" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
                                     <label for="">eind tijd</label>
-                                    <input type="datetime-local" name="dt_end" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                                    <input type="datetime-local" value="2008-07-11T13:00" name="dt_end" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
                                     <input type="submit" value="Les Invoeren" class="mt-4 bg-gray-300 dark:bg-gray-700 p-2 rounded">
                                 </form>
                             </div>

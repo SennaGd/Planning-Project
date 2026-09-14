@@ -115,18 +115,26 @@ class ActivityController extends Controller
             'dt_start'    => 'required|date',
             'dt_end'      => 'required|date|after_or_equal:dt_start',
             'summary'     => 'required|string|max:255',
-            'description' => 'required|string|max:255',
+//            'description' => 'required|string|max:255',
             'location'    => 'required|string|max:255',
-            'status'      => 'required|string|max:255',
-            'text'        => 'required|string|max:255',
+//            'status'      => 'required|string|max:255',
+//            'text'        => 'required|string|max:255',
 //            'version'     => 2.0,
             'attendee'    => 'required|string|max:255',
             'class'    => 'required|string|max:255',
         ]);
+
 //        if($validated){
 //            dd($validated);
 //        }
-        $activiy = Activity::create($validated);
+        dd($activiy = Activity::create($validated + [
+                'uid'=> time(),
+                'dt_stamp' => now()->toDateString(),
+                'description' =>'haiiii',
+                'status' => 'mlem',
+                'text' => 'mrrp',
+                'version' =>2.0
+            ]));
         dd($activiy);
     }
 

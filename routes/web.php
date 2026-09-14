@@ -12,7 +12,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [ActivityController::class, 'dashboard'])->name('dashboard');
 });
 //Route::middleware(['auth', 'verified'])->group(function () {
-    route::post('/store', [ActivityController::class, 'store']);
+    route::post('/store', [ActivityController::class, 'store'])->name('store');
 //});
 
 // ICS

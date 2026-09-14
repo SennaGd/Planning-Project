@@ -8,6 +8,15 @@
             <div class="flex-1"></div>
             <a href="">Kalenderabonomenten</a>
         </div>
+        @if ($errors->any())
+            <div style="color: red;">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <table class="table-auto text-left w-full">
             <thead class="dark:bg-schiphol-dark_gray bg-gray-300 transition-colors duration-200">
             <tr class="dark:text-schiphol-light_gray transition-colors duration-200 text-2xl dark:border-schiphol-dark_gray">

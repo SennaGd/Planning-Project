@@ -9,9 +9,11 @@ Route::get('/lesplein', [ActivityController::class, 'index'])->name('lesplein');
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::view('dashboard', 'dashboard')->name('dashboard');
+    Route::get('/dashboard', [ActivityController::class, 'dashboard'])->name('dashboard');
 });
-
+//Route::middleware(['auth', 'verified'])->group(function () {
+    route::post('/store', [ActivityController::class, 'store']);
+//});
 
 // ICS
 

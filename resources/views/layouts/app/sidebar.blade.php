@@ -10,15 +10,50 @@
                 <flux:sidebar.collapse class="lg:hidden" />
             </flux:sidebar.header>
 
-            <flux:sidebar.nav>
-                <flux:sidebar.group :heading="__('Platform')" class="grid">
+            <flux:sidebar.nav class="space-y-2.5">
+                <flux:sidebar.group :heading="__('beheer')" class="grid">
                     <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </flux:sidebar.item>
+                    <flux:sidebar.item icon="academic-cap" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                        {{ __('klas toevoegen') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="academic-cap" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                        {{ __('les toevoegen') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="academic-cap" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate >
+                        {{ __('les toevoegen') }}
+                    </flux:sidebar.item>
+
+                    <flux:modal.trigger name="add-class">
+                        <flux:sidebar.item icon="academic-cap">
+                            {{ __('Les Invoeren') }}
+                        </flux:sidebar.item>
+                    </flux:modal.trigger>
+                    <flux:modal name="add-class" class="md:max-w-lg">
+                            <div class="space-y-6">
+                                <form action="{{ route('store') }}" method="POST">
+                                    <label for="summary">Bestemming/omscrhijving:</label>
+                                    <input type="text" name="summary" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                                    <label for="">gate/klaslokaal</label>
+                                    <input type="text" name="location" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                                    <label for="">vluchtnummer/klas</label>
+                                    <input type="text" name="class" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                                    <label for="">vliegmaatschapij/aanwezige</label>
+                                    <input type="text" name="attendee" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                                    <label for="">begin tijd</label>
+                                    <input type="datetime-local" name="dt_start" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                                    <label for="">eind tijd</label>
+                                    <input type="datetime-local" name="dt_end" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                                    <input type="submit" value="Les Invoeren" class="mt-4 bg-gray-300 dark:bg-gray-700 p-2 rounded">
+                                </form>
+                            </div>
+                    </flux:modal>
                 </flux:sidebar.group>
             </flux:sidebar.nav>
 
             <flux:spacer />
+
 
             <flux:sidebar.nav>
                 <flux:sidebar.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit" target="_blank">

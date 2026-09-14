@@ -47,7 +47,7 @@
 
     <dialog id='my-dialog-2' closedby='any' class='popup-content background:black/20 backdrop-blur-sm m-auto p-5 shadow rounded dark:bg-schiphol-dark_gray dark:text-[#f0f0f0] dark:text-schiphol-light_gray'>
         <h2>Abonneer op een of meerdere kalenders</h2>
-        <form action="{{ route('calendar.ics') }}" method="POST" class=''>
+        <form action="{{ route('calendar.handle_request') }}" method="POST" class=''>
             @csrf
                 <p class='italic'>- Selecteer klassen</p>
                 <div class='p-2 pl-5 align-content' >
@@ -67,17 +67,13 @@
                     </ul>
                 </div>
 
-            <input class='underline' type='submit' value='Submit' >
+
+                <div>
+                    <input name='qr-code' type='checkbox'> QR-Code</input>
+                </div>
+            <input class='underline' type='submit' value='Submit' />
         </form>
     </dialog>
-
-    <!--  popup  | content  -->
-    <div class='popup-wrapper'>
-            <div class='popup dark:text-schiphol-light_gray'>
-                <div class='popup-close'>x</div>
-                <div class='popup-content'>
-                   </div>
-        </div>
     <script>
         const navigationEntry = performance.getEntriesByType('navigation')[0];
         const currentUrl = new URL(window.location.href);

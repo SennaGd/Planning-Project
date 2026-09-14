@@ -7,8 +7,6 @@ use App\Models\Activity;
 use App\Models\SchoolClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Response;
-use Illuminate\Http\RedirectResponse;
 
 class ActivityController extends Controller
 {
@@ -35,8 +33,7 @@ class ActivityController extends Controller
                              ->orWhere('attendee', 'like', "%{$searchQuery}%");
                 });
             })
-            ->orderBy('dt_start')
-            ->get();
+            ->orderBy('dt_start') ->get();
 
 
         $school_classes = SchoolClass::all();
@@ -82,116 +79,12 @@ class ActivityController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
+    public function generate_qr_code(Request $request)
     {
-        $activity = Activity::where("prod_id", $id)->firstOrFail();
 
-        return view('ics', compact("activity"));
     }
 
 
-    /**
-     * Parsed from format .now()  to ICS format
-     * YYYY-MM-DD HH-MM-SS -> YYYYMMDDTHHMMSSZ
-     * 2026-09-04 11:09:48 -> 20260904T110948Z
-    */
-    public function parse_ics_time(string $str_time)
-    {
-        $year = substr($str_time, 0, 4);
-        $month = substr($str_time, 5, 2);
-        $day = substr($str_time, 8, 2);
-        $hour = substr($str_time, 11, 2);
-        $minute = substr($str_time, 14, 2);
-        $second = substr($str_time, 17, 2);
-
-        $ics_time = $year.$month.$day."T".$hour.$minute.$second."Z";
-
-        return $ics_time;
-    }
-
-
-    public function generate_ics_feed(Request $request): Response | RedirectResponse
-    {
-        if (empty($request->input('school_classes'))) {
-            return back()->with('error', 'Selecteer minimaal één klas.');
-        }
-
-        $classes_validation= $request->validate([
-            'school_classes'   => ['required', 'array'],
-            'school_classes.*' => ['integer', 'exists:school_classes,id'],
-        ]);
-
-        // contains id array [1,2,3,4]
-        $selected_classes = $classes_validation['school_classes'];
-
-
-        $activities = Activity::whereHas(
-            'schoolClasses',
-            function ($query) use ($selected_classes) {
-                $query->whereIn('school_classes.id', $selected_classes);
-            })->get();
-
-        # header ICS file
-        $ics_content = implode("\r\n", [
-            "BEGIN:VCALENDAR",
-            "VERSION:2.0",
-            "PRODID:-//Firda Planning//Planning Dashboard v2.0//NL",
-            "CALSCALE:GREGORIAN",
-            "METHOD:PUBLISH",
-        ]);
-
-        foreach ($activities as $activity){
-            if ($activity) {
-                $parsed_dt_start = ActivityController::parse_ics_time(
-                    $activity->dt_start
-                );
-
-                $parsed_dt_end = ActivityController::parse_ics_time(
-                    $activity->dt_end
-                );
-
-
-                $event = implode("\r\n", [
-                    "BEGIN:VEVENT",
-                    "UID:".uniqid()."@firda-planning.com",
-                    "DTSTAMP:".now()->utc()->format('Ymd\THis\Z'),
-                    "DTSTART:$parsed_dt_start",
-                    "DTEND:$parsed_dt_end",
-                    "SUMMARY:$activity->summary",
-                    "LOCATION:$activity->location",
-                    "END:VEVENT",
-                ]);
-                $ics_content = $ics_content."\r\n".$event;
-            }
-        };
-        #$ics_content = implode("\r\n", [
-        #    'BEGIN:VCALENDAR',
-        #    'VERSION:2.0',
-        #    'PRODID:-//Your Company//Your App//EN',
-        #    'CALSCALE:GREGORIAN',
-        #    'METHOD:PUBLISH',
-        #    'BEGIN:VEVENT',
-        #    'UID:' . uniqid() . '@yourdomain.com',
-        #    'DTSTAMP:' . now()->utc()->format('Ymd\THis\Z'),
-        #    'DTSTART:20260910T140000Z',
-        #    'DTEND:20260910T150000Z',
-        #    'SUMMARY:Team Strategy Meeting',
-        #    'DESCRIPTION:Discussion regarding upcoming objectives.',
-        #    'LOCATION:Conference Room A',
-        #    'END:VEVENT',
-        #    'END:VCALENDAR',
-        #]);
-
-
-        $ics_content = $ics_content."\r\n"."END:VCALENDAR";
-        return response($ics_content, 200, [
-            'Content-Type' => 'text/calendar; charset=utf-8',
-            'Content-Disposition' => 'inline; filename="event.ics"',
-        ]);
-    }
     /**
      * Show the form for editing the specified resource.
      */

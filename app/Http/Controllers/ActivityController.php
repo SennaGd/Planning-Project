@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\View\View;
 use App\Models\Activity;
+use App\Models\SchoolClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Response;
+use Illuminate\Http\RedirectResponse;
 
 class ActivityController extends Controller
 {
@@ -28,20 +30,24 @@ class ActivityController extends Controller
             ->when($searchQuery, function ($query) use ($searchQuery) {
                 $query->where(function ($subQuery) use ($searchQuery) {
                     $subQuery->where('summary', 'like', "%{$searchQuery}%")
-                        ->orWhere('description', 'like', "%{$searchQuery}%")
-                        ->orWhere('location', 'like', "%{$searchQuery}%")
-                        ->orWhere('attendee', 'like', "%{$searchQuery}%");
+                             ->orWhere('description', 'like', "%{$searchQuery}%")
+                             ->orWhere('location', 'like', "%{$searchQuery}%")
+                             ->orWhere('attendee', 'like', "%{$searchQuery}%");
                 });
             })
             ->orderBy('dt_start')
             ->get();
 
-        if (Route::currentRouteName() === 'home') {
-            return view('index', compact('activities', 'selectedDate', 'searchQuery'));
-        } elseif (Route::currentRouteName() === 'lesplein') {
-            return view('lesplein', compact('activities'));
-        }
 
+        $school_classes = SchoolClass::all();
+
+
+        if (Route::currentRouteName() === 'home') {
+            return view('index', compact('activities', 'selectedDate', 'searchQuery', 'school_classes'));
+        }
+        elseif (Route::currentRouteName() === 'lesplein') {
+            return view('lesplein', compact('activities', 'school_classes'));
+        }
         abort(404);
     }
     /**
@@ -85,6 +91,8 @@ class ActivityController extends Controller
 
         return view('ics', compact("activity"));
     }
+
+
     /**
      * Parsed from format .now()  to ICS format
      * YYYY-MM-DD HH-MM-SS -> YYYYMMDDTHHMMSSZ
@@ -103,9 +111,28 @@ class ActivityController extends Controller
 
         return $ics_time;
     }
-    public function generate_ics_feed(Request $request): Response
+
+
+    public function generate_ics_feed(Request $request): Response | RedirectResponse
     {
-        $activities_list = $request->query('activities', []);
+        if (empty($request->input('school_classes'))) {
+            return back()->with('error', 'Selecteer minimaal één klas.');
+        }
+
+        $classes_validation= $request->validate([
+            'school_classes'   => ['required', 'array'],
+            'school_classes.*' => ['integer', 'exists:school_classes,id'],
+        ]);
+
+        // contains id array [1,2,3,4]
+        $selected_classes = $classes_validation['school_classes'];
+
+
+        $activities = Activity::whereHas(
+            'schoolClasses',
+            function ($query) use ($selected_classes) {
+                $query->whereIn('school_classes.id', $selected_classes);
+            })->get();
 
         # header ICS file
         $ics_content = implode("\r\n", [
@@ -116,8 +143,7 @@ class ActivityController extends Controller
             "METHOD:PUBLISH",
         ]);
 
-        foreach ($activities_list as $id){
-            $activity = Activity::where("prod_id", $id)->firstOrFail();
+        foreach ($activities as $activity){
             if ($activity) {
                 $parsed_dt_start = ActivityController::parse_ics_time(
                     $activity->dt_start
@@ -161,7 +187,6 @@ class ActivityController extends Controller
 
 
         $ics_content = $ics_content."\r\n"."END:VCALENDAR";
-
         return response($ics_content, 200, [
             'Content-Type' => 'text/calendar; charset=utf-8',
             'Content-Disposition' => 'inline; filename="event.ics"',

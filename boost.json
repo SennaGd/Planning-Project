@@ -16,6 +16,7 @@
         "testing-best-practices",
         "fluxui-development",
         "livewire-development",
-        "tailwindcss-development"
+        "tailwindcss-development",
+        "echo-development"
     ]
 }

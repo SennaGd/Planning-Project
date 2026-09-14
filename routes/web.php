@@ -16,8 +16,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 // ICS
 
 Route::get('/ics/{activity}', [ActivityController::class, 'show']);
-Route::get('/calendar/generate.ics', [ActivityController::class, 'generate_ics_feed'])->name('calendar.ics');
-
+Route::post('/calendar/generate.ics', [ActivityController::class, 'generate_ics_feed'])->name('calendar.ics');
 
 
 

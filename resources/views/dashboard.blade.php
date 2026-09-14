@@ -1,5 +1,4 @@
 <x-layouts::app :title="__('Dashboard')">
-
     <x-SchipholLayout>
         <div class="flex w-full items-center px-6 py-3 dark:bg-schiphol-dark_gray transition-colors duration-200" id="filterbar" >
             <form method="GET" action="/" class="flex items-center gap-3">

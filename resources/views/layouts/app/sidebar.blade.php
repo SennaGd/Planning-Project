@@ -34,19 +34,30 @@
                             <div class="space-y-6">
                                 <form action="{{ route('store') }}" method="POST">
                                     <label for="summary">les:</label>
-                                    <input type="text" name="summary" value="Introductie Software Development" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                                    <input type="text" name="summary" value="^•⩊•^" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
                                     <label for="">gate/klaslokaal</label>
                                     <input type="text" name="location" value="audiotorium" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
                                     <label for="">korte omschrijving</label>
                                     <input type="text" name="description" value="hier ga je je verdiepen in software" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
                                     <label for="">vluchtnummer/klas</label>
-                                    <input type="text" name="class" value="1111" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                                    <div class="dropdown-menu">
+                                        @foreach ($school_classes as $class)
+                                            <label class="dropdown-item">
+                                                <input
+                                                    type="checkbox"
+                                                    name="school_classes[]"
+                                                    value="{{ $class->id }}"
+                                                >
+                                                <span>{{ $class->classname }}</span>
+                                            </label>
+                                        @endforeach
+                                    </div>
                                     <label for="">vliegmaatschapij/aanwezige</label>
                                     <input type="text" name="attendee" value="it-projecten@gmail.com" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
                                     <label for="">begin tijd</label>
-                                    <input type="datetime-local" value="2008-07-11T12:00" name="dt_start" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                                    <input type="datetime-local" value="2026-09-14T12:00" name="dt_start" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
                                     <label for="">eind tijd</label>
-                                    <input type="datetime-local" value="2008-07-11T13:00" name="dt_end" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                                    <input type="datetime-local" value="2026-09-14T13:00" name="dt_end" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
                                     <input type="submit" value="Les Invoeren" class="mt-4 bg-gray-300 dark:bg-gray-700 p-2 rounded">
                                 </form>
                             </div>

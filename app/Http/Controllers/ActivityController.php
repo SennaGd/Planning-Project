@@ -110,32 +110,22 @@ class ActivityController extends Controller
     public function store(Request $request){
 //        dd($request->all());
         $validated = $request->validate([
-//            'uid'         => time(), // good for now, make verification that the time is not yet in use
-//            'dt_stamp'    => now()->toDateString(),
             'dt_start'    => 'required|date',
             'dt_end'      => 'required|date|after_or_equal:dt_start',
             'summary'     => 'required|string|max:255',
-//            'description' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
             'location'    => 'required|string|max:255',
-//            'status'      => 'required|string|max:255',
-//            'text'        => 'required|string|max:255',
-//            'version'     => 2.0,
             'attendee'    => 'required|string|max:255',
             'class'    => 'required|string|max:255',
         ]);
 
-//        if($validated){
-//            dd($validated);
-//        }
         dd($activiy = Activity::create($validated + [
-                'uid'=> time(),
+                'uid'=> time(), //good for now, need to make verification that the time is not yet in use
                 'dt_stamp' => now()->toDateString(),
-                'description' =>'haiiii',
-                'status' => 'mlem',
-                'text' => 'mrrp',
+                'status' => 'active',
+                'text' => 'IT en Software Development',
                 'version' =>2.0
             ]));
-        dd($activiy);
     }
 
     /**

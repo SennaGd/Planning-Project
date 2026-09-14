@@ -33,10 +33,12 @@
                     <flux:modal name="add-class" class="md:max-w-lg">
                             <div class="space-y-6">
                                 <form action="{{ route('store') }}" method="POST">
-                                    <label for="summary">Bestemming/omscrhijving:</label>
+                                    <label for="summary">les:</label>
                                     <input type="text" name="summary" value="Introductie Software Development" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
                                     <label for="">gate/klaslokaal</label>
                                     <input type="text" name="location" value="audiotorium" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                                    <label for="">korte omschrijving</label>
+                                    <input type="text" name="description" value="hier ga je je verdiepen in software" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
                                     <label for="">vluchtnummer/klas</label>
                                     <input type="text" name="class" value="1111" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
                                     <label for="">vliegmaatschapij/aanwezige</label>

@@ -7,6 +7,7 @@ use App\Models\SchoolClass;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\View\View;
 
 class ActivityController extends Controller
@@ -120,21 +121,21 @@ class ActivityController extends Controller
             'description' => 'required|string|max:255',
             'location' => 'required|string|max:255',
             'attendee' => 'required|string|max:255',
+
         ]);
 
-        $activiy = Activity::create($validated + [
+        $activity = Activity::create($validated + [
             'uid' => time(), // good for now, need to make verification that the time is not yet in use
             'dt_stamp' => now()->toDateString(),
             'status' => 'active',
             'text' => 'IT en Software Development',
             'version' => 2.0,
         ]);
-        $id = $activiy->id;
-        dd($id);
-        foreach ($selectedClasses as $class) {
-            'activity_id' => $id,
-            'class_id' => $class,
-        }
+
+        Schema::withoutForeignKeyConstraints(function () use ($activity, $selectedClasses): void {
+            $activity->attachSchoolClasses($selectedClasses);
+        });
+
     }
 
     /**
@@ -154,7 +155,6 @@ class ActivityController extends Controller
      * YYYY-MM-DD HH-MM-SS -> YYYYMMDDTHHMMSSZ
      * 2026-09-04 11:09:48 -> 20260904T110948Z
     */
-     */
     public function parse_ics_time(string $str_time)
     {
         $year = substr($str_time, 0, 4);

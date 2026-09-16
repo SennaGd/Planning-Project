@@ -68,8 +68,11 @@ class ActivityController extends Controller
             })
             ->orderBy('dt_start')
             ->get();
+
+        $school_classes = SchoolClass::all();
+
         if (Route::currentRouteName() === 'dashboard') {
-            return view('dashboard', compact('activities', 'selectedDate', 'searchQuery'));
+            return view('dashboard', compact('activities', 'selectedDate', 'searchQuery', 'school_classes'));
         } elseif (Route::currentRouteName() === 'dashboard') {
             return view('dashboard', compact('activities'));
         }
@@ -112,8 +115,8 @@ class ActivityController extends Controller
     {
         $selectedClasses = $request->input('school_classes', []);
 
-//        dd($selectedClasses);
-//                dd($request->all());
+        //        dd($selectedClasses);
+        //                dd($request->all());
         $validated = $request->validate([
             'dt_start' => 'required|date',
             'dt_end' => 'required|date|after_or_equal:dt_start',
@@ -143,10 +146,11 @@ class ActivityController extends Controller
      */
     public function show($id)
     {
-        $activity = Activity::where("prod_id", $id)->firstOrFail();
+        $activity = Activity::where('prod_id', $id)->firstOrFail();
         $activity = Activity::where('prod_id', $id)->firstOrFail();
 
-        return view('ics', compact("activity"));
+        return view('ics', compact('activity'));
+
         return view('ics', compact('activity'));
     }
 
@@ -154,7 +158,7 @@ class ActivityController extends Controller
      * Parsed from format .now()  to ICS format
      * YYYY-MM-DD HH-MM-SS -> YYYYMMDDTHHMMSSZ
      * 2026-09-04 11:09:48 -> 20260904T110948Z
-    */
+     */
     public function parse_ics_time(string $str_time)
     {
         $year = substr($str_time, 0, 4);
@@ -164,7 +168,7 @@ class ActivityController extends Controller
         $minute = substr($str_time, 14, 2);
         $second = substr($str_time, 17, 2);
 
-        $ics_time = $year.$month.$day."T".$hour.$minute.$second."Z";
+        $ics_time = $year.$month.$day.'T'.$hour.$minute.$second.'Z';
         $ics_time = $year.$month.$day.'T'.$hour.$minute.$second.'Z';
 
         return $ics_time;
@@ -174,7 +178,7 @@ class ActivityController extends Controller
     {
         $activities_list = $request->query('activities', []);
 
-        # header ICS file
+        // header ICS file
         // header ICS file
         $ics_content = implode("\r\n", [
             'BEGIN:VCALENDAR',

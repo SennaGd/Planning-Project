@@ -34,18 +34,8 @@ class IcsController extends Controller
         return $ics_time;
     }
 
-
-    public function generate_ics_contents(Request $request): Response
+    public function parse_activities(Collection $activities): string
     {
-        $classIds = $request->input('class_ids', []);
-
-        // fetches activities of selected class ids
-        $activities = Activity::whereHas(
-            'schoolClasses',
-            function ($query) use ($classIds) {
-                $query->whereIn('school_classes.id', $classIds);
-            })->get();
-
         $contents = [
             "BEGIN:VCALENDAR",
             "VERSION:2.0",
@@ -79,8 +69,21 @@ class IcsController extends Controller
 
         $contents[] = "END:VCALENDAR";
 
-        $ics_content = implode("\r\n", $contents);
+        return implode("\r\n", $contents);
+    }
 
+    public function generate_ics_contents(Request $request): Response
+    {
+        $classIds = $request->input('class_ids', []);
+
+        // fetches activities of selected class ids
+        $activities = Activity::whereHas(
+            'schoolClasses',
+            function ($query) use ($classIds) {
+                $query->whereIn('school_classes.id', $classIds);
+            })->get();
+
+        $ics_content = IcsController::parse_activities($activities);
 
         return response($ics_content, 200, [
             'Content-Type' => 'text/calendar; charset=utf-8',
@@ -89,14 +92,8 @@ class IcsController extends Controller
     }
 
 
-    public function handle_request(Request $request):  Response | View
+    public function handle_request(Request $request):  Response | View | RedirectResponse
     {
-
-        // handle no classes selected | redirect
-        if (empty($request->input('school_classes'))) {
-        //    return back()->with('error', 'Selecteer minimaal één klas.');
-        }
-
         // -- Fetching Activities -- \\
         //
         // fetch selected classes
@@ -115,7 +112,6 @@ class IcsController extends Controller
                 $query->whereIn('school_classes.id', $selected_classes);
             })->get();
 
-
         // handle qr code
         if (!empty($request->input('qr-code'))) {
 
@@ -128,5 +124,17 @@ class IcsController extends Controller
             return view("qrcode", compact('qr_code','webcalUrl', 'httpsUrl'));
         }
 
+        // handle ics file
+        if (!empty($request->input('school_classes'))) {
+            $ics_contents = IcsController::parse_activities($activities);
+
+            return response($ics_contents, 200, [
+                'Content-Type' => 'text/calendar; charset=utf-8',
+                'Content-Disposition' => 'inline; filename="event.ics"',
+            ]);
+        }
+
+
+        return back()->with('error', 'Selecteer minimaal één klas.');
     }
 }

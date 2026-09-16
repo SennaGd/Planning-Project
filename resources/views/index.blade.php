@@ -35,7 +35,7 @@
                             <td class="px-4 py-2" data-cell="classnames">{{ $activity->schoolClasses->pluck('classname')->join(', ') }}</td>
                             <td class="px-4 py-2">{{ $activity->attendee}}</td>
                             @if (strtolower(trim((string) $activity->status)) === 'active')
-                            <td class="px-4 py-2">@if (\Carbon\Carbon::parse($activity->dt_end)->isPast()) <p class="text-red-500">Vertrokken</p> @elseif (\Carbon\Carbon::parse($activity->dt_start)->isPast()) <p class="text-green-500">Boarding</p> @else <p class="text-yellow-500">Gepland</p> @endif</td> 
+                            <td class="px-4 py-2">@if (\Carbon\Carbon::parse($activity->dt_end)->isPast()) <p class="text-red-500">Vertrokken</p> @elseif (\Carbon\Carbon::parse($activity->dt_start)->isPast()) <p class="text-green-500">Boarding</p> @else <p class="text-yellow-500">Gepland</p> @endif</td>
                             @else
                             <td class="px-4 py-2"><p class="text-gray-500">Geanuleerd</p></td>
                             @endif

@@ -21,21 +21,28 @@
                     <flux:sidebar.item icon="academic-cap" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('les toevoegen') }}
                     </flux:sidebar.item>
-                    <flux:sidebar.item icon="academic-cap" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate >
-                        {{ __('les toevoegen') }}
+                    <flux:sidebar.item
+                        icon="academic-cap"
+                        x-on:click.stop="document.querySelector('dialog[data-modal=edit-school-class]')?.showModal()">
+
+                        {{ __('klassen bewerken') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item
+                        icon="academic-cap"
+                        x-on:click.stop="document.querySelector('dialog[data-modal=add-school-class]')?.showModal()">
+
+                    {{ __('klas toevoegen') }}
                     </flux:sidebar.item>
 
                     <flux:sidebar.item
                         icon="academic-cap"
-                        x-on:click.stop="document.querySelector('dialog[data-modal=add-class]')?.showModal()"
-                    >
+                        x-on:click.stop="document.querySelector('dialog[data-modal=add-lesson]')?.showModal()">
                         {{ __('Les Invoeren') }}
                     </flux:sidebar.item>
                 </flux:sidebar.group>
             </flux:sidebar.nav>
 
             <flux:spacer />
-
 
             <flux:sidebar.nav>
                 <flux:sidebar.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit" target="_blank">
@@ -68,8 +75,7 @@
                             <div class="flex items-center gap-2 px-1 py-1.5 text-start text-sm">
                                 <flux:avatar
                                     :name="auth()->user()->name"
-                                    :initials="auth()->user()->initials()"
-                                />
+                                    :initials="auth()->user()->initials()" />
 
                                 <div class="grid flex-1 text-start text-sm leading-tight">
                                     <flux:heading class="truncate">{{ auth()->user()->name }}</flux:heading>

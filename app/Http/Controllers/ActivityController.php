@@ -12,6 +12,7 @@ use Illuminate\View\View;
 
 class ActivityController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
@@ -115,8 +116,6 @@ class ActivityController extends Controller
     {
         $selectedClasses = $request->input('school_classes', []);
 
-        //        dd($selectedClasses);
-        //                dd($request->all());
         $validated = $request->validate([
             'dt_start' => 'required|date',
             'dt_end' => 'required|date|after_or_equal:dt_start',

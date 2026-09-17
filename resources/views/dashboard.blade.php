@@ -78,14 +78,16 @@
             </tbody>
         </table>
 
-        <flux:modal name="add-class" class="md:max-w-lg">
+        <flux:modal name="add-lesson" class="md:max-w-lg">
             <div class="space-y-6">
-                <form action="{{ route('store') }}" method="POST">
+                <form action="{{ route('storeLesson') }}" method="POST">
                     @csrf
                     <label for="summary">les:</label>
                     <input type="text" name="summary" value="^•⩊•^" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
                     <label for="">gate/klaslokaal</label>
                     <input type="text" name="location" value="audiotorium" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                    <label for="">omscrhijving</label>
+                    <input type="text" name="description" value="test" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
                     <label for="">vluchtnummer/klas</label>
                     <div class="dropdown-menu">
                         @foreach ($school_classes as $class)
@@ -107,6 +109,35 @@
                     <input type="datetime-local" value="2026-09-14T13:00" name="dt_end" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
                     <input type="submit" value="Les Invoeren" class="mt-4 bg-gray-300 dark:bg-gray-700 p-2 rounded">
                 </form>
+            </div>
+        </flux:modal>
+        <flux:modal name="add-school-class" class="md:max-w-lg">
+            <div class="space-y-6">
+                <form action="{{ route('storeSchoolClass') }}" method="POST">
+                    @csrf
+                    <label for="classname">les:</label>
+                    <input type="text" name="classname" value="" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                    <input type="submit" value="Les Invoeren" class="mt-4 bg-gray-300 dark:bg-gray-700 p-2 rounded">
+                </form>
+            </div>
+        </flux:modal>
+        <flux:modal name="edit-school-class" class="md:max-w-lg">
+            <div class="space-y-6">
+                @foreach ($school_classes as $class)
+                    <form method="POST" action="{{ route('editSchoolClass') }}">
+                        @csrf
+                        @method('PATCH')
+                        <label for="classname">les:</label>
+                        <input type="text" name="classname" value="{{ $class->classname }}" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                        <input type="submit" value="Les Invoeren" class="mt-4 bg-gray-150 dark:bg-gray-350 p-2 rounded">
+                    </form>
+                @endforeach
+{{--                <form action="{{ route('editSchoolClass') }}" method="POST">--}}
+{{--                    @csrf--}}
+{{--                    <label for="classname">les:</label>--}}
+{{--                    <input type="text" name="classname" value="" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">--}}
+{{--                    <input type="submit" value="Les Invoeren" class="mt-4 bg-gray-300 dark:bg-gray-700 p-2 rounded">--}}
+{{--                </form>--}}
             </div>
         </flux:modal>
     </x-SchipholLayout>

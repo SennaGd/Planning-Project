@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActivityController;
+use \App\Http\Controllers\SchoolClassController;
 
 
 Route::get('/', [ActivityController::class, 'index'])->name('home');
@@ -12,8 +13,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [ActivityController::class, 'dashboard'])->name('dashboard');
 });
 //Route::middleware(['auth', 'verified'])->group(function () {
-    route::post('/store', [ActivityController::class, 'store'])->name('store');
+    route::post('/storeLesson', [ActivityController::class, 'store'])->name('storeLesson');
 //});
+
+//Route::middleware(['auth', 'verified'])->group(function () {
+route::post('/storeSchoolClass', [SchoolClassController::class, 'store'])->name('storeSchoolClass');
+//});
+route::patch('/editSchoolClass', [SchoolClassController::class, 'update'])->name('editSchoolClass');
 
 // ICS
 

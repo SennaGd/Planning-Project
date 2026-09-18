@@ -20,6 +20,7 @@ Route::post('/storeSchoolClass', [SchoolClassController::class, 'store'])->name(
 // });
 Route::patch('/editSchoolClass', [SchoolClassController::class, 'update'])->name('editSchoolClass');
 Route::delete('/deleteSchoolClass', [SchoolClassController::class, 'destroy'])->name('deleteSchoolClass');
+Route::patch('/updateActivity', [ActivityController::class, 'update'])->name('updateActivity');
 
 // adding account
 Route::post("/add/account", [UserController::class, "add"])->name("add.account");

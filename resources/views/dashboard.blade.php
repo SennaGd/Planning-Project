@@ -59,19 +59,43 @@
                 </tr>
                     <dialog id="my-dialog-{{ $activity->prod_id }}" closedby="any" class="backdrop:bg-black/50 p-5 rounded text-black dark:text-white">
                         <p>aan het bewerken: {{ $activity->summary }}!</p>
-                        <form method="dialog">
-                            <label for="summary">Bestemming/omscrhijving:</label>
+                        <form method="POST" action="{{ route('updateActivity') }}">
+                            @csrf
+                            @method('PATCH')
+                            <label for="summary">Bestemming:</label>
                             <input type="text" name="summary" value="{{ $activity->summary }}" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
                             <label for="">gate/klaslokaal</label>
                             <input type="text" name="location" value="{{ $activity->location }}" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
                             <label for="">vluchtnummer/klas</label>
                             <input type="text" name="class" value="{{ $activity->class }}" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                            <label for="omscrhijving">omscrhijving</label>
+                            <input type="text" name="description" value="{{ $activity->description }}" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
                             <label for="">vliegmaatschapij/aanwezige</label>
                             <input type="text" name="attendee" value="{{ $activity->attendee }}" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                            @if($activity->status == 'active')
+                                <label for="">status</label>
+                                <select name="status" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                                    <option value="active" selected>actief</option>
+                                    <option value="inactive">inactief</option>
+                                </select>
+                            @elseif($activity->status == 'inactive')
+                                <label for="">status</label>
+                                <select name="status" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                                    <option value="active" >actief</option>
+                                    <option value="inactive" selected>inactief</option>
+                                </select>
+                            @else
+                                <label for="">status</label>
+                                <select name="status" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                                    <option value="active" >actief</option>
+                                    <option value="inactive">inactief</option>
+                                </select>
+                            @endif
                             <label for="">begin tijd</label>
                             <input type="datetime-local" name="dt_start" value="{{ \Carbon\Carbon::parse($activity->dt_start)->format('Y-m-d\TH:i') }}" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
                             <label for="">eind tijd</label>
                             <input type="datetime-local" name="dt_end" value="{{ \Carbon\Carbon::parse($activity->dt_end)->format('Y-m-d\TH:i') }}" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                            <input type="hidden" name="id" value="{{ $activity->id }}">
                             <input type="submit" value="bewerkingen opslaan" class="mt-4 bg-gray-300 dark:bg-gray-700 p-2 rounded">
                         </form>
                         <button command="close" commandfor="my-dialog-{{ $activity->id }}" class="mt-4 bg-gray-300 dark:bg-gray-700 p-2 rounded">

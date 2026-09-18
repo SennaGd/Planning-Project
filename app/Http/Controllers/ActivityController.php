@@ -12,7 +12,6 @@ use Illuminate\View\View;
 
 class ActivityController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      */
@@ -248,9 +247,33 @@ class ActivityController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Activity $activity)
+    public function update(Request $request)
     {
-        //
+        //        dd($request->all());
+        $validated = $request->validate([
+            'id' => 'required|exists:activities,id',
+            'summary' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
+            'attendee' => 'required|string|max:255',
+            'dt_start' => 'required|date',
+            'dt_end' => 'required|date|after_or_equal:dt_stamp',
+            'status' => 'required|string|max:255',
+//            'class' => 'required|string|max:255',
+        ]);
+        $activity = Activity::findOrFail($request->id);
+        $activity->update([
+            'summary' => $validated['summary'],
+            'description' => $validated['description'],
+            'location' => $validated['location'],
+            'attendee' => $validated['attendee'],
+            'dt_start' => $validated['dt_start'],
+            'dt_end' => $validated['dt_end'],
+            'status' => $validated['status'],
+            'dt_updated' => now()->toDateTimeString(),
+        ]);
+
+        return redirect('/dashboard');
     }
 
     /**

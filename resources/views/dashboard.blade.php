@@ -54,7 +54,7 @@
                     <td class="px-4 py-2">{{ \Carbon\Carbon::parse($activity->dt_start)->format('d-m-Y') }}</td>
                     <td class="px-4 py-2">{{ $activity->summary }}</td>
                     <td class="px-4 py-2">{{ $activity->location }}</td>
-                    <td class="px-4 py-2">{{ $activity->class }}</td>
+                    <td class="px-4 py-2" data-cell="classnames">{{ $activity->schoolClasses->pluck('classname')->join(', ') }}</td>
                     <td class="px-4 py-2">{{ $activity->attendee}}</td>
                 </tr>
                     <dialog id="my-dialog-{{ $activity->prod_id }}" closedby="any" class="backdrop:bg-black/50 p-5 rounded text-black dark:text-white">

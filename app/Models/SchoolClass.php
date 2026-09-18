@@ -8,8 +8,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class SchoolClass extends Model
 {
     protected $table = 'school_classes';
-    protected $fillable = ['classname'];
-
+    protected $fillable = [
+        'classname',
+        'updated_at'
+    ];
     public function activities(): BelongsToMany
     {
         return $this->belongsToMany(

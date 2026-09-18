@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\SchoolClass;
+use Illuminate\Http\Request;
 
 class SchoolClassController extends Controller
 {
@@ -12,21 +12,25 @@ class SchoolClassController extends Controller
         $validated = $request->validate([
             'classname' => 'required|string|max:255',
         ]);
-        $schoolClass = schoolClass::create($validated +[
+        $schoolClass = SchoolClass::create($validated + [
             'created_at' => now()->toDateString(),
             'updated_at' => now()->toDateString(),
-            ]);
+        ]);
 
         return redirect('/dashboard');
     }
-    public function update(Request $request){
+
+    public function update(Request $request)
+    {
         $validated = $request->validate([
+            'id'        => 'required|exists:school_classes,id',
             'classname' => 'required|string|max:255',
         ]);
-        $update = schoolClass::find($request->id);
-        $update->update($validated +[
-            'updated_at' => now()->toDateString(),
-            ]);
-        dd($update);
+        $schoolClass = SchoolClass::findOrFail($request->id);
+        $schoolClass->update([
+            'classname' => $validated['classname'],
+        ]);
+
+        return redirect('/dashboard');
     }
 }

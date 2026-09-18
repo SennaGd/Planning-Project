@@ -6,6 +6,8 @@ use App\Models\Activity;
 use App\Models\SchoolClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\View\View;
 
 class ActivityController extends Controller
 {
@@ -136,6 +138,8 @@ class ActivityController extends Controller
         Schema::withoutForeignKeyConstraints(function () use ($activity, $selectedClasses): void {
             $activity->attachSchoolClasses($selectedClasses);
         });
+
+        return redirect('/dashboard');
 
     }
 

@@ -128,9 +128,9 @@
                         @csrf
                         @method('PATCH')
                         <input type="hidden" value="{{ $class->id }}" name="id">
-                        <label for="classname">les:</label>
+                        <label for="classname">klas:</label>
                         <input type="text" name="classname" value="{{ $class->classname }}" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
-                        <input type="submit" value="Les Invoeren" class="mt-4 bg-gray-150 dark:bg-gray-350 p-2 rounded">
+                        <input type="submit" value="klas Invoeren" class="mt-4 bg-gray-150 dark:bg-gray-350 p-2 rounded">
                     </form>
                 @endforeach
 {{--                <form action="{{ route('editSchoolClass') }}" method="POST">--}}

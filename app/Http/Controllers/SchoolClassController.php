@@ -20,11 +20,13 @@ class SchoolClassController extends Controller
         return redirect('/dashboard');
     }
     public function update(Request $request){
-        dd($request);
-        // frank you used patch to get here and can also use patch for updating lessons
         $validated = $request->validate([
             'classname' => 'required|string|max:255',
         ]);
-
+        $update = schoolClass::find($request->id);
+        $update->update($validated +[
+            'updated_at' => now()->toDateString(),
+            ]);
+        dd($update);
     }
 }

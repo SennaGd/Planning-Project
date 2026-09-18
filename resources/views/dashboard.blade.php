@@ -1,8 +1,9 @@
 <x-layouts::app :title="__('Dashboard')">
     <x-SchipholLayout>
         <div class="flex w-full items-center px-6 py-3 dark:bg-schiphol-dark_gray transition-colors duration-200" id="filterbar" >
-            <form method="GET" action="/" class="flex items-center gap-3">
+            <form method="GET" action="{{ route('dashboard') }}" class="flex items-center gap-3">
                 <input type="date" id="date" name="date" value="{{ $selectedDate }}" class="inline-auto w-[10rem] shrink-0">
+                <input type="hidden" name="search" value="{{ $searchQuery }}">
             </form>
             <div class="flex-1"></div>
             <a href="">Kalenderabonomenten</a>
@@ -25,10 +26,11 @@
                 <th scope="col" class="px-4 py-2">Tijd</th>
                 <th scope="col" class="px-4 py-2">Datum</th>
                 <th scope="col" class="px-4 py-2">
-                    <form method="GET" action="/" class="flex items-center gap-3">
+                    <form method="GET" action="{{ route('dashboard') }}" class="flex items-center gap-3">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 shrink-0">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                         </svg>
+                        <input type="hidden" name="date" value="{{ $selectedDate }}">
                         <input class="w-full bg-transparent outline-none" type="text" name="search" id="search" placeholder="Zoeken" value="{{ $searchQuery }}">
                     </form>
                 </th>
@@ -180,5 +182,10 @@
             </div>
         </flux:modal>
     </x-SchipholLayout>
+    <script>
+        document.getElementById('date').addEventListener('change', function() {
+            this.form.submit();
+        });
+    </script>
 </x-layouts::app>
 

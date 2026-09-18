@@ -122,23 +122,29 @@
             </div>
         </flux:modal>
         <flux:modal name="edit-school-class" class="md:max-w-lg">
-            <div class="space-y-6">
+            <div class="space-y-6 mt-10">
                 @foreach ($school_classes as $class)
-                    <form method="POST" action="{{ route('editSchoolClass') }}">
-                        @csrf
-                        @method('PATCH')
-                        <input type="hidden" value="{{ $class->id }}" name="id">
-                        <label for="classname">klas:</label>
-                        <input type="text" name="classname" value="{{ $class->classname }}" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
-                        <input type="submit" value="klas Invoeren" class="mt-4 bg-gray-150 dark:bg-gray-350 p-2 rounded">
-                    </form>
+                    <div class="flex items-center gap-2">
+                        <form id="edit-school-class-{{ $class->id }}" method="POST" action="{{ route('editSchoolClass') }}" class="flex min-w-0 flex-1 items-center gap-2">
+                            @csrf
+                            @method('PATCH')
+                            <input type="hidden" name="id" value="{{ $class->id }}">
+                            <label for="classname-{{ $class->id }}" class="sr-only">Klas</label>
+                            <input id="classname-{{ $class->id }}" type="text" name="classname" value="{{ $class->classname }}" class="p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                            <button type="submit" form="edit-school-class-{{ $class->id }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-700 rounded">
+                                <flux:icon name="pencil-square" class="size-7" />
+                            </button>
+                        </form>
+                        <form id="delete-school-class-{{ $class->id }}" method="POST" action="{{ route('deleteSchoolClass') }}">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="id" value="{{ $class->id }}">
+                            <button type="submit" form="delete-school-class-{{ $class->id }}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 border border-red-700 rounded">
+                                <flux:icon name="trash" class="size-7" />
+                            </button>
+                        </form>
+                    </div>
                 @endforeach
-{{--                <form action="{{ route('editSchoolClass') }}" method="POST">--}}
-{{--                    @csrf--}}
-{{--                    <label for="classname">les:</label>--}}
-{{--                    <input type="text" name="classname" value="" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">--}}
-{{--                    <input type="submit" value="Les Invoeren" class="mt-4 bg-gray-300 dark:bg-gray-700 p-2 rounded">--}}
-{{--                </form>--}}
             </div>
         </flux:modal>
     </x-SchipholLayout>

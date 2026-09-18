@@ -16,6 +16,8 @@
                 </ul>
             </div>
         @endif
+
+
         <table class="table-auto text-left w-full">
             <thead class="dark:bg-schiphol-dark_gray bg-gray-300 transition-colors duration-200">
             <tr class="dark:text-schiphol-light_gray transition-colors duration-200 text-2xl dark:border-schiphol-dark_gray">
@@ -121,6 +123,7 @@
                 </form>
             </div>
         </flux:modal>
+
         <flux:modal name="edit-school-class" class="md:max-w-lg">
             <div class="space-y-6 mt-10">
                 @foreach ($school_classes as $class)
@@ -145,6 +148,35 @@
                         </form>
                     </div>
                 @endforeach
+            </div>
+        </flux:modal>
+
+        <!-- Super user | Add teacher accounts -->
+        <flux:modal name="add-teacher-account" class="md:max-w-lg">
+            <div class="space-y-6 mt-10">
+                <form id='add-teacher' method='POST' action="{{ route('add.account') }}" class='flex min-w-0 flex flex-col items-center gap-2'>
+                    @csrf
+
+                    <label>Naam</label>
+                    <input id='name' type='text' name='name' class='p-2 rounded border border-gray-300 dark:border-gray-700 w-full'>
+
+
+                    <label>Email</label>
+                    <input id='email' type='text' name='email' class='p-2 rounded border border-gray-300 dark:border-gray-700 w-full'>
+
+
+                    <label>Wachtwoord</label>
+                    <input id='password' type='text' name='password' class='p-2 rounded border border-gray-300 dark:border-gray-700 w-full'>
+
+                    <button
+                           type="submit"
+                           form="add-teacher"
+                           class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 border border-red-700 rounded"
+                    >
+                    Maak account aan.
+                    </button>
+
+                </form>
             </div>
         </flux:modal>
     </x-SchipholLayout>

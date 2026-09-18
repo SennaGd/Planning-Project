@@ -11,6 +11,7 @@
             </flux:sidebar.header>
 
             <flux:sidebar.nav class="space-y-2.5">
+            @if (auth()->user()->role != 'super')
                 <flux:sidebar.group :heading="__('beheer')" class="grid">
                     <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
@@ -40,6 +41,18 @@
                         {{ __('Les Invoeren') }}
                     </flux:sidebar.item>
                 </flux:sidebar.group>
+
+            @elseif (auth()->user()->role == "super")
+
+                <flux:sidebar.group>
+                    <flux:sidebar.item
+                        icon="academic-cap"
+                        x-on:click.stop="document.querySelector('dialog[data-modal=add-teacher-account]')?.showModal()">
+                        {{ __('Docent Toevoegen') }}
+                    </flux:sidebar.item>
+
+                </flux:sidebar.group>
+            @endif
             </flux:sidebar.nav>
 
             <flux:spacer />

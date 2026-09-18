@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\SchoolClassController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ActivityController::class, 'index'])->name('home');
@@ -19,6 +20,9 @@ Route::post('/storeSchoolClass', [SchoolClassController::class, 'store'])->name(
 // });
 Route::patch('/editSchoolClass', [SchoolClassController::class, 'update'])->name('editSchoolClass');
 Route::delete('/deleteSchoolClass', [SchoolClassController::class, 'destroy'])->name('deleteSchoolClass');
+
+// adding account
+Route::post("/add/account", [UserController::class, "add"])->name("add.account");
 
 // ICS
 

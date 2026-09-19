@@ -2,13 +2,10 @@
 <script src="https://cdn.jsdelivr.net/npm/laravel-echo@2.5.0/dist/echo.iife.js"></script>
 <script>
     window.Echo = new Echo.default({
-        broadcaster: 'reverb',
-        key: @js(config('broadcasting.connections.reverb.key')),
-        wsHost: @js(config('broadcasting.connections.reverb.options.host') ?: '127.0.0.1'),
-        wsPort: @js((int) (config('broadcasting.connections.reverb.options.port') ?: 8080)),
-        wssPort: @js((int) (config('broadcasting.connections.reverb.options.port') ?: 8080)),
-        forceTLS: @js(config('broadcasting.connections.reverb.options.scheme') === 'https'),
-        enabledTransports: ['ws', 'wss'],
+        broadcaster: 'pusher',
+        key: @js(config('broadcasting.connections.pusher.key')),
+        cluster: @js(config('broadcasting.connections.pusher.options.cluster')),
+        forceTLS: @js(config('broadcasting.connections.pusher.options.encrypted')),
     });
 
     const activitiesBody = document.getElementById('activities-body');
@@ -150,14 +147,14 @@
     }
 
     window.Echo.channel('activities')
-        .listen('ActivityCreated', (activity) => {
+        .listen('.ActivityCreated', (activity) => {
             if (activity.date !== selectedDate) {
                 return;
             }
 
             upsertActivityRow(activity);
         })
-        .listen('ActivityUpdated', (activity) => {
+        .listen('.ActivityChanged', (activity) => {
             if (activity.date !== selectedDate) {
                 return;
             }

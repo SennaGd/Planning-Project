@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\ActivityChanged;
 use App\Events\ActivityCreated;
 use App\Events\ActivityDeleted;
 use Database\Factories\ActivityFactory;
@@ -49,13 +50,17 @@ class Activity extends Model
         $this->schoolClasses()->attach($classIds);
         $this->unsetRelation('schoolClasses');
 
-        ActivityCreated::dispatch($this->load('schoolClasses'));
+        ActivityChanged::dispatch($this->load('schoolClasses'));
     }
 
     protected static function booted(): void
     {
         static::created(function (Activity $activity): void {
             ActivityCreated::dispatch($activity);
+        });
+
+        static::updated(function (Activity $activity): void {
+            ActivityChanged::dispatch($activity);
         });
 
         static::deleting(function (Activity $activity): void {

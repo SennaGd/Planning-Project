@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Events;
 
@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldRescue;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class AcitivityChanged implements ShouldBroadcastNow, ShouldRescue 
+class ActivityChanged implements ShouldBroadcastNow, ShouldRescue
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -21,9 +21,6 @@ class AcitivityChanged implements ShouldBroadcastNow, ShouldRescue
         }
     }
 
-    /**
-     * @return array<int, Channel>
-     */
     public function broadcastWhen(): bool
     {
         $connection = config('broadcasting.default');

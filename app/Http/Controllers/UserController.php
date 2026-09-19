@@ -4,9 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function add(Request $request) {
+
+        $validated = $request->validate([
+            'name' => 'Required|string',
+            'password' => 'required|string',
+            'email' => 'required|string',
+        ]);
+
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+            'role' => 'teacher',
+        ]);
+
+        return redirect()->route("dashboard");
+    }
     /**
      * Display a listing of the resource.
      */

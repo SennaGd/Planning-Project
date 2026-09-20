@@ -44,7 +44,7 @@ class ActivityController extends Controller
             return view('index', compact('activities', 'selectedDate', 'searchQuery', 'school_classes'));
         }
         elseif (Route::currentRouteName() === 'lesplein') {
-            return view('lesplein', compact('activities', 'school_classes'));
+            return view('lesplein', compact('activities', 'selectedDate', 'school_classes'));
         }
         abort(404);
     }

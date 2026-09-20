@@ -14,7 +14,7 @@
 
     </div>
         <div class="w-full max-w-full overflow-x-auto">
-        <table class="table-auto text-left w-full text-[clamp(0.5rem,1.4vw,1.5rem)] [&_th]:whitespace-nowrap [&_td]:whitespace-nowrap [&_th]:px-[0.6em] [&_th]:py-[0.35em] [&_td]:px-[0.6em] [&_td]:py-[0.35em]">
+        <table class="table-auto text-left w-full text-[clamp(0.55rem,1vw,1rem)] [&_th]:whitespace-nowrap [&_td]:whitespace-nowrap [&_th]:px-[0.6em] [&_th]:py-[0.35em] [&_td]:px-[0.6em] [&_td]:py-[0.35em]">
             <thead class="dark:bg-schiphol-dark_gray bg-gray-300 transition-colors duration-200">
                 <tr class="dark:text-schiphol-light_gray transition-colors duration-200 text-[1.15em] dark:border-schiphol-dark_gray dark:text-[#FFCD00]">
                     <th scope="col">Tijd</th>

@@ -21,9 +21,6 @@ class ActivityCreated implements ShouldBroadcastNow, ShouldRescue
         }
     }
 
-    /**
-     * @return array<int, Channel>
-     */
     public function broadcastWhen(): bool
     {
         $connection = config('broadcasting.default');
@@ -45,6 +42,11 @@ class ActivityCreated implements ShouldBroadcastNow, ShouldRescue
         return [
             new Channel('activities'),
         ];
+    }
+
+    public function broadcastAs(): string
+    {
+        return 'ActivityCreated';
     }
 
     /**

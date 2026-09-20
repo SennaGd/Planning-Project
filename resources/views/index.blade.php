@@ -35,7 +35,7 @@
                             <td class="px-4 py-2" data-cell="classnames">{{ $activity->schoolClasses->pluck('classname')->join(', ') }}</td>
                             <td class="px-4 py-2">{{ $activity->attendee}}</td>
                             @if (strtolower(trim((string) $activity->status)) === 'active')
-                            <td class="px-4 py-2">@if (\Carbon\Carbon::parse($activity->dt_end)->isPast()) <p class="text-red-500">Vertrokken</p> @elseif (\Carbon\Carbon::parse($activity->dt_start)->isPast()) <p class="text-green-500">Boarding</p> @else <p class="text-yellow-500">Gepland</p> @endif</td> 
+                            <td class="px-4 py-2">@if (\Carbon\Carbon::parse($activity->dt_end)->isPast()) <p class="text-red-500">Vertrokken</p> @elseif (\Carbon\Carbon::parse($activity->dt_start)->isPast()) <p class="text-green-500">Boarding</p> @else <p class="text-yellow-500">Gepland</p> @endif</td>
                             @else
                             <td class="px-4 py-2"><p class="text-gray-500">Geanuleerd</p></td>
                             @endif
@@ -47,7 +47,7 @@
 
     <dialog id='my-dialog-2' closedby='any' class='popup-content background:black/20 backdrop-blur-sm m-auto p-5 shadow rounded dark:bg-schiphol-dark_gray dark:text-[#f0f0f0] dark:text-schiphol-light_gray'>
         <h2>Abonneer op een of meerdere kalenders</h2>
-        <form action="{{ route('calendar.ics') }}" method="POST" class=''>
+        <form action="{{ route('calendar.handle_request') }}" method="POST" class=''>
             @csrf
                 <p class='italic'>- Selecteer klassen</p>
                 <div class='p-2 pl-5 align-content' >
@@ -67,17 +67,13 @@
                     </ul>
                 </div>
 
-            <input class='underline' type='submit' value='Submit' >
+
+                <div>
+                    <input name='qr-code' type='checkbox'> QR-Code</input>
+                </div>
+            <input class='underline' type='submit' value='Submit' />
         </form>
     </dialog>
-
-    <!--  popup  | content  -->
-    <div class='popup-wrapper'>
-            <div class='popup dark:text-schiphol-light_gray'>
-                <div class='popup-close'>x</div>
-                <div class='popup-content'>
-                   </div>
-        </div>
     <script>
         const navigationEntry = performance.getEntriesByType('navigation')[0];
         const currentUrl = new URL(window.location.href);

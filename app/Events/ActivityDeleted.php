@@ -21,9 +21,6 @@ class ActivityDeleted implements ShouldBroadcastNow, ShouldRescue
         }
     }
 
-    /**
-     * @return array<int, Channel>
-     */
     public function broadcastWhen(): bool
     {
         $connection = config('broadcasting.default');

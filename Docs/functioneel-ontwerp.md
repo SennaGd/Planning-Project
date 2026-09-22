@@ -4,7 +4,7 @@
 ## Inleiding 
 Dit document beschrijft het functioneel ontwerp van een Webapplicatie voor het "Planning Dashboard Project". De webaplicatie laat verschillende lesplanningen zien van meerdere klassen. 
 Waar een student/gebruiker zich kan abonneren op een of meerdere klas(en). 
-Docenten kunnen zich aanmelden op een login pagina waar zij planningen kunnen aanmaken, aanpassen en verwijderen.
+Docenten kunnen zich aanmelden op een login pagina waar zij activiteiten kunnen aanmaken, aanpassen en op inactief zetten.
 Wanneer een student zich abonneert op een planning/klas zal de planning ook in zijn/haar calender komen.
 
 De planning zal zich ook afspelen op het scherm in de hal (C afdeling / leerplein).
@@ -93,7 +93,7 @@ Een superbeheerder kan gemakkelijk docenten toevoegen.
 | **Actor** | Docent |
 | **Preconditie** | Docent is ingelogd en de betreffende activiteit bestaat in het systeem. |
 | **Scenario** | Docent selecteert een activiteit in de beheeromgeving. Docent klikt op de knop om op inactief te zetten en bevestigt de actie. Activiteit wordt op inactief gezet. De wijziging word direct doorgespeeld naar de homepagina. |
-| **Uitzonderingen** | Activiteit is al verwijderd door een andere docent: Melding dat de activiteit niet meer bestaat. |
+| **Uitzonderingen** | Activiteit is al inactief gezet door een andere docent: Melding dat de activiteit al op inactief staat. |
 | **Niet-functionele eisen** | Directe verwerking (1 seconde). |
 | **Postconditie** | De activiteit is op inactief gezet. |
 

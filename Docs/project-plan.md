@@ -28,7 +28,7 @@ Op dit informatiebord zal een student de volgende informatie vinden: Bestemming(
 Studenten kunnen zich ook abonneren op een of meerdere klassen. De klassen kan je selecteren met een knopje en dan vervolgens kan je abonneren op de klassen die de student heeft aangevinkt. Dit kan worden gedaan met een knopje en een QR-Code. Met de QR-Code zal de student of docent dit ook kunnen delen met een klas.
 De studenten zullen deze planning kunnen bezoeken via hun internet-browser en hebben zelf geen account nodig (ook niet voor het abonneren).
 
-Voor de docenten is er ook een omgeving om verschillende activiteiten aan te maken voor een aangegeven klas. Deze omgeving kunnen de docenten bezoeken na het inloggen in zijn/haar account. De docent kan ook activiteiten aanmaken in de naam van een andere docenten. Ook kunnen docenten deze activiteiten aanpassen en verwijderen, de docenten kunnen ook andere docenten hun les aanpassen en verwijderen. 
+Voor de docenten is er ook een omgeving om verschillende activiteiten aan te maken voor een aangegeven klas. Deze omgeving kunnen de docenten bezoeken na het inloggen in zijn/haar account. De docent kan ook activiteiten aanmaken in de naam van een andere docenten. Ook kunnen docenten deze activiteiten aanpassen en op inactief zetten, de docenten kunnen ook andere docenten hun les aanpassen en op inactief zetten. 
 
 De docenten hun account wordt aangemaakt door een superbeheerder dit persoon zal alleen verantwoordelijk zijn voor het aanmaken voor de docent zijn account, dus niet voor het aanmaken of aanpassen van verschillende activiteiten.
 

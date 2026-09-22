@@ -44,8 +44,8 @@ Een user story is een korte, simpele omschrijving van een functionaliteit. Het z
 -	De feed kan worden gebruikt met Outlook.
 -	De feed kan worden gebruikt met Google Calendar.
 -	Wanneer er een wijziging is in planning wordt dat automatisch gesynchroniseerd.
--	Wanneer er een activiteit wordt toegevoegd wordt dat automatisch gesynchroniseerd.
--	Wanneer er een activiteit wordt verwijderd wordt dat automatisch gesynchroniseerd.
+-	Wanneer er een activiteit wordt toegevoegd wordt, dat automatisch gesynchroniseerd.
+-	Wanneer er een activiteit inactief wordt gezet, wordt dat automatisch gesynchroniseerd.
 
 ## Titel: Docent voegt activiteit toe
 **scenario:** <br> Als docent wil ik een activiteit kunnen toevoegen zodat studenten kunnen zien wat er gepland staat
@@ -70,15 +70,15 @@ Een user story is een korte, simpele omschrijving van een functionaliteit. Het z
 -	De docent kan de doelgroep of klas wijzigen.
 -	Na het opslaan worden de gewijzigde gegevens weergegeven.
 -	De wijzigingen worden uiteindelijk ook verwerkt in de planning van studenten.
-     Titel: docent verwijderd activiteit
-     scenario: Als docent wil ik een activiteit kunnen verwijderen, zodat geannuleerde of fout aangemaakte activiteiten niet meer zichtbaar zijn.
+     Titel: docent zet activiteit op inactief
+     scenario: Als docent wil ik een activiteit op inactief willen zetten, zodat geannuleerde of fout aangemaakte activiteiten niet meer zichtbaar zijn.
      acceptatiecriteria:
 -	De docent kan een activiteit selecteren.
--	De docent kan kiezen om de activiteit te verwijderen.
--	Het systeem vraagt om bevestiging voordat de activiteit wordt verwijderd.
--	Na bevestiging wordt de activiteit verwijderd.
--	De verwijderde activiteit is niet meer zichtbaar op het dashboard.
--	De verwijderde activiteit wordt bij de volgende agenda synchronisatie niet meer weergegeven op de gebruikers hun gelinkte agenda's.
+-	De docent kan kiezen om de activiteit op inactief te zetten.
+<!-- -	Het systeem vraagt om bevestiging voordat de activiteit wordt verwijderd. -->
+-	Na bevestiging wordt de activiteit op inactief gezet.
+<!-- -	De verwijderde activiteit is niet meer zichtbaar op het dashboard.
+-	De verwijderde activiteit wordt bij de volgende agenda synchronisatie niet meer weergegeven op de gebruikers hun gelinkte agenda's. -->
 
 <!-- ## Titel: Docent beheert tijdsblok
 **scenario:** <br> Als docent wil ik tijdsblokken kunnen toevoegen, wijzigen en verwijderen, zodat ik de beschikbare planning tijden kan beheren

@@ -53,7 +53,7 @@ Ingevulde gegevens worden verwerkt met een bijhorende controller, de controller 
 De normale studenten kunnen alleen activiteiten die zijn ingepland bekijken. Docenten kunnen activiteiten aanpassen en verwijderen die zij hebben gemaakt. Dit kan zowel gedaan worden door de docent die de activeit heeft gemaakt en door een ander.
 
 ## De responsetijden
-De database requests zullen altijd onder de twee secondes zitten, zelfs als het er boven zit zal het niet heel veel uitmaken voor de user experience. Voor docenten zal het waarschijnlijk iets sneller gaan ivm; hoge prioriteit (dus ongeveer een seconde). Ook wordt er gebruik gemaakt van Laravel Reverb voor realtime updates tussen de backend en frontend zodat, wijzigingen en toevoegingen direct worden getoond zowel als voor de student en docent.
+De database requests zullen altijd onder de twee secondes zitten, zelfs als het er boven zit zal het niet heel veel uitmaken voor de user experience. Voor docenten zal het waarschijnlijk iets sneller gaan ivm; hoge prioriteit (dus ongeveer een seconde). Ook wordt er gebruik gemaakt van Pusher voor realtime updates tussen de backend en frontend zodat, wijzigingen en toevoegingen direct worden getoond zowel als voor de student en docent. Pusher is handig voor hosting dat geen portforwarding heeft en zit al in de Laravel Starter Kit als broadcasting methode.
 
 ## De Onderhoudtbaarheid
 Sinds het object georienteerd wordt gemaakt zal alles makkelijk te onderhouden zijn. Alle code moet het liefst apart werken zodat je gemakkelijk code functies en classes kan veranderen. Laravel helpt hier ook bij met controllers, models, migrations en meer.

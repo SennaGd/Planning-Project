@@ -32,7 +32,7 @@ Een superbeheerder kan gemakkelijk docenten toevoegen.
     Account aanpassen
     Lessen/activiteiten toevoegen 
     Lessen/activiteiten aanpassen
-    Lessen/activiteiten verwijderen
+    Lessen/activiteiten inactief zetten
 
 - Superbeheerder
     Inlog omgeving
@@ -72,9 +72,9 @@ Een superbeheerder kan gemakkelijk docenten toevoegen.
 | **Versie** | 1.0 |
 | **Actor** | Docent |
 | **Preconditie** | Docent is succesvol ingelogd in de beheeromgeving. |
-| **Scenario** | Docent opent het formulier voor een nieuwe activiteit. Vult de vereiste velden in (Bestemming(Les), VluchtNummer(Klas), Airline(Docent), Gate(Lokaal), Tijd). Verzendt het formulier. Controller valideert de invoer en slaat de gegevens op in de database (`activities` tabel). Laravel Reverb pusht een realtime update naar het dashboard op het leerplein en mobiele apparaten. |
+| **Scenario** | Docent opent het formulier voor een nieuwe activiteit. Vult de vereiste velden in (Bestemming(Les), VluchtNummer(Klas), Airline(Docent), Gate(Lokaal), Tijd). Verzendt het formulier. Controller valideert de invoer en slaat de gegevens op in de database (`activities` tabel). Pusher pusht een realtime update naar het dashboard op het leerplein en mobiele apparaten. |
 | **Uitzonderingen** | Ongeldige tijd of ontbrekende verplichte velden: Controller geeft een validatiefout en de data wordt niet opgeslagen. |
-| **Niet-functionele eisen** | Realtime updates via Laravel Reverb. Formuliervalidatie afgehandeld door Laravel Controller. |
+| **Niet-functionele eisen** | Realtime updates via Pusher. Formuliervalidatie afgehandeld door Laravel Controller. |
 | **Postconditie** | De activiteit is toegevoegd aan de database en direct zichtbaar op alle dashboards. |
 
 | Naam | Past activiteit aan |
@@ -82,7 +82,7 @@ Een superbeheerder kan gemakkelijk docenten toevoegen.
 | **Versie** | 1.0 |
 | **Actor** | Docent |
 | **Preconditie** | Docent is ingelogd en de betreffende activiteit bestaat in het systeem. |
-| **Scenario** | Docent selecteert een activiteit in de beheeromgeving. Docent wijzigt de gegevens. Controller controleert de nieuwe data. Systeem update de gegevens in de `activities` tabel. Laravel Reverb voert een realtime update uit op de frontend. |
+| **Scenario** | Docent selecteert een activiteit in de beheeromgeving. Docent wijzigt de gegevens. Controller controleert de nieuwe data. Systeem update de gegevens in de `activities` tabel. Pusher voert een realtime update uit op de frontend. |
 | **Uitzonderingen** | Gelijktijdig bewerken door een andere docent: Foutmelding dat de actie niet kon worden voltooid. |
 | **Niet-functionele eisen** | Verwerkingstijd onder de 1 seconde. |
 | **Postconditie** | De activiteit is bijgewerkt in de database en op het dashboard. |
@@ -92,7 +92,7 @@ Een superbeheerder kan gemakkelijk docenten toevoegen.
 | **Versie** | 1.0 |
 | **Actor** | Docent |
 | **Preconditie** | Docent is ingelogd en de betreffende activiteit bestaat in het systeem. |
-| **Scenario** | Docent selecteert een activiteit in de beheeromgeving. Docent klikt op de knop om te verwijderen en bevestigt de actie. Controller verwijdert de record uit de `activities` tabel. Laravel Reverb voert een realtime update uit op de frontend. |
+| **Scenario** | Docent selecteert een activiteit in de beheeromgeving. Docent klikt op de knop om te verwijderen en bevestigt de actie. Controller verwijdert de record uit de `activities` tabel. Pusher voert een realtime update uit op de frontend. |
 | **Uitzonderingen** | Activiteit is al verwijderd door een andere docent: Melding dat de activiteit niet meer bestaat. |
 | **Niet-functionele eisen** | Directe verwerking (1 seconde). |
 | **Postconditie** | De activiteit is definitief verwijderd uit de database en verdwijnt van het dashboard. |

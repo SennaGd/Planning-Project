@@ -36,7 +36,7 @@ De docenten hun account wordt aangemaakt door een superbeheerder dit persoon zal
 ### MoSCoW
 | MUST HAVE | SHOULD HAVE | COULD HAVE | WON'T HAVE |
 | --------- | ----------- | ---------- | ---------- | 
-| dashboard             | Realtime Updates (laravel reverb) | Mobiele Weergave  | Export naar Excel  |
+| dashboard             | Realtime Updates (Pusher) | Mobiele Weergave  | Export naar Excel  |
 | beheer omgeving       | Login Omgeving | Thema Switch | Koppeling met Microsoft 365  |
 | Gebruikers Rollen     | Activiteiten Beheer Omgeving | QR-code Kalender Abonnement                       | Foto van Docent |
 | Kalender Abonnement   | Superbeheerder Omgeving | Dark Mode Switch | Agendaweergave naast Schiphol-weergave |

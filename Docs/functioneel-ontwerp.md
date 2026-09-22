@@ -52,8 +52,8 @@ Een superbeheerder kan gemakkelijk docenten toevoegen.
 | **Versie** | 1.0 |
 | **Actor** | Student, Docent |
 | **Preconditie** | De webapplicatie is bereikbaar via de browser of het fysieke scherm op het leerplein (C-afdeling) staat aan. |
-| **Scenario** | Gebruiker opent het dashboard via telefoon/laptop of bekijkt het fysieke scherm. De controllers halen de gegevens op uit de SQLite database (`activities` tabel). Het lesrooster wordt getoond in Schiphol-stijl (Bestemming/Les, VluchtNummer/Klas, Airline/Docent, Gate/Lokaal, Tijd/Tijdstip). |
-| **Uitzonderingen** | Geen databaseverbinding: Het scherm toont een melding dat er geen activiteiten geladen kunnen worden. |
+| **Scenario** | Gebruiker opent het dashboard via telefoon/laptop of bekijkt het fysieke scherm. Het lesrooster wordt getoond in Schiphol-stijl (Bestemming/Les, VluchtNummer/Klas, Airline/Docent, Gate/Lokaal, Tijd/Tijdstip). |
+| **Uitzonderingen** | Niks staat in de planning: Het scherm toont geen activiteiten. |
 | **Niet-functionele eisen** | Database response binnen 2 seconden. |
 | **Postconditie** | De gebruiker heeft een up-to-date en overzichtelijk beeld van de actuele lessen en activiteiten. |
 
@@ -62,9 +62,9 @@ Een superbeheerder kan gemakkelijk docenten toevoegen.
 | **Versie** | 1.0 |
 | **Actor** | Docent, Superbeheerder |
 | **Preconditie** | Gebruiker beschikt over een aangemaakt account en bevindt zich op de inlogomgeving. |
-| **Scenario** | 1. Gebruiker vult e-mailadres en wachtwoord in. Gebruiker klikt op de inlogknop. De controller valideert de gegevens (wachtwoord wordt geverifieerd via Hash + Salt). Bij akkoord wordt de gebruiker doorverwezen naar de beheeromgeving. |
-| **Uitzonderingen** | Onjuiste inloggegevens: De controller weigert toegang en toont een foutmelding. |
-| **Niet-functionele eisen** | Snelheid van de response ligt onder 1 seconde. Wachtwoorden zijn gehasht en ook gesalt. |
+| **Scenario** | 1. Gebruiker vult e-mailadres en wachtwoord in. Gebruiker klikt op de inlogknop. Bij akkoord wordt de gebruiker doorverwezen naar de beheeromgeving. |
+| **Uitzonderingen** | Onjuiste inloggegevens: Wordt toegang geweigerd en toont een foutmelding. |
+| **Niet-functionele eisen** | Snelheid van de response ligt onder 1 seconde. |
 | **Postconditie** | Gebruiker is geauthenticeerd en heeft toegang tot zijn/haar specifieke beheerfuncties. |
 
 | Naam | Maakt activiteit aan |
@@ -72,9 +72,9 @@ Een superbeheerder kan gemakkelijk docenten toevoegen.
 | **Versie** | 1.0 |
 | **Actor** | Docent |
 | **Preconditie** | Docent is succesvol ingelogd in de beheeromgeving. |
-| **Scenario** | Docent opent het formulier voor een nieuwe activiteit. Vult de vereiste velden in (Bestemming(Les), VluchtNummer(Klas), Airline(Docent), Gate(Lokaal), Tijd). Verzendt het formulier. Controller valideert de invoer en slaat de gegevens op in de database (`activities` tabel). Pusher pusht een realtime update naar het dashboard op het leerplein en mobiele apparaten. |
-| **Uitzonderingen** | Ongeldige tijd of ontbrekende verplichte velden: Controller geeft een validatiefout en de data wordt niet opgeslagen. |
-| **Niet-functionele eisen** | Realtime updates via Pusher. Formuliervalidatie afgehandeld door Laravel Controller. |
+| **Scenario** | Docent opent het formulier voor een nieuwe activiteit. Vult de vereiste velden in (Bestemming(Les), VluchtNummer(Klas), Airline(Docent), Gate(Lokaal), Tijd). Verzendt het formulier. De invoer wordt gevailideert en de gegevens worden opgeslagen. De activieteit wordt dan rechtstreeks doorgespeeld naar wat studenten kunnen zien. |
+| **Uitzonderingen** | Ongeldige tijd of ontbrekende verplichte velden: Geeft een validatiefout en de data wordt niet opgeslagen. |
+| **Niet-functionele eisen** | Realtime updates. |
 | **Postconditie** | De activiteit is toegevoegd aan de database en direct zichtbaar op alle dashboards. |
 
 | Naam | Past activiteit aan |
@@ -82,27 +82,27 @@ Een superbeheerder kan gemakkelijk docenten toevoegen.
 | **Versie** | 1.0 |
 | **Actor** | Docent |
 | **Preconditie** | Docent is ingelogd en de betreffende activiteit bestaat in het systeem. |
-| **Scenario** | Docent selecteert een activiteit in de beheeromgeving. Docent wijzigt de gegevens. Controller controleert de nieuwe data. Systeem update de gegevens in de `activities` tabel. Pusher voert een realtime update uit op de frontend. |
+| **Scenario** | Docent selecteert een activiteit in de beheeromgeving. Docent wijzigt de gegevens en bevestigd de wijziging door op de knop te drukken. De wijziging word direct doorgespeeld naar de homepagina. |
 | **Uitzonderingen** | Gelijktijdig bewerken door een andere docent: Foutmelding dat de actie niet kon worden voltooid. |
 | **Niet-functionele eisen** | Verwerkingstijd onder de 1 seconde. |
-| **Postconditie** | De activiteit is bijgewerkt in de database en op het dashboard. |
+| **Postconditie** | De activiteit is bijgewerkt. |
 
-| Naam | Verwijderd activiteit |
+| Naam | Zet activiteit op inactief |
 | :--- | :--- |
 | **Versie** | 1.0 |
 | **Actor** | Docent |
 | **Preconditie** | Docent is ingelogd en de betreffende activiteit bestaat in het systeem. |
-| **Scenario** | Docent selecteert een activiteit in de beheeromgeving. Docent klikt op de knop om te verwijderen en bevestigt de actie. Controller verwijdert de record uit de `activities` tabel. Pusher voert een realtime update uit op de frontend. |
+| **Scenario** | Docent selecteert een activiteit in de beheeromgeving. Docent klikt op de knop om op inactief te zetten en bevestigt de actie. Activiteit wordt op inactief gezet. De wijziging word direct doorgespeeld naar de homepagina. |
 | **Uitzonderingen** | Activiteit is al verwijderd door een andere docent: Melding dat de activiteit niet meer bestaat. |
 | **Niet-functionele eisen** | Directe verwerking (1 seconde). |
-| **Postconditie** | De activiteit is definitief verwijderd uit de database en verdwijnt van het dashboard. |
+| **Postconditie** | De activiteit is op inactief gezet. |
 
 | Naam | Link genereren agenda-feed-link |
 | :--- | :--- |
 | **Versie** | 1.0 |
 | **Actor** | Student |
 | **Preconditie** | Student heeft de webapplicatie geopend in een browser. |
-| **Scenario** | Student vinkt een of meerdere klassen aan. Student klikt op de knop om een agenda-link te genereren. Systeem maakt gebruik van de Request Class (van Laravel) om een ICS-bestand op te stellen. Systeem geef ICS-bestand terug aan gebruiker. |
+| **Scenario** | Student vinkt een of meerdere klassen aan. Student klikt op de knop om een agenda-link te genereren. Krijgt link en kan erop klikken om toe te voegen aan zijn/haar agenda. |
 | **Uitzonderingen** | Geen klas geselecteerd: Systeem meld dat er minimaal één klas moet worden aangevinkt. |
 | **Niet-functionele eisen** | Geen account vereist. Beveiligd tegen server overload bij veel gelijktijdige requests. |
 | **Postconditie** | De student beschikt over een direct te koppelen kalender-link. |
@@ -134,7 +134,7 @@ Een superbeheerder kan gemakkelijk docenten toevoegen.
 | **Preconditie** | Gebruiker bevindt zich op het dashboard. |
 | **Scenario** | Gebruiker selecteert een klas via de filteropties. Alleen de gekozen klassen blijven zichtbaar. |
 | **Uitzonderingen** | Geen matchende klassen: Dashboard toont een lege lijst met melding. |
-| **Niet-functionele eisen** | Directe UI-reactiviteit via Laravel PHP & Vue zonder reload van de pagina. |
+| **Niet-functionele eisen** | Directe zoekfunctie bij ingevoerde tekst zonder op enter te drukken. |
 | **Postconditie** | Het dashboard toont een gefilterde weergave van het rooster. |
 
 | Naam | Zoekt voor bestemming of omschrijving |
@@ -142,7 +142,7 @@ Een superbeheerder kan gemakkelijk docenten toevoegen.
 | **Versie** | 1.0 |
 | **Actor** | Student, Docent |
 | **Preconditie** | Gebruiker bevindt zich op het dashboard. |
-| **Scenario** | Gebruiker typt een zoekterm in het zoekveld (bijv. "Workshop" of lokaalnaam). De frontend doorzoekt direct de geladen `activities` data. De tabel ververst op enter en toont enkel de matchende resultaten. |
+| **Scenario** | Gebruiker typt een zoekterm in het zoekveld (bijv. "Workshop" of lokaalnaam). De tabel ververst op enter en toont enkel de matchende resultaten. |
 | **Uitzonderingen** | Geen resultaten gevonden: Melding "Geen activiteiten gevonden voor deze zoekopdracht". |
 | **Niet-functionele eisen** | Directe reactiviteit in de zoekbalk. Realtime updates. |
 | **Postconditie** | De gebruiker ziet alleen de specifieke gezochte lessen/activiteiten. |
@@ -152,9 +152,9 @@ Een superbeheerder kan gemakkelijk docenten toevoegen.
 | **Versie** | 1.0 |
 | **Actor** | Docent |
 | **Preconditie** | Gebruiker is ingelogd in het beheerpaneel. |
-| **Scenario** | Gebruiker navigeert naar klasbeheer. Vult een nieuwe klassennaam in. Klikt op opslaan. Controller valideert de uniekheid en slaat de klas op in de `classes` tabel. |
-| **Uitzonderingen** | Klas bestaat al: Controller geeft een foutmelding. |
-| **Niet-functionele eisen** | Data-integriteit waarborgen in SQLite. |
+| **Scenario** | Gebruiker navigeert naar klasbeheer. Vult een nieuwe klassennaam in. Klikt op opslaan. |
+| **Uitzonderingen** | Klas bestaat al: Gebruiker krijgt een foutmelding. |
+| **Niet-functionele eisen** | Meerdere klassen in één keer toevoegen. |
 | **Postconditie** | De nieuwe klas is beschikbaar in het systeem en kan gekoppeld worden aan activiteiten. |
 
 | Naam | Bekijkt docenten accounts |
@@ -162,7 +162,7 @@ Een superbeheerder kan gemakkelijk docenten toevoegen.
 | **Versie** | 1.0 |
 | **Actor** | Superbeheerder |
 | **Preconditie** | Superbeheerder is succesvol ingelogd. |
-| **Scenario** | Superbeheerder navigeert naar het gebruikersoverzicht. Het systeem haalt de lijst met gebruikers met de rol 'docent' op uit de `users` tabel. De accounts worden overzichtelijk op het scherm getoond. |
+| **Scenario** | Superbeheerder navigeert naar het gebruikersoverzicht. Het systeem haalt de lijst met gebruikers met de rol 'docent' op. De accounts worden overzichtelijk op het scherm getoond. |
 | **Uitzonderingen** | Geen docentenaccounts gevonden: Toont een lege tabel. |
 | **Niet-functionele eisen** | Alleen toegankelijk voor rollen met superbeheerdersaccount. |
 | **Postconditie** | De superbeheerder heeft inzicht in alle geregistreerde docentenaccounts. |
@@ -172,9 +172,9 @@ Een superbeheerder kan gemakkelijk docenten toevoegen.
 | **Versie** | 1.0 |
 | **Actor** | Superbeheerder |
 | **Preconditie** | Superbeheerder is ingelogd. |
-| **Scenario** | Superbeheerder opent het formulier 'Nieuwe docent'. Vult gebruikersnaam, e-mail en een tijdelijk wachtwoord in. Controller controleert de gegevens, hasht + salt het wachtwoord en slaat de docent op in `users`. |
+| **Scenario** | Superbeheerder opent het formulier 'Nieuwe docent'. Vult gebruikersnaam, e-mail en een tijdelijk wachtwoord in. |
 | **Uitzonderingen** | E-mailadres is al in gebruik: Validatiefout blokkeert de actie. |
-| **Niet-functionele eisen** | Veilige wachtwoordopslag (Hash + Salt). |
+| **Niet-functionele eisen** | Meerdere accounts in één keer toevoegen. |
 | **Postconditie** | Er is een nieuw docentaccount aangemaakt waarmee ingelogd kan worden. |
 
 | Naam | Past docent account aan |
@@ -182,9 +182,9 @@ Een superbeheerder kan gemakkelijk docenten toevoegen.
 | **Versie** | 1.0 |
 | **Actor** | Superbeheerder |
 | **Preconditie** | Superbeheerder is ingelogd en het docentaccount bestaat. |
-| **Scenario** | Superbeheerder selecteert een docentaccount uit het overzicht. Wijzigt de gewenste gegevens (bijv. gebruikersnaam of e-mail). Slaat de wijzigingen op. Controller valideert en update de `users` tabel. |
+| **Scenario** | Superbeheerder selecteert een docentaccount uit het overzicht. Wijzigt de gewenste gegevens (bijv. gebruikersnaam of e-mail). Slaat de wijzigingen op. |
 | **Uitzonderingen** | Gewijzigde e-mail bestaat al bij een andere gebruiker: Validatiefout. |
-| **Niet-functionele eisen** | Snelle verwerking door de controller. |
+| **Niet-functionele eisen** | Meerdere accounts in één keer aanpassen. |
 | **Postconditie** | De gegevens van het docentaccount zijn bijgewerkt. |
 
 | Naam | Verwijderd docent account |
@@ -192,7 +192,7 @@ Een superbeheerder kan gemakkelijk docenten toevoegen.
 | **Versie** | 1.0 |
 | **Actor** | Superbeheerder |
 | **Preconditie** | Superbeheerder is ingelogd en het docentaccount bestaat. |
-| **Scenario** | Superbeheerder klikt op 'Verwijderen' bij het betreffende docentaccount. Bevestigt de verwijdering in het pop-upvenster. Controller verwijdert het account uit de `users` tabel. |
+| **Scenario** | Superbeheerder klikt op 'Verwijderen' bij het betreffende docentaccount. Bevestigt de verwijdering in het pop-upvenster. |
 | **Uitzonderingen** | Poging tot verwijderen van het eigen superbeheerdersaccount: Systeem weigert de actie. |
 | **Niet-functionele eisen** | Beveiligingscontrole op rolrechten voorafgaand aan de delete-query. |
 | **Postconditie** | Het docentaccount is definitief verwijderd en de docent kan niet meer inloggen. |
@@ -202,7 +202,7 @@ Een superbeheerder kan gemakkelijk docenten toevoegen.
 | **Versie** | 1.0 |
 | **Actor** | Docent |
 | **Preconditie** | Docent is ingelogd in de beheeromgeving. |
-| **Scenario** | Docent navigeert naar instellingen. Wijzigt eigen gegevens zoals gebruikersnaam, email of wachtwoord. Verzendt de wijzigingen. Controller valideert de gegevens (en re-hasht het nieuwe wachtwoord indien gewijzigd) en update de database. |
+| **Scenario** | Docent navigeert naar instellingen. Wijzigt eigen gegevens zoals gebruikersnaam, email of wachtwoord. Verzendt de wijzigingen. |
 | **Uitzonderingen** | Huidig wachtwoord onjuist bij wachtwoordwijziging: Actie wordt geweigerd. |
 | **Niet-functionele eisen** | Veilige verwerking van profielgegevens. |
 | **Postconditie** | De eigen accountgegevens van de docent zijn succesvol bijgewerkt. |

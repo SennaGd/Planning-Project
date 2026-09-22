@@ -80,14 +80,14 @@ Een user story is een korte, simpele omschrijving van een functionaliteit. Het z
 -	De verwijderde activiteit is niet meer zichtbaar op het dashboard.
 -	De verwijderde activiteit wordt bij de volgende agenda synchronisatie niet meer weergegeven op de gebruikers hun gelinkte agenda's.
 
-## Titel: Docent beheert tijdsblok
+<!-- ## Titel: Docent beheert tijdsblok
 **scenario:** <br> Als docent wil ik tijdsblokken kunnen toevoegen, wijzigen en verwijderen, zodat ik de beschikbare planning tijden kan beheren
 ## acceptatiecriteria:
 -	De docent kan een nieuw tijdsblok toevoegen.
 -	De docent kan een bestaand tijdsblok wijzigen.
 -	De docent kan een bestaand tijdsblok verwijderen.
 -	Een tijdsblok bevat minimaal een begin en eindtijd.
--	De eindtijd kan niet eerder zijn dan de begintijd.
+-	De eindtijd kan niet eerder zijn dan de begintijd. -->
 
 ## Titel: SuperBeheerder maakt een account aan
 **scenario:** <br> Als SuperBeheerder is het mijn taak om accounts voor docenten aan te maken. <br> **acceptatiecriteria:**

@@ -53,88 +53,109 @@ De link: http://www.madebytiemen.nl/planning
 
 --- 
 TC-01-03 - Realtime update na nieuwe activiteit | Student & Docent
+
 De tester's kijken of er realtime updates worden gegeven naar het dashboard. 
 De _testgever_ voegt een nieuwe activiteit toe.
 De student kijkt of de activiteit automatisch zich laat zien.
 
 ---
 TC-02-01 - Filteren op klas | Student
+
 De tester zoekt voor alle activiteiten van twee klassen, dit doet hij met de filter knop.
 
 ---
 TC-02-02 - Filteren op opleiding, groepen en categorie | Student
+
 De tester 
 
 ---
 TC-02-03 - Zoeken op bestemming (lokaal) of omschrijving
+
 De tester zoekt voor lessen in een lokaal of omschrijving dat gegeven wordt door de testgever, wanneer de tester dit doet zal hij alle lessen in dat lokaal of omschrijving kunnen raadplegen.
 
 ---
 TC-03-01 - Inloggen als docent | Docent
+
 De tester krijgt accountgegevens van de testgever. De tester zal zich moeten inloggen zonder enige hulp, de enige informatie dat de tester heeft is dat hij moet inloggen.
 Als de tester heeft ingelogd zal hij zich in de beheeromgeving als docent bevinden.
 
 ---
 TC-03-02 - Inloggen als superbeheerder | Beheerder
+
 De tester krijgt accountgegevens van de testgever. De tester zal zich moeten inloggen zonder enige hulp. 
 Als de tester heeft ingelogd zal hij zich in de beheeromgeving als superbeheerder bevinden.
 
 ---
 TC-03-03 - Mislukte login met onjuiste gegevens | Student / Docent / Superbeheerder
+
 De tester zal moeten proberen om in te loggen zonder accountgegevens. Hierbij zal er een foutmelding moeten komen dat de tester niet kan inloggen.
 
 ---
 TC-04-01 - Maakt activiteit aan | Docent
+
 De tester is ingelogd als docent en bevind zich in de beheeromgeving. De tester zal een activiteit moeten toevoegen aan het systeem. Hierbij test de tester de verplichte velden, tegen lege informatie. 
 Als alles is ingevult voegt de docent een activiteit aan en krijgt dit te zien in de beheeromgeving.
 
 ---
 TC-04-02 - Past activiteit aan | Docent
+
 De tester is ingelogd als docent, hij krijgt een overzicht met verschillende activiteiten die hij zal moeten aanpassen. 
 
 ---
 TC-04-03 - Zet activiteit op inactief | Docent
+
 De tester bevindt zich in de beheeromgeving als docent met een overzicht van verschillende activiteiten. Hierbij moet de tester een activiteit op inactief zetten. Daarna gaat de docent naar het dashboard en kijkt of de activiteit op inactief staat.
 
 ---
 TC-05-01 - Maakt unieke klas aan | Docent
+
 De tester bevindt zich in de beheeromgeving als docent. Hierbij krijgt de tester opdracht dat hij een nieuwe klas moet aanmaken. De tester navigeert zelf naar het menu om een klas toe te voegen en zal de forms testen op lege inputs. 
 Als dit successvol gaat komt er een nieuwe klas bij te staan in de database/omgeving.
 
 ---
 TC-06-01 - Agenda-abbonement | Student
+
 De tester krijgt taak om zich te abonneren op een klas, hierbij maakt de tester gebruik van de kalender-abbenementen knop. De tester doet dit direct via de abboneer knop 
 Als dit goed gaat zal de tester de activiteiten van de geselecteerde klassen in de agenda krijgen.
 
 ---
 TC-06-02 - Agenda koppelen in externe agenda-apps | Student
+
 De tester zal een link moeten krijgen voor de activiteiten van de geselecteerde klas(sen). Hierbij maakt de tester gebruik van de kalenderabbenementen knop en genereerd hij een link die de tester dan in zijn calenderapp zet.
 
 ---
 TC-06-03 - QR-Code genereren voor agenda-feed | Student
+
 De tester zal een QR-Code moeten genereren die de tester kan delen met andere mensen (studenten). 
 
+---
 TC-06-04 - QR-Code scannen leidt naar abboneren | Student
+
 De tester heeft een QR-Code gegenereed. De tester scanned de QR-Code en zal een .ics bestand kunnen downloaden, vervolgens opent de tester het bestand en zal de lesplanning in de agenda van de tester bevinden.
 
 ---
 TC-07-01 - Superbeheerder bekijkt docentenaccounts | Superbeheerder
+
 De tester is ingelogd als superbeheerder. Hier zal de tester zich naar het docentenoverzicht gaan en de lijst met alle docentenaccounts te zien krijgen.
 
 ---
 TC-07-02 - Maakt docentenaccount aan | Superbeheerder
+
 De tester krijgt als opdracht om een docentenaccount aan te maken, de tester test of de docentenaccounts succesvol aangemaakt zijn door zich in te loggen zodra de tester deze heeft aangemaakt.
 
 ---
 TC-07-03 - Past docentenaccount aan  | Superbeheerder
+
 De tester moet een docentenaccount die hij heeft aangemaakt in *TC-07-02* en probeert de naam en/of wachtwoord aan te passen. Zodra de tester dit heeft uitgevoerd zal de tester uitloggen als superbeheerder en inloggen in het aangepaste docentenaccount. 
 
 ---
 TC-07-04 - Verwijderd docentenaccount  | Superbeheerder
+
 De tester verwijderd een docentenaccount en probeert daarna in te loggen in het verwijderde account.
 
 ---
 TC-07-05 - Past eigen account aan | Docent
+
 De tester krijgt opdracht om zijn docentenaccount aan te passen. Hierbij past de tester de gebruikersnaam en/of e-mail aan. Zodra dit gedaan logged de tester eerst uit en probeert daarna in het aangepaste account in te loggen.
 
 ---

@@ -6,7 +6,7 @@
                 <input type="hidden" name="search" value="{{ $searchQuery }}">
             </form>
             <div class="flex-1"></div>
-            <a href="">Kalenderabonomenten</a>
+            <!-- <a href="">Kalenderabonomenten</a> -->
         </div>
         @if ($errors->any())
             <div style="color: red;">
@@ -110,13 +110,13 @@
             <div class="space-y-6">
                 <form action="{{ route('storeLesson') }}" method="POST">
                     @csrf
-                    <label for="summary">les:</label>
-                    <input type="text" name="summary" value="^•⩊•^" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
-                    <label for="">gate/klaslokaal</label>
-                    <input type="text" name="location" value="audiotorium" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
-                    <label for="">omscrhijving</label>
-                    <input type="text" name="description" value="test" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
-                    <label for="">vluchtnummer/klas</label>
+                    <label for="summary">Les/Activiteit:</label>
+                    <input type="text" name="summary" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                    <label for="">Locatie/klaslokaal</label>
+                    <input type="text" name="location" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                    <label for="">Omscrhijving</label>
+                    <input type="text" name="description" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                    <label for="">Klas(sen)</label>
                     <div class="dropdown-menu">
                         @foreach ($school_classes as $class)
                             <label class="dropdown-item">
@@ -129,12 +129,17 @@
                             </label>
                         @endforeach
                     </div>
-                    <label for="">vliegmaatschapij/aanwezige</label>
-                    <input type="text" name="attendee" value="it-projecten@gmail.com" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
-                    <label for="">begin tijd</label>
-                    <input type="datetime-local" value="2026-09-14T12:00" name="dt_start" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
-                    <label for="">eind tijd</label>
-                    <input type="datetime-local" value="2026-09-14T13:00" name="dt_end" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                    <label for="attendee">Aanwezige</label>
+                    <input id="attendee" name="attendee" list="teachers" required placeholder="Kies een docent of typ een naam" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                    <datalist id="teachers">
+                        @foreach ($teachers as $teacher)
+                            <option value="{{ $teacher->name }}"></option>
+                        @endforeach
+                    </datalist>
+                    <label for="">Begin tijd</label>
+                    <input type="datetime-local" value="" name="dt_start" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
+                    <label for="">Eind tijd</label>
+                    <input type="datetime-local" value="" name="dt_end" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
                     <input type="submit" value="Les Invoeren" class="mt-4 bg-gray-300 dark:bg-gray-700 p-2 rounded">
                 </form>
             </div>
@@ -143,9 +148,9 @@
             <div class="space-y-6">
                 <form action="{{ route('storeSchoolClass') }}" method="POST">
                     @csrf
-                    <label for="classname">les:</label>
+                    <label for="classname">Klasnaam:</label>
                     <input type="text" name="classname" value="" class="mt-2 p-2 rounded border border-gray-300 dark:border-gray-700 w-full">
-                    <input type="submit" value="Les Invoeren" class="mt-4 bg-gray-300 dark:bg-gray-700 p-2 rounded">
+                    <input type="submit" value="Klas Invoeren" class="mt-4 bg-gray-300 dark:bg-gray-700 p-2 rounded">
                 </form>
             </div>
         </flux:modal>

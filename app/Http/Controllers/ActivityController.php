@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Activity;
 use App\Models\SchoolClass;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
@@ -72,9 +73,13 @@ class ActivityController extends Controller
             ->get();
 
         $school_classes = SchoolClass::all();
+        $teachers = User::query()
+            ->where('role', 'teacher')
+            ->orderBy('name')
+            ->get();
 
         if (Route::currentRouteName() === 'dashboard') {
-            return view('dashboard', compact('activities', 'selectedDate', 'searchQuery', 'school_classes'));
+            return view('dashboard', compact('activities', 'selectedDate', 'searchQuery', 'school_classes', 'teachers'));
         } elseif (Route::currentRouteName() === 'dashboard') {
             return view('dashboard', compact('activities'));
         }

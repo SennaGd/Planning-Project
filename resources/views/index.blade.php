@@ -10,7 +10,7 @@
         <div class="flex-1"></div>
         <!--  popup  | button  -->
 
-        <button command='show-modal' commandfor="my-dialog-2">kalenderabonnementen</button>
+        <!-- <button command='show-modal' commandfor="my-dialog-2">kalenderabonnementen</button> -->
 
     </div>
         <div class="w-full max-w-full overflow-x-auto">

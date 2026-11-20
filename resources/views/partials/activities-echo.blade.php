@@ -10,6 +10,7 @@
 
     const activitiesBody = document.getElementById('activities-body');
     const selectedDate = @js($selectedDate);
+    const showActivityDate = @js($showActivityDate ?? true);
 
     function formatTime(iso) {
         return new Date(iso).toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' });
@@ -53,6 +54,29 @@
         activitiesBody.querySelectorAll('[data-activity-id]').forEach(refreshActivityStatus);
     }
 
+    function activityCells(activity) {
+        const cells = [
+            `${formatTime(activity.dt_start)} - ${formatTime(activity.dt_end)}`,
+        ];
+
+        if (showActivityDate) {
+            cells.push(formatDate(activity.dt_start));
+        }
+
+        cells.push(
+            activity.summary ?? '',
+            activity.location ?? '',
+            activity.classnames ?? '',
+            activity.attendee ?? '',
+        );
+
+        return cells;
+    }
+
+    function classnamesCellIndex() {
+        return showActivityDate ? 4 : 3;
+    }
+
     function appendActivityRow(activity) {
         const row = document.createElement('tr');
         row.className = 'text-1xl';
@@ -60,21 +84,12 @@
         row.dataset.dtStart = activity.dt_start;
         row.dataset.dtEnd = activity.dt_end;
 
-        const cells = [
-            `${formatTime(activity.dt_start)} - ${formatTime(activity.dt_end)}`,
-            formatDate(activity.dt_start),
-            activity.summary ?? '',
-            activity.location ?? '',
-            activity.classnames ?? '',
-            activity.attendee ?? '',
-        ];
-
-        cells.forEach((value, index) => {
+        activityCells(activity).forEach((value, index) => {
             const cell = document.createElement('td');
             cell.className = 'px-4 py-2';
             cell.textContent = value;
 
-            if (index === 4) {
+            if (index === classnamesCellIndex()) {
                 cell.dataset.cell = 'classnames';
             }
 
@@ -122,22 +137,13 @@
         existing.dataset.dtStart = activity.dt_start;
         existing.dataset.dtEnd = activity.dt_end;
 
-        const cells = [
-            `${formatTime(activity.dt_start)} - ${formatTime(activity.dt_end)}`,
-            formatDate(activity.dt_start),
-            activity.summary ?? '',
-            activity.location ?? '',
-            activity.classnames ?? '',
-            activity.attendee ?? '',
-        ];
-
-        cells.forEach((value, index) => {
+        activityCells(activity).forEach((value, index) => {
             const cell = existing.children[index];
 
             if (cell) {
                 cell.textContent = value;
 
-                if (index === 4) {
+                if (index === classnamesCellIndex()) {
                     cell.dataset.cell = 'classnames';
                 }
             }

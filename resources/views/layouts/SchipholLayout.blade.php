@@ -24,9 +24,20 @@
 
     </head>
     <body class="min-h-full bg-white text-black transition-colors duration-200 dark:bg-schiphol-dark dark:text-white">
-        <header class="flex items-center gap-4 bg-[#FFCD00] px-6 py-3 m-0 transition-colors duration-200 dark:bg-black" id="header">
+        @php
+            $isLesplein = Route::currentRouteName() === 'lesplein';
+        @endphp
+        <header @class([
+            'm-0 flex items-center bg-[#FFCD00] transition-colors duration-200 dark:bg-black',
+            'gap-4 px-6 py-3' => ! $isLesplein,
+            'gap-8 px-12 py-6' => $isLesplein,
+        ]) id="header">
             {{-- <img src="{{ asset('images/departure.png') }}" alt="Logo" class="h-16 w-16 object-contain"> --}}
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="h-16 w-16 object-contain text-black dark:text-[#FFCD00]" fill="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" @class([
+                'object-contain text-black dark:text-[#FFCD00]',
+                'h-16 w-16' => ! $isLesplein,
+                'h-32 w-32' => $isLesplein,
+            ]) fill="currentColor">
                 <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" stroke="none">
                 <path d="M1350 4706 c-107 -30 -214 -59 -236 -65 l-42 -11 515 -893 c284 -490
                 517 -899 520 -907 3 -12 -101 -43 -519 -154 -288 -77 -569 -151 -624 -166
@@ -38,35 +49,53 @@
                 <path d="M170 610 l0 -250 2395 0 2395 0 0 250 0 250 -2395 0 -2395 0 0 -250z"/>
                 </g>
             </svg>
-            <h1 class="text-2xl font-semibold text-black dark:text-[#FFCD00]" id="title">Planning</h1>
-            @php
-                if (Route::currentRouteName() === 'home') {
-                    $link = route('dashboard');
-                    $linkText = 'Inloggen';
-                } else {
-                    $link = route('home');
-                    $linkText = 'Home';
-                }
-            @endphp
+            <h1 @class([
+                'font-semibold text-black dark:text-[#FFCD00]',
+                'text-2xl' => ! $isLesplein,
+                'text-5xl' => $isLesplein,
+            ]) id="title">Planning</h1>
             <div class="flex-1"></div>
-            <div class="flex items-center gap-4" id="headerButtons">
-                <a href="{{ $link }}" class="ml-auto flex items-center gap-2 text-black hover:text-gray-700 dark:text-schiphol-gold dark:hover:text-schiphol-gold/80" id="loginLink">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25" />
-                    </svg>
-                    <p>{{ $linkText }}</p>
-                </a>
-                <button type="button" id="darkModeToggle" aria-label="Toggle dark mode" class="flex items-center justify-center rounded-full p-1 text-black transition hover:text-gray-700 dark:text-schiphol-gold dark:hover:text-schiphol-gold/80">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-8 cursor-pointer" id="darkModeIcon">
-                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z" clip-rule="evenodd" />
-                    </svg>
-                </button>
-            </div>
+            @unless (Route::currentRouteName() === 'lesplein')
+                @php
+                    if (Route::currentRouteName() === 'home') {
+                        $link = route('dashboard');
+                        $linkText = 'Inloggen';
+                    } else {
+                        $link = route('home');
+                        $linkText = 'Home';
+                    }
+                @endphp
+                <div class="flex items-center gap-4" id="headerButtons">
+                    <a href="{{ $link }}" class="ml-auto flex items-center gap-2 text-black hover:text-gray-700 dark:text-schiphol-gold dark:hover:text-schiphol-gold/80" id="loginLink">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25" />
+                        </svg>
+                        <p>{{ $linkText }}</p>
+                    </a>
+                    <button type="button" id="darkModeToggle" aria-label="Toggle dark mode" class="flex items-center justify-center rounded-full p-1 text-black transition hover:text-gray-700 dark:text-schiphol-gold dark:hover:text-schiphol-gold/80">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-8 cursor-pointer" id="darkModeIcon">
+                            <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+            @endunless
         </header>
-        <div class="flex w-full items-center px-6 py-3 dark:bg-schiphol-dark_gray transition-colors duration-200">
-            <h2 id="currentTime" class="text-2xl text-black dark:text-white">{{ now()->format('H:i') }}</h2>
+        <div @class([
+            'flex w-full items-center transition-colors duration-200 dark:bg-schiphol-dark_gray',
+            'px-6 py-3' => ! $isLesplein,
+            'px-12 py-6' => $isLesplein,
+        ])>
+            <h2 id="currentTime" @class([
+                'text-black dark:text-white',
+                'text-2xl' => ! $isLesplein,
+                'text-5xl' => $isLesplein,
+            ])>{{ now()->format('H:i') }}</h2>
             <div class="flex-1"></div>
-            <h2 id="currentDate" class="text-2xl text-black dark:text-white">{{ now()->format('d-m-Y') }}</h2>
+            <h2 id="currentDate" @class([
+                'text-black dark:text-white',
+                'text-2xl' => ! $isLesplein,
+                'text-5xl' => $isLesplein,
+            ])>{{ now()->format('d-m-Y') }}</h2>
         </div>
         <main class="bg-white transition-colors duration-200 dark:bg-schiphol-slate">
             {{ $slot }}
@@ -139,10 +168,6 @@
             updateClock();
             setInterval(updateClock, 1000);
             document.getElementById('darkModeToggle')?.addEventListener('click', toggleDarkMode);
-
-            if (window.location.pathname === '/lesplein') {
-                document.getElementById('headerButtons').style.display = 'none';
-            }
         </script>
     </body>
 </html>
